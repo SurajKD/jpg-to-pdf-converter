@@ -32,5 +32,5 @@ export async function imagesToPdf(files: File[], options?: { format?: 'A4'|'Lett
     page.drawImage(embedded, { x: (pageSize.w - width) / 2, y: (pageSize.h - height) / 2, width, height })
   }
   const pdfBytes = await pdfDoc.save()
-  return new Blob([pdfBytes], { type: 'application/pdf' })
+  return new Blob([Buffer.from(pdfBytes)], { type: 'application/pdf' })
 }
