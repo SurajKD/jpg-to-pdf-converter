@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const domain = process.env.NEXT_PUBLIC_DOMAIN || 'https://jpgtopdf.example'
+  const domain = process.env.NEXT_PUBLIC_DOMAIN || 'https://jpg-to-pdf-convert.netlify.app'
   const pages = [
     '',
     '/tools/jpg-to-pdf',
