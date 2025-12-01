@@ -1,5 +1,4 @@
 {
-  "/not-found": "app/not-found.js",
-  "/tools/jpg-to-pdf/page": "app/tools/jpg-to-pdf/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/tools/jpg-to-pdf/page": "app/tools/jpg-to-pdf/page.js"
 }

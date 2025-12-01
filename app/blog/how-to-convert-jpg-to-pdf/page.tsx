@@ -13,6 +13,21 @@ export const metadata: Metadata = {
       "Convert JPG to PDF for free using our fast, privacy-first online converter. No signup, mobile-friendly.",
     type: "article",
     url: "https://your-netlify-domain.netlify.app/blog/how-to-convert-jpg-to-pdf",
+    images: [
+      {
+        url: '/og-jpg-to-pdf.png',
+        width: 1200,
+        height: 630,
+        alt: 'JPG to PDF Converter Preview',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'JPG to PDF Converter — Free Online Tool',
+    description:
+      'Convert JPG and PNG images to PDF instantly. Secure, private, browser-based conversion.',
+    images: ['/og-jpg-to-pdf.png'],
   },
 };
 
