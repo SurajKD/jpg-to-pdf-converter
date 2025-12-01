@@ -16,17 +16,22 @@ export default function DropzoneClient() {
   const [animating, setAnimating] = useState(false) // 2s post-convert animation
   const [converted, setConverted] = useState(false) // conversion complete + animation done
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
+  const [lastBlob, setLastBlob] = useState<Blob | null>(null) // store blob for Web Share
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const added = acceptedFiles.map(f => ({ file: f, id: genId(), url: URL.createObjectURL(f) }))
-    setItems(prev => [...prev, ...added])
-    // reset previous conversion state if uploading new files
-    if (downloadUrl) {
-      URL.revokeObjectURL(downloadUrl)
-      setDownloadUrl(null)
-      setConverted(false)
-    }
-  }, [downloadUrl])
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const added = acceptedFiles.map(f => ({ file: f, id: genId(), url: URL.createObjectURL(f) }))
+      setItems(prev => [...prev, ...added])
+      // reset previous conversion state if uploading new files
+      if (downloadUrl) {
+        URL.revokeObjectURL(downloadUrl)
+        setDownloadUrl(null)
+        setConverted(false)
+        setLastBlob(null)
+      }
+    },
+    [downloadUrl]
+  )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -35,7 +40,11 @@ export default function DropzoneClient() {
 
   const revokeUrl = (url?: string | null) => {
     if (!url) return
-    try { URL.revokeObjectURL(url) } catch (e) {}
+    try {
+      URL.revokeObjectURL(url)
+    } catch (e) {
+      /* ignore */
+    }
   }
 
   const remove = (idToRemove: string) => {
@@ -58,9 +67,14 @@ export default function DropzoneClient() {
       revokeUrl(downloadUrl)
       setDownloadUrl(null)
     }
+    if (lastBlob) setLastBlob(null)
 
     try {
       const blob = await imagesToPdf(items.map(i => i.file), { format: 'A4', quality: 0.8 })
+
+      // store blob for Web Share
+      setLastBlob(blob)
+
       const url = URL.createObjectURL(blob)
       setDownloadUrl(url)
 
@@ -78,6 +92,57 @@ export default function DropzoneClient() {
     }
   }
 
+  // Share via Web Share API (Option A) - primary. Fallback: instruct user to download & share manually.
+  const onShare = async () => {
+    if (!lastBlob) {
+      alert('Nothing to share — convert a PDF first.')
+      return
+    }
+
+    try {
+      // create a File from the Blob (required by many Web Share implementations)
+      const file = new File([lastBlob], `converted-${new Date().toISOString().replace(/[:.]/g, '-')}.pdf`, {
+        type: 'application/pdf',
+      })
+
+      // Feature detect Web Share with files support
+      // @ts-ignore navigator.canShare might not exist in TS DOM lib
+      if (navigator && (navigator as any).canShare && (navigator as any).canShare({ files: [file] })) {
+        await (navigator as any).share({
+          files: [file],
+          title: 'Converted PDF',
+          text: 'Here is the PDF I converted for you.',
+        })
+        // optionally show a small confirmation
+        // alert('Shared successfully')
+        return
+      } else {
+        // Some browsers (older) may not support sharing files. Try navigator.share with URL (not ideal).
+        if (navigator.share && downloadUrl) {
+          try {
+            await navigator.share({
+              title: 'Converted PDF',
+              text: 'Download the converted PDF',
+              url: downloadUrl, // note: blob: URL may not be accessible to other apps
+            })
+            return
+          } catch (_e) {
+            // ignore and fallback below
+          }
+        }
+      }
+
+      // Fallback behaviour:
+      // blob: URLs don't work cross-app — so instruct the user to download the file and share from their device.
+      alert(
+        'Sharing files directly is not supported in this browser. The PDF has been prepared for download — please tap "Download" and share the file from your device\'s Files app or gallery.'
+      )
+    } catch (err) {
+      console.error('Share failed', err)
+      alert('Sharing failed — please download the PDF and share it manually.')
+    }
+  }
+
   const resetAll = () => {
     // revoke thumbnails
     items.forEach(i => revokeUrl(i.url))
@@ -85,6 +150,7 @@ export default function DropzoneClient() {
     // revoke pdf
     if (downloadUrl) revokeUrl(downloadUrl)
     setDownloadUrl(null)
+    setLastBlob(null)
     setProcessing(false)
     setAnimating(false)
     setConverted(false)
@@ -195,7 +261,7 @@ export default function DropzoneClient() {
           </div>
         )}
 
-        {/* After converted: show Download (green) + Reset */}
+        {/* After converted: show Download (green) + Share + Reset */}
         {converted && downloadUrl && (
           <>
             <a
@@ -213,6 +279,20 @@ export default function DropzoneClient() {
             >
               ⬇️ Download PDF
             </a>
+
+            <button
+              onClick={onShare}
+              style={{
+                background: '#0b74de',
+                color: '#fff',
+                padding: '10px 14px',
+                borderRadius: 8,
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              📤 Share
+            </button>
 
             <button
               onClick={resetAll}
