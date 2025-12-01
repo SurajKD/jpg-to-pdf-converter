@@ -1,7 +1,18 @@
 export default function AdPlaceholder() {
-  return (
-    <div style={{border:'1px dashed #cbd5e1', padding:12, borderRadius:8, textAlign:'center', color:'#64748b'}}>
-      <div style={{fontSize:12}}>Ad placeholder — paste AdSense code here after approval</div>
-    </div>
-  )
+    return (
+        <div style={{  padding: 12, borderRadius: 8, textAlign: 'center' }}>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307056257132100"
+                crossOrigin="anonymous"></script>
+
+            <ins className="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-2307056257132100"
+                data-ad-slot="5881488425"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({ });
+            </script>
+        </div>
+    )
 }
