@@ -5,7 +5,7 @@ import AdPlaceholder from "../components/AdPlaceholder"
 export const metadata: Metadata = {
     title: "Free JPG to PDF Converter Online | Fast & Secure",
     description:
-        "Convert JPG images to PDF instantly. Privacy-first, client-side conversion. No uploads required. Works on desktop, tablet, and mobile.",
+        "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
     keywords: ["jpg to pdf", "image to pdf", "convert jpg to pdf online", "free pdf converter"],
     alternates: {
         canonical: "https://jpg-to-pdf-convert.netlify.app",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Free JPG to PDF Converter Online | Fast & Secure",
         description:
-            "Convert JPG images to PDF instantly. Privacy-first, client-side conversion. No uploads required. Works on desktop, tablet, and mobile.",
+            "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
         url: "https://jpg-to-pdf-convert.netlify.app",
         siteName: "JPG→PDF Converter",
         locale: "en_US",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'JPG to PDF Converter — Free Online Tool',
         description:
-            'Convert JPG and PNG images to PDF instantly. Secure, private, browser-based conversion.',
+            'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
         images: ['/og-jpg-to-pdf.png'],
     },
 }
@@ -41,7 +41,7 @@ const webAppLd = {
     "@type": "WebApplication",
     name: "JPG to PDF Converter",
     description:
-        "Free online tool to convert JPG images to PDF documents securely in your browser",
+        "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
     url: "https://jpg-to-pdf-convert.netlify.app",
     applicationCategory: "Utility",
     offers: {

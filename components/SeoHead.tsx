@@ -3,7 +3,7 @@ export default function SeoHead({ title, description }: { title?: string; descri
   return (
     <Head>
       <title>{title || 'JPG to PDF'}</title>
-      <meta name="description" content={description || 'Convert JPG to PDF in your browser'} />
+      <meta name="description" content={description || 'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.'} />
     </Head>
   )
 }

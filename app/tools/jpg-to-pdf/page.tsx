@@ -6,7 +6,7 @@ const DropzoneClient = dynamic(() => import('../../../components/DropzoneClient'
 export const metadata: Metadata = {
     title: 'JPG to PDF Converter Tool | Free Online Conversion',
     description:
-        'Instantly convert JPG and PNG images to PDF in your browser. Reorder images, adjust quality, and download. Private client-side conversion — no uploads unless you choose server-side features.',
+        'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
     keywords: ['jpg to pdf', 'image to pdf', 'convert jpg to pdf', 'free pdf converter', 'online pdf converter'],
     alternates: {
         canonical: 'https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'JPG to PDF Converter Tool | Free Online Conversion',
         description:
-            'Instantly convert JPG and PNG images to PDF in your browser. Reorder images, adjust quality, and download. Private client-side conversion — no uploads unless you choose server-side features.',
+            'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
         url: 'https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf',
         siteName: 'JPG→PDF Converter',
         type: 'website',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'JPG to PDF Converter — Free Online Tool',
         description:
-            'Convert JPG and PNG images to PDF instantly. Secure, private, browser-based conversion.',
+            'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
         images: ['/og-jpg-to-pdf.png'],
     },
 }
@@ -41,7 +41,7 @@ const webAppLd = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: 'JPG to PDF Converter',
-    description: 'Convert JPG and PNG images to PDF online. Secure, private, and instant conversion in your browser.',
+    description: 'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
     url: 'https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf',
     applicationCategory: 'Utility',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
