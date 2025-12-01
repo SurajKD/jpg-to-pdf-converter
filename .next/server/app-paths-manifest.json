@@ -1,10 +1,5 @@
 {
-  "/_not-found": "app/_not-found.js",
-  "/about/page": "app/about/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/privacy/page": "app/privacy/page.js",
-  "/terms/page": "app/terms/page.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
   "/page": "app/page.js",
+  "/blog/how-to-convert-jpg-to-pdf/page": "app/blog/how-to-convert-jpg-to-pdf/page.js",
   "/tools/jpg-to-pdf/page": "app/tools/jpg-to-pdf/page.js"
 }
