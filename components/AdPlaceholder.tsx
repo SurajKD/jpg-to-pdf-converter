@@ -1,13 +1,13 @@
 export default function AdPlaceholder() {
     return (
-        <div style={{  padding: 12, borderRadius: 8, textAlign: 'center' }}>
+        <div style={{ padding: 12, borderRadius: 8, textAlign: 'center' }}>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307056257132100"
                 crossOrigin="anonymous"></script>
-
+            {/* <!-- anyfileconverter --> */}
             <ins className="adsbygoogle"
-                style={{ display: 'block' }}
+                style={{display:"block"}}
                 data-ad-client="ca-pub-2307056257132100"
-                data-ad-slot="5881488425"
+                data-ad-slot="5842385001"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
             <script>
