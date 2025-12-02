@@ -1,137 +1,192 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions — JPG to PDF Converter",
+  title: "Terms & Conditions — AnyFileConverter.online",
   description:
-    "Terms and conditions for using the JPG to PDF Converter. Read about acceptable use, file handling, privacy, and limitations of liability.",
+    "Terms and conditions for using AnyFileConverter.online. Learn about acceptable use, file handling, privacy, intellectual property, and limitations of liability.",
   alternates: { canonical: "https://anyfileconverter.online/terms" },
-}
+};
 
 export default function TermsPage() {
+  const today = new Date().toISOString().split("T")[0];
+
   return (
     <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
       <h1>Terms &amp; Conditions</h1>
-
-      <p style={{ color: "#555" }}>
-        Last updated: {new Date().toISOString().split("T")[0]}
-      </p>
+      <p style={{ color: "#555" }}>Last updated: {today}</p>
 
       <section>
-        <h2>1. Acceptance of terms</h2>
+        <h2>1. Acceptance of Terms</h2>
         <p>
-          By using the JPG → PDF Converter website (the “Service”), you agree to these Terms &amp; Conditions. If you do not agree,
-          please do not use the Service. We may update these terms from time to time; continued use after changes means you accept
-          the updated terms.
+          By using AnyFileConverter.online (the “Service”), you agree to these Terms &amp; Conditions.
+          If you do not agree with any part of these Terms, you should discontinue use immediately.
+          We may update these Terms periodically; continued use after changes means you accept the updated version.
         </p>
       </section>
 
       <section>
-        <h2>2. Description of service</h2>
+        <h2>2. Description of Service</h2>
         <p>
-          The Service lets users convert image files (for example JPG, JPEG, PNG) into PDF documents. Conversion is performed
-          client-side by default — meaning files are processed in your browser unless you explicitly choose a server-side option.
-          The Service is provided "as is" and may change, be suspended, or discontinued at any time.
+          AnyFileConverter.online provides a variety of free online file tools, including but not limited to:
+          image converters, PDF utilities, document converters, compression tools, and file optimizers.
         </p>
+
+        <p>
+          Most conversions occur <strong>client-side</strong> in your browser, meaning files typically do
+          not leave your device. Some optional features may require temporary server uploads, and these are clearly
+          labeled before use.
+        </p>
+
+        <p>The Service is provided “as is” and may change or be discontinued at any time.</p>
       </section>
 
       <section>
-        <h2>3. User responsibilities</h2>
+        <h2>3. User Responsibilities</h2>
         <ul>
-          <li>You are responsible for the content of files you upload or convert.</li>
-          <li>Do not upload or convert content that you do not have the right to use, share, or distribute.</li>
-          <li>Do not use the Service for unlawful activities, including but not limited to copyright infringement, harassment,
-            or distribution of illegal content.</li>
-          <li>If you choose to share converted files using any built-in upload or share feature, you consent to that action.</li>
+          <li>You are responsible for the files you upload, convert, or share.</li>
+          <li>You must have the legal right to use, distribute, or process the files you upload.</li>
+          <li>You must not use the Service for unlawful activities, including copyright infringement or distribution of illegal content.</li>
+          <li>
+            If you use optional upload/share features, you consent to the temporary storage and handling required to provide those features.
+          </li>
         </ul>
       </section>
 
       <section>
-        <h2>4. File handling & privacy</h2>
+        <h2>4. File Handling & Privacy</h2>
         <p>
-          By default, our tool performs conversions locally in your browser so files do not leave your device. If you opt into any
-          server-side features (for example, temporary cloud hosting or share links), such files may be uploaded and stored temporarily.
-          Any server-side storage is described at the time of the action and will include retention information. If you have concerns
-          about file handling, please contact us at<a href="/contact"> our contact page</a>.
+          By default, conversions are performed locally in your browser, and we do not have access to your files.
+          Files are not uploaded unless you opt into a feature that requires it.
+        </p>
+
+        <p>For optional upload or share features:</p>
+        <ul>
+          <li>Files may be uploaded and stored temporarily.</li>
+          <li>Retention periods (for example, auto-deletion after 24 hours) are clearly stated during use.</li>
+          <li>Files are removed after the retention period or when you manually delete them.</li>
+        </ul>
+
+        <p>
+          For more details, please review our{" "}
+          <a href="/privacy" style={{ color: "#0b74de" }}>
+            Privacy Policy
+          </a>
+          .
         </p>
       </section>
 
       <section>
-        <h2>5. Third-party services</h2>
+        <h2>5. Third-Party Services</h2>
         <p>
-          The Service may include or link to third-party tools, services, or websites. We are not responsible for the privacy practices,
-          content, or terms of those third parties. Use of any linked service is at your own risk and governed by that third party's terms.
+          The Service may include links to or integrations with third-party services such as analytics providers,
+          advertising networks (e.g., Google AdSense), cloud hosting platforms, or external websites.
+        </p>
+
+        <p>
+          We are not responsible for the content, policies, or practices of any third-party providers. Your use of their services
+          is governed by their respective terms and policies.
         </p>
       </section>
 
       <section>
-        <h2>6. Intellectual property</h2>
+        <h2>6. Intellectual Property</h2>
         <p>
-          All content on the site (design, text, code, graphics) is owned or licensed by us unless otherwise noted. You may not copy,
-          reproduce, modify, or republish site content without our prior written permission. You retain ownership of the files you upload.
+          All site content, including text, design, layout, graphics, and code, is owned or licensed by us unless otherwise indicated.
+          You may not reproduce, modify, distribute, or republish any part of the Service without written permission.
+        </p>
+
+        <p>
+          You retain full ownership of any files you upload. We make no claims over your original content.
         </p>
       </section>
 
       <section>
-        <h2>7. Limitation of liability</h2>
+        <h2>7. Limitation of Liability</h2>
         <p>
-          To the maximum extent permitted by law, the site, its owners, operators, and contributors are not liable for any direct,
-          indirect, incidental, consequential, or punitive damages arising from your use of the Service. This includes damages from
-          loss of data, loss of business, or inability to use the Service. Use the Service at your own risk.
+          To the fullest extent permitted by law, AnyFileConverter.online and its operators are not liable for any damages,
+          including but not limited to loss of data, loss of business, file corruption, or inability to use the Service.
+        </p>
+
+        <p>You use the Service entirely at your own risk.</p>
+      </section>
+
+      <section>
+        <h2>8. No Warranties</h2>
+        <p>
+          The Service is provided without warranties of any kind, express or implied. We do not guarantee:
+        </p>
+
+        <ul>
+          <li>Uninterrupted or error-free operation</li>
+          <li>Accuracy or suitability for any specific purpose</li>
+          <li>Security of uploaded files beyond reasonable measures</li>
+        </ul>
+
+        <p>
+          If you use the Service for sensitive or critical files, you should verify results and maintain backups.
         </p>
       </section>
 
       <section>
-        <h2>8. No warranties</h2>
-        <p>
-          The Service is provided without warranties of any kind, express or implied. We do not guarantee error-free operation, suitability
-          for a particular purpose, or uninterrupted availability.
-        </p>
-      </section>
+        <h2>9. Acceptable Use & Prohibited Activities</h2>
+        <p>You agree NOT to use the Service to:</p>
 
-      <section>
-        <h2>9. Acceptable use & prohibited content</h2>
+        <ul>
+          <li>Upload or convert illegal, harmful, or defamatory content</li>
+          <li>Infringe on intellectual property rights</li>
+          <li>Harass, exploit, or harm others</li>
+          <li>Attempt to bypass or disrupt site security</li>
+          <li>Automate high-volume or abusive requests</li>
+        </ul>
+
         <p>
-          You must not use the Service to upload, convert, or distribute illegal, defamatory, obscene, or infringing content. We reserve
-          the right to remove content or suspend access if we believe the Service is being used in violation of these terms or applicable law.
+          We may suspend or terminate access for violations of these Terms or applicable law.
         </p>
       </section>
 
       <section>
         <h2>10. Termination</h2>
         <p>
-          We may suspend or terminate the Service (or your access to it) at any time for any reason, including breach of these Terms,
-          illegal activity, or abuse. Sections that by their nature should survive termination (such as limitation of liability, intellectual
-          property, and governing law) will continue to apply.
+          We reserve the right to suspend or terminate the Service, or your access to it, at any time and for any reason,
+          including misuse, breach of terms, or operational necessity.
+        </p>
+
+        <p>
+          Sections that logically survive termination (e.g., liability limits, intellectual property) will remain in effect.
         </p>
       </section>
 
       <section>
-        <h2>11. Governing law</h2>
+        <h2>11. Governing Law</h2>
         <p>
-          These Terms are governed by the laws of the jurisdiction in which the site operator is located. If any part of these Terms
-          is found to be invalid, the remaining provisions will continue in full force and effect.
+          These Terms are governed by the laws applicable in the jurisdiction of the site operator.
+          If any provision is found unenforceable, remaining sections remain in full effect.
         </p>
       </section>
 
       <section>
-        <h2>12. Changes to these terms</h2>
+        <h2>12. Changes to These Terms</h2>
         <p>
-          We may update these Terms occasionally. We will post changes on this page with an updated "Last updated" date. It is your
-          responsibility to review the Terms periodically.
+          We may update these Terms as needed. Updated versions will be posted on this page along with a revised
+          “Last updated” date. It is your responsibility to review Terms periodically.
         </p>
       </section>
 
       <section>
         <h2>13. Contact</h2>
         <p>
-          If you have questions or concerns about these Terms, please contact us:<a href="/contact"> our contact page</a>.
+          For questions about these Terms, please contact us via the{" "}
+          <a href="/contact" style={{ color: "#0b74de" }}>
+            Contact page
+          </a>
+          .
         </p>
       </section>
 
       <p style={{ marginTop: 28, color: "#666", fontSize: 13 }}>
-        These terms were generated to reflect common practices for lightweight utility sites. They are not a substitute for legal advice.
-        If you need guaranteed legal compliance (for example for business or regional regulations), please consult a qualified attorney.
+        These Terms are designed to reflect common standards for utility websites and online tools. They are not legal advice;
+        for legally binding or region-specific requirements, please consult an attorney.
       </p>
     </main>
-  )
+  );
 }

@@ -32,13 +32,21 @@ export default function Header() {
         <Link
           href="/"
           style={{
-            fontSize: "24px",
-            color: "#0b74de",
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
             textDecoration: "none",
-            fontWeight: 700,
           }}
         >
-          JPG→PDF
+          <img
+            src="/anyfileconverterLogo.png"
+            alt="AnyFileConverter Logo"
+            style={{
+              height: "42px",
+              width: "auto",   // Auto width as you requested
+              objectFit: "contain",
+            }}
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -67,6 +75,7 @@ export default function Header() {
             background: "transparent",
             border: 0,
             cursor: "pointer",
+            padding: "6px",
           }}
         >
           <div style={burgerLine}></div>

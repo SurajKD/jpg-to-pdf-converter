@@ -1,51 +1,101 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — JPG to PDF Converter",
-  description: "About our JPG to PDF converter: mission, privacy-first approach, and why we built this free tool.",
+  title: "About — AnyFileConverter.online",
+  description:
+    "Learn about AnyFileConverter.online – a fast, private, and secure set of file conversion tools built to help users convert, compress, and manage files easily.",
   alternates: { canonical: "https://anyfileconverter.online/about" },
-}
+};
 
 export default function AboutPage() {
   return (
-    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
-      <h1>About JPG → PDF Converter</h1>
+    <main
+      style={{
+        padding: 24,
+        maxWidth: 900,
+        margin: "0 auto",
+        lineHeight: 1.7,
+      }}
+    >
+      <h1>About AnyFileConverter</h1>
+
       <p style={{ color: "#555" }}>
-        We built this free JPG to PDF converter because users needed a fast, simple and private way to convert images
-        into shareable documents — without installing apps or creating accounts. Our goal is to keep the tool lightweight,
-        reliable, and respectful of your privacy.
+        AnyFileConverter.online was created with a simple goal — to offer fast,
+        reliable, and privacy-focused tools for converting and managing files.
+        What started as a small JPG → PDF converter has grown into a broader
+        platform designed to help students, professionals, designers, and anyone
+        who needs quick, no-signup utilities directly in the browser.
       </p>
 
-      <h2>Our approach</h2>
+      <h2>Our Mission</h2>
       <p>
-        By default, all conversions happen in your browser (client-side). That means your images are never uploaded to our
-        servers unless you explicitly opt in to a server feature (for example, temporary cloud hosting). We believe privacy
-        should be the default — not an afterthought.
+        We believe that basic digital tools should be <strong>free</strong>,
+        <strong>easy to use</strong>, and <strong>privacy-friendly</strong>.
+        Many online converters upload your files to a server, process them
+        remotely, and store them unnecessarily. We take a different approach.
       </p>
 
-      <h2>What we do and why it’s free</h2>
+      <h2>Privacy-First Approach</h2>
       <p>
-        This site is a small project that provides useful utilities for everyone — students, professionals, photographers,
-        and anyone who needs quick PDF files from images. The tool is free because we believe basic utilities should be
-        accessible. We support the project with modest, policy-compliant ads and occasional suggestions for upgrades.
+        Most conversions on AnyFileConverter happen completely in your browser
+        (client-side). This means:
       </p>
 
-      <h2>Trust & security</h2>
       <ul>
-        <li><strong>Client-side first:</strong> Conversions happen locally in your browser by default.</li>
-        <li><strong>No accounts:</strong> You don't need to sign up — just convert and download.</li>
-        <li><strong>Temporary uploads only if chosen:</strong> If you use sharing/upload features, files are stored only briefly.</li>
+        <li>
+          <strong>Your files never leave your device</strong> during normal
+          conversions.
+        </li>
+        <li>
+          <strong>No accounts or sign-ups</strong> are needed — just convert and
+          download.
+        </li>
+        <li>
+          <strong>No file retention</strong> — nothing is stored on our servers
+          unless you explicitly use a tool that requires temporary uploads.
+        </li>
       </ul>
 
-      <h2>Want to help?</h2>
+      <h2>Why it’s Free</h2>
       <p>
-        If you like the tool, please share it with friends or leave feedback on the contact page. Small projects grow through
-        helpful users — thank you for using the converter.
+        The project is supported through lightweight, policy-compliant ads. This
+        allows us to keep all essential file tools free to use while funding
+        platform improvements and new tools. Our goal is to keep the experience
+        simple, clean, and accessible to everyone.
       </p>
 
-      <p style={{ marginTop: 28, color: "#666" }}>
-        — The JPG→PDF team
+      <h2>Tools We Provide</h2>
+      <p>
+        We are constantly expanding our list of tools. Current and upcoming
+        utilities include:
       </p>
+
+      <ul>
+        <li>JPG → PDF Converter</li>
+        <li>PNG → JPG Converter</li>
+        <li>PDF Merge & Split tools</li>
+        <li>Compress PDF</li>
+        <li>PDF → JPG</li>
+        <li>Word ↔ PDF Converters</li>
+        <li>Image optimizers & more</li>
+      </ul>
+
+      <h2>Our Commitment</h2>
+      <p>
+        Speed, simplicity, and security are the foundation of
+        AnyFileConverter.online. Whether you're a student submitting assignments
+        or a professional working with documents, we want to save you time and
+        make file management effortless.
+      </p>
+
+      <h2>Want to Help?</h2>
+      <p>
+        If you enjoy using our tools, please share the site or send feedback
+        through the Contact page. Your support helps small projects grow and
+        keeps free tools alive.
+      </p>
+
+      <p style={{ marginTop: 28, color: "#666" }}>— The AnyFileConverter Team</p>
     </main>
-  )
+  );
 }

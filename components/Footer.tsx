@@ -1,5 +1,5 @@
-import Link from "next/link"
-import AdPlaceholder from "./AdPlaceholder"
+import Link from "next/link";
+import AdPlaceholder from "./AdPlaceholder";
 
 export default function Footer() {
   return (
@@ -30,18 +30,32 @@ export default function Footer() {
             alignItems: "flex-start",
           }}
         >
-          {/* Brand / Copyright */}
+
+          {/* Brand Section */}
           <div style={{ flex: "1 1 250px" }}>
-            <h3 style={{ margin: 0, color: "#0b74de" }}>JPG → PDF Converter</h3>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <img
+                src="/anyfileconverterLogo.png"
+                alt="AnyFileConverter Logo"
+                style={{
+                  height: "42px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+
             <p style={{ margin: "8px 0 0", color: "#666", fontSize: 14 }}>
-              © {new Date().getFullYear()} JPG → PDF Converter.  
-              Fast, secure & privacy-first tools.
+              © {new Date().getFullYear()} AnyFileConverter.online<br />
+              Fast, secure & privacy-first file tools.
             </p>
           </div>
 
-          {/* Footer Navigation */}
+          {/* Footer Navigation 1 */}
           <nav style={{ flex: "1 1 200px", fontSize: 14 }}>
-            <h4 style={{ margin: "0 0 8px", fontWeight: 600, fontSize: 15 }}>Quick Links</h4>
+            <h4 style={{ margin: "0 0 8px", fontWeight: 600, fontSize: 15 }}>
+              Quick Links
+            </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: "1.7" }}>
               <li><Link href="/">Home</Link></li>
               <li><Link href="/tools/jpg-to-pdf">JPG → PDF Tool</Link></li>
@@ -49,8 +63,11 @@ export default function Footer() {
             </ul>
           </nav>
 
+          {/* Footer Navigation 2 */}
           <nav style={{ flex: "1 1 200px", fontSize: 14 }}>
-            <h4 style={{ margin: "0 0 8px", fontWeight: 600, fontSize: 15 }}>Site Info</h4>
+            <h4 style={{ margin: "0 0 8px", fontWeight: 600, fontSize: 15 }}>
+              Site Info
+            </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: "1.7" }}>
               <li><Link href="/about">About</Link></li>
               <li><Link href="/contact">Contact</Link></li>
@@ -58,18 +75,20 @@ export default function Footer() {
               <li><Link href="/terms">Terms & Conditions</Link></li>
             </ul>
           </nav>
+
         </div>
 
-        {/* Ad Section (Safe Placement) */}
+        {/* Ad Section */}
         <div style={{ marginTop: 8 }}>
           <AdPlaceholder />
         </div>
 
         {/* Bottom Disclaimer */}
         <div style={{ fontSize: 13, color: "#777", marginTop: 8 }}>
-          This site uses client-side processing to keep your files private. No images are uploaded by default.
+          This site uses client-side processing to keep your files private.  
+          No images are uploaded to any server by default.
         </div>
       </div>
     </footer>
-  )
+  );
 }

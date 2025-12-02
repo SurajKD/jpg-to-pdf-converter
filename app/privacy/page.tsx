@@ -1,57 +1,64 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — JPG to PDF Converter",
+  title: "Privacy Policy — AnyFileConverter.online",
   description:
-    "Learn how JPG to PDF Converter handles your data. We use client-side processing, store no uploaded files, and prioritize your privacy.",
+    "Learn how AnyFileConverter.online handles your data. We prioritize privacy by default: most conversions run client-side and files are not stored unless you opt in.",
   alternates: { canonical: "https://anyfileconverter.online/privacy" },
 };
 
 export default function PrivacyPage() {
+  const lastUpdated = new Date().toISOString().split("T")[0];
+
   return (
     <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
       <h1>Privacy Policy</h1>
-      <p style={{ color: "#555" }}>Last updated: {new Date().toISOString().split("T")[0]}</p>
+      <p style={{ color: "#555" }}>Last updated: {lastUpdated}</p>
 
       <section>
         <h2>1. Introduction</h2>
         <p>
-          Your privacy is extremely important to us. This Privacy Policy explains what information we collect,
-          how we use it, and what rights you have when using the JPG → PDF Converter (“Service”).  
-          Our goal is to keep your data safe, private, and fully within your control.
+          Your privacy matters to us. This Privacy Policy explains what information we may collect, how we use it,
+          and the choices you have when using AnyFileConverter.online (the “Service”). Our core principle: provide
+          useful conversion tools while keeping your files private and under your control.
         </p>
       </section>
 
       <section>
-        <h2>2. File processing (Images & PDFs)</h2>
+        <h2>2. File processing (Images, PDFs & other files)</h2>
         <p>
-          The JPG → PDF conversion happens <strong>directly in your browser</strong>.
-          Your images are processed locally on your device and <strong>never uploaded to our servers by default</strong>.
+          By default, most conversion operations on AnyFileConverter.online occur <strong>entirely in your browser</strong>.
+          This means your files are processed locally on your device and <strong>are not uploaded to our servers</strong>
+          unless you explicitly choose a feature that requires server-side handling (for example, temporary public sharing).
         </p>
 
-        <p>This means:</p>
+        <p>This default approach means:</p>
         <ul>
-          <li>We do <strong>not</strong> store your images.</li>
-          <li>We do <strong>not</strong> monitor, access, or view your files.</li>
-          <li>No one (including us) sees your documents.</li>
+          <li>We do <strong>not</strong> receive, view, or store your files during client-side conversions.</li>
+          <li>Conversions are fast and run on the device to maximize privacy.</li>
+          <li>If you opt into an upload/share feature, we will clearly state what is uploaded and for how long it will be stored.</li>
         </ul>
-
-        <p>
-          If we introduce optional cloud features in the future (like “share PDF online” or “store file temporarily”),
-          these features will be <strong>opt-in</strong>, clearly labeled, and include separate data handling explanations.
-        </p>
       </section>
 
       <section>
         <h2>3. Personal data we collect</h2>
-        <p>We do not collect personal information unless you voluntarily contact us.</p>
+        <p>
+          We do not collect personal data unless you voluntarily provide it (for example, via a contact form). Minimal
+          technical data may be collected automatically to help us improve the Service.
+        </p>
 
-        <p>The Service may collect:</p>
         <ul>
-          <li><strong>Basic device data</strong> (browser type, screen size, OS) — used for performance optimization only.</li>
           <li>
-            <strong>Anonymous analytics</strong>, such as number of visitors — used to improve the site.
-            These do not include your uploaded files or personally identifiable information.
+            <strong>Basic technical data</strong> — browser type, OS, screen size, and aggregate usage statistics used
+            for performance and debugging.
+          </li>
+          <li>
+            <strong>Anonymous analytics</strong> — aggregated visitor counts and page usage. These analytics do not include
+            your uploaded files or personally identifying file contents.
+          </li>
+          <li>
+            <strong>Contact information</strong> — only if you use the contact form or email us directly; we use this
+            information strictly to respond to your inquiry.
           </li>
         </ul>
       </section>
@@ -59,28 +66,25 @@ export default function PrivacyPage() {
       <section>
         <h2>4. Cookies & analytics</h2>
         <p>
-          We may use analytics tools (e.g., Google Analytics or privacy-friendly alternatives) to collect anonymous data
-          about site usage. These cookies do <strong>not</strong> track your documents or personal identity.
+          We may use cookies and analytics tools (such as Google Analytics) to gather anonymous usage data. Cookies help
+          us improve the website and measure performance. These cookies do not track the content of your files.
         </p>
 
-        <p>You can disable cookies in your browser at any time.</p>
+        <p>
+          You can disable cookies in your browser settings. If you prefer not to be included in analytics, you can
+          opt out using browser controls or advertising opt-out tools provided by third parties.
+        </p>
       </section>
 
       <section>
-        <h2>5. Google AdSense & third-party advertising</h2>
+        <h2>5. Advertising & third-party services</h2>
         <p>
-          This website may display ads through Google AdSense. Google may use cookies such as
-          <strong> DoubleClick / Personalized Ads cookies</strong> to:
+          The Service may display advertisements (e.g., Google AdSense) to fund the project. Third-party ad providers
+          may use cookies or device identifiers to serve relevant ads and measure performance.
         </p>
 
-        <ul>
-          <li>Show relevant advertisements</li>
-          <li>Limit repetitive ad display</li>
-          <li>Measure ad performance</li>
-        </ul>
-
         <p>
-          You can opt out of personalized advertising at:
+          To opt out of personalized advertising, visit:
           <br />
           <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">
             https://www.google.com/settings/ads
@@ -88,61 +92,85 @@ export default function PrivacyPage() {
         </p>
 
         <p>
-          No ads are placed inside tool interfaces where accidental clicks may occur, in compliance with AdSense policies.
+          Ads are placed thoughtfully and are not embedded inside tool input areas where accidental clicks could occur.
+          We follow ad provider policies and industry best practices.
         </p>
       </section>
 
       <section>
-        <h2>6. Third-party links</h2>
+        <h2>6. Third-party links & services</h2>
         <p>
-          Our Service may link to other websites. We are not responsible for the privacy practices of third-party sites.
-          We encourage you to review their privacy policies individually.
+          AnyFileConverter.online may contain links to third-party websites or use third-party services (CDNs, analytics,
+          ad networks). We are not responsible for the privacy practices of those third parties. Please review their
+          privacy policies separately.
         </p>
       </section>
 
       <section>
-        <h2>7. Children’s privacy</h2>
+        <h2>7. Temporary uploads & sharing (optional features)</h2>
         <p>
-          This website is not specifically intended for children under 13. We do not knowingly collect personal data from children.
+          Some optional features (for example, creating a temporary public link to share a converted file) require files
+          to be uploaded to our server or cloud storage. These features are strictly opt-in and will include a clear notice
+          and retention period. We will remove such files automatically after the stated retention period (for example,
+          24 hours) unless you delete them earlier.
+        </p>
+
+        <p>
+          If you use any upload or sharing feature, we recommend you avoid uploading sensitive information unless you are
+          comfortable with the temporary storage and retention policy shown at the time of upload.
         </p>
       </section>
 
       <section>
         <h2>8. Data security</h2>
         <p>
-          Because file processing occurs on your device, your documents never travel across the internet during conversion.
-          This provides a high level of data protection.
+          Because client-side conversion is the default, your files typically never traverse the network during processing,
+          which reduces exposure. Any server interactions (for optional features) use HTTPS to protect data in transit.
         </p>
+
         <p>
-          Any optional server interactions (if introduced later) will use HTTPS for secure communication.
+          We take reasonable measures to protect data and infrastructure, but no system can be guaranteed 100% secure.
+          If you have specific security concerns, please contact us via the Contact page.
         </p>
       </section>
 
       <section>
-        <h2>9. Your rights</h2>
-        <p>You have the right to:</p>
+        <h2>9. Children’s privacy</h2>
+        <p>
+          The Service is not intended for children under 13. We do not knowingly collect personal information from children.
+          If you believe a child has provided us with personal data, please contact us.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Your rights</h2>
+        <p>Where applicable, you have the right to:</p>
         <ul>
-          <li>Request deletion of any information you voluntarily shared with us</li>
-          <li>Opt out of cookies or analytics</li>
-          <li>Request information about stored data (if any)</li>
+          <li>Request access to the personal data you provided (if any).</li>
+          <li>Request deletion of any personal data you voluntarily shared.</li>
+          <li>Opt out of analytics and cookies where possible.</li>
         </ul>
       </section>
 
       <section>
-        <h2>10. Future updates</h2>
+        <h2>11. Changes to this policy</h2>
         <p>
-          We may update this privacy policy if new features or regulations require changes.
-          Updated policies will be posted on this page with a new "Last updated" date.
+          We may update this Privacy Policy as the Service evolves. We will post the updated policy here with a revised
+          “Last updated” date.
         </p>
       </section>
 
       <section>
-        <h2>11. Contact us</h2>
-        <p>If you have any questions about this Privacy Policy, contact us: <a href="/contact">our contact page</a></p>
+        <h2>12. Contact</h2>
+        <p>
+          If you have questions about this Privacy Policy or your data, please visit our <a href="/contact">Contact page</a>
+          or email us at the address listed there.
+        </p>
       </section>
 
       <p style={{ marginTop: 32, color: "#666", fontSize: 13 }}>
-        This policy was written to comply with AdSense, GDPR-friendly guidelines, and privacy best practices.
+        This policy is designed to be compatible with common ad network policies and privacy best practices. It is for
+        informational purposes and does not constitute legal advice. If you need legal advice, consult a qualified attorney.
       </p>
     </main>
   );
