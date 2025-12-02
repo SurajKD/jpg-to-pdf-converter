@@ -2,16 +2,32 @@ import '../styles/globals.css'
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Script from 'next/script'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <head>
-                <meta name="google-site-verification" content="exdUbiV7-HG63XFZG8s1_VA0yBIdJYTcvuSDe9RrH1c" />
-                <link rel="icon" href="/favicon.ico" type="image/x-icon"></link>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307056257132100"
-                    crossOrigin="anonymous"></script>
+                {/* Favicon */}
+                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+                {/* Google Analytics */}
+                <Script
+                    async
+                    src="https://www.googletagmanager.com/gtag/js?id=G-VHBD43982P"
+                    strategy="afterInteractive"
+                />
+
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-VHBD43982P');
+                    `}
+                </Script>
             </head>
+
             <body>
                 <Header />
                 <main className="container">{children}</main>
