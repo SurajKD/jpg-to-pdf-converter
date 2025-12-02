@@ -9,13 +9,13 @@ export const metadata: Metadata = {
         'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
     keywords: ['jpg to pdf', 'image to pdf', 'convert jpg to pdf', 'free pdf converter', 'online pdf converter'],
     alternates: {
-        canonical: 'https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf',
+        canonical: 'https://anyfileconverter.online/tools/jpg-to-pdf',
     },
     openGraph: {
         title: 'JPG to PDF Converter Tool | Free Online Conversion',
         description:
             'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
-        url: 'https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf',
+        url: 'https://anyfileconverter.online/tools/jpg-to-pdf',
         siteName: 'JPG→PDF Converter',
         type: 'website',
         locale: 'en_US',
@@ -42,7 +42,7 @@ const webAppLd = {
     '@type': 'WebApplication',
     name: 'JPG to PDF Converter',
     description: 'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
-    url: 'https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf',
+    url: 'https://anyfileconverter.online/tools/jpg-to-pdf',
     applicationCategory: 'Utility',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
 }

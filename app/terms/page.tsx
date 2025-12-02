@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Terms & Conditions — JPG to PDF Converter",
   description:
     "Terms and conditions for using the JPG to PDF Converter. Read about acceptable use, file handling, privacy, and limitations of liability.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/terms" },
+  alternates: { canonical: "https://anyfileconverter.online/terms" },
 }
 
 export default function TermsPage() {

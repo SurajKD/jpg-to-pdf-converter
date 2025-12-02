@@ -4,7 +4,7 @@ import AdPlaceholder from "../../../components/AdPlaceholder"
 export const metadata: Metadata = {
   title: "How to Reduce PDF Size After Conversion",
   description: "Practical tips to reduce PDF size after converting images, without losing too much quality.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/blog/reduce-pdf-size-after-conversion" },
+  alternates: { canonical: "https://anyfileconverter.online/blog/reduce-pdf-size-after-conversion" },
 }
 
 export default function ReduceSize() {

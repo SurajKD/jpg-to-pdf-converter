@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy — JPG to PDF Converter",
   description:
     "Learn how JPG to PDF Converter handles your data. We use client-side processing, store no uploaded files, and prioritize your privacy.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/privacy" },
+  alternates: { canonical: "https://anyfileconverter.online/privacy" },
 };
 
 export default function PrivacyPage() {

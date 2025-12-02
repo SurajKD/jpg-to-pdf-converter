@@ -4,7 +4,7 @@ import AdPlaceholder from "../../../components/AdPlaceholder"
 export const metadata: Metadata = {
   title: "Best JPG to PDF Tools — Free & Paid Options",
   description: "A short comparison of the best JPG to PDF tools, including pros, cons, and when to use each.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/blog/best-jpg-to-pdf-tools" },
+  alternates: { canonical: "https://anyfileconverter.online/blog/best-jpg-to-pdf-tools" },
 }
 
 export default function BestTools() {

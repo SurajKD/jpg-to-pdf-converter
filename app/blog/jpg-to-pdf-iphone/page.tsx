@@ -4,7 +4,7 @@ import AdPlaceholder from "../../../components/AdPlaceholder"
 export const metadata: Metadata = {
   title: "How to Convert JPG to PDF on iPhone — Fast Methods",
   description: "Easy ways to convert JPG images to PDF on iPhone using the Photos app, Files, or our browser tool.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/blog/jpg-to-pdf-iphone" },
+  alternates: { canonical: "https://anyfileconverter.online/blog/jpg-to-pdf-iphone" },
 }
 
 export default function IphoneGuide() {

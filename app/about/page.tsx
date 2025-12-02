@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "About — JPG to PDF Converter",
   description: "About our JPG to PDF converter: mission, privacy-first approach, and why we built this free tool.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/about" },
+  alternates: { canonical: "https://anyfileconverter.online/about" },
 }
 
 export default function AboutPage() {

@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Blog & Guides — JPG to PDF Converter",
   description: "Helpful guides and tips for converting JPG to PDF, mobile instructions, quality tips, and more.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/blog" },
+  alternates: { canonical: "https://anyfileconverter.online/blog" },
 }
 
 export default function BlogIndex() {

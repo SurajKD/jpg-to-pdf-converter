@@ -1,4 +1,4 @@
-export function toolJsonLd(domain = 'https://jpg-to-pdf-convert.netlify.app') {
+export function toolJsonLd(domain = 'https://anyfileconverter.online') {
   return {
     "@context": "https://schema.org",
     "@type": "WebApplication",

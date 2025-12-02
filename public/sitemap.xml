@@ -3,78 +3,78 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/</loc>
+    <loc>https://anyfileconverter.online/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Main Tool Page -->
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/tools/jpg-to-pdf</loc>
+    <loc>https://anyfileconverter.online/tools/jpg-to-pdf</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/privacy</loc>
+    <loc>https://anyfileconverter.online/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/terms</loc>
+    <loc>https://anyfileconverter.online/terms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Trust Pages (needed for AdSense) -->
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/about</loc>
+    <loc>https://anyfileconverter.online/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/contact</loc>
+    <loc>https://anyfileconverter.online/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <!-- Blog Index -->
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/blog</loc>
+    <loc>https://anyfileconverter.online/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Blog Posts -->
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/blog/how-to-convert-jpg-to-pdf</loc>
+    <loc>https://anyfileconverter.online/blog/how-to-convert-jpg-to-pdf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/blog/jpg-to-pdf-android</loc>
+    <loc>https://anyfileconverter.online/blog/jpg-to-pdf-android</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/blog/jpg-to-pdf-iphone</loc>
+    <loc>https://anyfileconverter.online/blog/jpg-to-pdf-iphone</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/blog/reduce-pdf-size-after-conversion</loc>
+    <loc>https://anyfileconverter.online/blog/reduce-pdf-size-after-conversion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://jpg-to-pdf-convert.netlify.app/blog/best-jpg-to-pdf-tools</loc>
+    <loc>https://anyfileconverter.online/blog/best-jpg-to-pdf-tools</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

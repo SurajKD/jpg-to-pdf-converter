@@ -4,8 +4,8 @@ import AdPlaceholder from "../../../components/AdPlaceholder"
 export const metadata: Metadata = {
   title: "How to Convert JPG to PDF on Android — Quick Guide",
   description: "Step-by-step instructions to convert JPG images to PDF on Android using browser, Google Photos, or this online tool.",
-  alternates: { canonical: "https://jpg-to-pdf-convert.netlify.app/blog/jpg-to-pdf-android" },
-  openGraph: { title: "How to Convert JPG to PDF on Android", description: "Fast Android methods", url: "https://jpg-to-pdf-convert.netlify.app/blog/jpg-to-pdf-android" }
+  alternates: { canonical: "https://anyfileconverter.online/blog/jpg-to-pdf-android" },
+  openGraph: { title: "How to Convert JPG to PDF on Android", description: "Fast Android methods", url: "https://anyfileconverter.online/blog/jpg-to-pdf-android" }
 }
 
 export default function AndroidGuide() {
