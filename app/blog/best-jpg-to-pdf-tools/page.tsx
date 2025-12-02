@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function BestTools() {
   return (
-    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
+    <main className="blog" style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
       <h1>Best JPG to PDF Tools — Free & Paid Options</h1>
 
       <p>

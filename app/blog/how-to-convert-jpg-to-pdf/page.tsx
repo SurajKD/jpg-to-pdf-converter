@@ -90,7 +90,7 @@ export default function Page() {
   };
 
   return (
-    <main style={{ padding: "24px", maxWidth: "900px", margin: "0 auto" }}>
+    <main className="blog" style={{ padding: "24px", maxWidth: "900px", margin: "0 auto" }}>
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"

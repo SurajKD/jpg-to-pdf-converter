@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ReduceSize() {
   return (
-    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
+    <main className="blog" style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
       <h1>How to Reduce PDF Size After Conversion</h1>
 
       <p>

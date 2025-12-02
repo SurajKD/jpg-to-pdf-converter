@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AndroidGuide() {
   return (
-    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
+    <main className="blog" style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
       <h1>How to Convert JPG to PDF on Android — Quick Guide</h1>
 
       <p>
