@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AdPlaceholder from "../../../components/AdPlaceholder";
 
 export const metadata: Metadata = {
   title: "How to Convert JPG to PDF — Step-by-Step Guide",
@@ -197,6 +198,9 @@ export default function Page() {
           as you like.
         </p>
       </section>
+      <div style={{ marginTop: 12 }}>
+        <AdPlaceholder />
+      </div>
     </main>
   );
 }
