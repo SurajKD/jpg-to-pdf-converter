@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { Metadata } from "next"
 import AdPlaceholder from "../components/AdPlaceholder"
+import { OpenConverterButton } from "../components/OpenConvertButton"
 
 export const metadata: Metadata = {
     title: "Free JPG to PDF Converter Online | Fast & Secure",
@@ -91,19 +92,7 @@ export default function Home() {
 
                 <div style={{ marginTop: 20 }}>
                     <Link href="/tools/jpg-to-pdf" aria-label="Open JPG to PDF converter">
-                        <button
-                            className="btn"
-                            style={{
-                                background: "#0b74de",
-                                color: "#fff",
-                                padding: "10px 16px",
-                                borderRadius: "8px",
-                                fontSize: "16px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            Open JPG → PDF Converter
-                        </button>
+                        <OpenConverterButton name="Open JPG → PDF Converter" />
                     </Link>
                 </div>
                 <div style={{ marginTop: 12 }}>

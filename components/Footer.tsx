@@ -1,9 +1,9 @@
 import Link from "next/link";
-import AdPlaceholder from "./AdPlaceholder";
 
 export default function Footer() {
   return (
     <footer
+      className="footerAFC"
       style={{
         marginTop: 40,
         padding: "32px 24px",
@@ -76,11 +76,6 @@ export default function Footer() {
             </ul>
           </nav>
 
-        </div>
-
-        {/* Ad Section */}
-        <div style={{ marginTop: 8 }}>
-          <AdPlaceholder />
         </div>
 
         {/* Bottom Disclaimer */}

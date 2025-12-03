@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { imagesToPdf } from '../lib/pdfClient'
+import { trackButton } from '../lib/utils'
 
 type Item = { file: File; id: string; url: string }
 
@@ -58,6 +59,7 @@ export default function DropzoneClient() {
 
     // Convert -> then show 2s animation -> then show download button
     const convert = async () => {
+        trackButton('Convert image to PDF')
         if (!items.length) return
         setProcessing(true)
         setAnimating(false)
