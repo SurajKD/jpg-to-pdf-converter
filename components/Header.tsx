@@ -65,7 +65,7 @@ export default function Header() {
             navOpen ? 'block' : 'hidden'
           } w-full md:block md:w-auto`}
         >
-          <ul className="flex flex-col md:flex-row md:items-center font-medium p-4 md:p-0 mt-4 md:mt-0 border border-slate-200 md:border-0 rounded-lg bg-slate-50 md:bg-transparent md:space-x-6">
+          <ul className="flex flex-col md:flex-row md:items-center font-medium p-4 md:p-0 mt-4 md:mt-0 border border-slate-200 md:border-0 rounded-lg bg-slate-50 md:bg-transparent md:space-x-6 m-0">
             {/* Tools dropdown */}
             <li className="relative">
               <button
