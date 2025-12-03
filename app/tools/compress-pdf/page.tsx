@@ -12,51 +12,110 @@ const AdPlaceholder = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Compress PDF Online — Reduce File Size Fast",
+  title: "Compress PDF Online — Free PDF Compressor (Fast & Private)",
   description:
-    "Compress PDF files online for free. Reduce PDF size while keeping quality, perfect for email, uploads, and sharing. Fast, secure, and runs in your browser.",
+    "Compress PDF files online for free. Reduce PDF size while keeping quality — ideal for email, uploads, and sharing. Fast, secure, and runs in your browser (no upload by default).",
+  keywords: [
+    "compress pdf",
+    "pdf compressor",
+    "reduce pdf size",
+    "compress pdf online",
+    "free pdf compressor",
+    "pdf compression no upload",
+  ],
   alternates: {
     canonical: "https://anyfileconverter.online/tools/compress-pdf",
   },
   openGraph: {
     title: "Compress PDF Online — Free PDF Compressor",
     description:
-      "Reduce your PDF file size online. Fast, secure PDF compression that runs in your browser.",
+      "Reduce your PDF file size online. Fast, private browser-based PDF compression — no upload required by default.",
     url: "https://anyfileconverter.online/tools/compress-pdf",
     type: "website",
-    siteName: "AnyFileConverter.online",
+    siteName: "AnyFileConverter",
+    locale: "en_US",
+    images: [
+      {
+        // Add an OG image at this absolute URL if available
+        url: "https://anyfileconverter.online/og-compress-pdf.png",
+        width: 1200,
+        height: 630,
+        alt: "Compress PDF — AnyFileConverter",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Compress PDF Online — Free PDF Compressor",
+    description:
+      "Reduce your PDF file size quickly in the browser. No signup. No upload required by default.",
+    images: ["https://anyfileconverter.online/og-compress-pdf.png"],
   },
 };
 
-const faqLd = {
+const pageJsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
+  "@graph": [
     {
-      "@type": "Question",
-      name: "Is my PDF uploaded to your server?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. Compression is done in your browser by default, so your PDF is not uploaded to our servers.",
-      },
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/compress-pdf#app",
+      "name": "PDF Compressor",
+      "applicationCategory": "FileConverter",
+      "operatingSystem": "Web",
+      "url": "https://anyfileconverter.online/tools/compress-pdf",
+      "description":
+        "Compress PDF files online in your browser. Reduce file size while maintaining quality — ideal for email, uploads, and sharing.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     },
     {
-      "@type": "Question",
-      name: "Does PDF compression reduce quality?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "This tool performs safe, browser-based compression. In most cases, visible quality remains similar while file size is reduced.",
-      },
+      "@type": "WebApplication",
+      "@id": "https://anyfileconverter.online/tools/compress-pdf#webapp",
+      "name": "PDF Compressor",
+      "url": "https://anyfileconverter.online/tools/compress-pdf",
+      "description":
+        "Browser-based PDF compression — fast, private, and free. No upload required by default.",
+      "applicationCategory": "Utility",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     },
     {
-      "@type": "Question",
-      name: "Do I need to create an account?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No account or registration is required to compress PDFs.",
-      },
-    },
-  ],
+      "@type": "FAQPage",
+      "@id": "https://anyfileconverter.online/tools/compress-pdf#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my PDF uploaded to your server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Compression runs in your browser by default so your PDF is not uploaded to our servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does PDF compression reduce quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This tool performs safe, browser-based compression. In most cases, visible quality remains similar while file size is reduced."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to create an account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No account or registration is required to compress PDFs."
+          }
+        }
+      ]
+    }
+  ]
 };
 
 export default function CompressPdfPage() {
@@ -118,7 +177,7 @@ export default function CompressPdfPage() {
       {/* FAQ JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
       />
     </>
   );

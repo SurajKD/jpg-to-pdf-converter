@@ -9,7 +9,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <head>
                 {/* Favicon */}
-                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+                <link rel="icon" href="https://anyfileconverter.online/favicon.ico" />
+                <link rel="icon" type="image/png" href="https://anyfileconverter.online/favicon-96x96.png" sizes="96x96" />
+                <link rel="icon" type="image/svg+xml" href="https://anyfileconverter.online/favicon.svg" />
+                <link rel="shortcut icon" href="https://anyfileconverter.online/favicon.ico" />
+                <link rel="apple-touch-icon" sizes="180x180" href="https://anyfileconverter.online/apple-touch-icon.png" />
+                <link rel="manifest" href="https://anyfileconverter.online/site.webmanifest" />
+
 
                 {/* Google Analytics */}
                 <Script
@@ -28,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Script>
             </head>
 
-             <body className="pt-16 bg-[var(--bg)]">
+            <body className="pt-16 bg-[var(--bg)]">
                 <Header />
                 <main className="container">{children}</main>
                 <Footer />

@@ -1,90 +1,124 @@
 import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 const AdPlaceholder = dynamic(() => import("../../../components/AdPlaceholder"), {
-  ssr: false,
-  loading: () => <div style={{ height: 90 }} />, // keep layout stable for ads
+    ssr: false,
+    loading: () => <div style={{ height: 90 }} />, // keep layout stable for ads
 })
 const DropzoneClient = dynamic(() => import('../../../components/DropzoneClient'), { ssr: false })
 
 export const metadata: Metadata = {
-    title: 'JPG to PDF Converter Tool | Free Online Conversion',
+    title: "JPG to PDF Converter — Free Online Tool (No Upload Needed)",
     description:
-        'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
-    keywords: ['jpg to pdf', 'image to pdf', 'convert jpg to pdf', 'free pdf converter', 'online pdf converter'],
+        "Convert JPG, JPEG, and PNG images to PDF instantly. Reorder photos, rotate pages, adjust margins, and combine multiple images into one PDF. 100% secure client-side processing.",
+    keywords: [
+        "jpg to pdf",
+        "convert jpg to pdf",
+        "image to pdf",
+        "jpg to pdf online",
+        "photo to pdf",
+        "merge jpg to pdf",
+        "jpg to pdf converter",
+        "free pdf converter",
+        "jpg to pdf no upload"
+    ],
     alternates: {
-        canonical: 'https://anyfileconverter.online/tools/jpg-to-pdf',
+        canonical: "https://anyfileconverter.online/tools/jpg-to-pdf",
     },
     openGraph: {
-        title: 'JPG to PDF Converter Tool | Free Online Conversion',
+        title: "JPG to PDF Converter — Free Online Tool (Fast & Secure)",
         description:
-            'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
-        url: 'https://anyfileconverter.online/tools/jpg-to-pdf',
-        siteName: 'JPG→PDF Converter',
-        type: 'website',
-        locale: 'en_US',
+            "Convert JPG, JPEG, and PNG images to PDF instantly. Rearrange, rotate, and combine multiple photos into one PDF. Client-side, fast, private.",
+        url: "https://anyfileconverter.online/tools/jpg-to-pdf",
+        siteName: "AnyFileConverter",
+        type: "article",
+        locale: "en_US",
         images: [
             {
-                url: '/og-jpg-to-pdf.png',
+                url: "https://anyfileconverter.online/og-jpg-to-pdf.png",
                 width: 1200,
                 height: 630,
-                alt: 'JPG to PDF Converter Preview',
+                alt: "JPG to PDF Converter Preview",
             },
         ],
     },
     twitter: {
-        card: 'summary_large_image',
-        title: 'JPG to PDF Converter — Free Online Tool',
+        card: "summary_large_image",
+        title: "JPG to PDF Converter — Free Online Tool",
         description:
-            'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
-        images: ['/og-jpg-to-pdf.png'],
+            "Convert JPG, JPEG, and PNG images to PDF instantly. Works on all devices. No upload required.",
+        images: ["https://anyfileconverter.online/og-jpg-to-pdf.png"],
     },
-}
+};
 
-const webAppLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: 'JPG to PDF Converter',
-    description: 'Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.',
-    url: 'https://anyfileconverter.online/tools/jpg-to-pdf',
-    applicationCategory: 'Utility',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-}
-
-const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
         {
-            '@type': 'Question',
-            name: 'Is my data uploaded when I convert images?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'No — by default conversion runs client-side in your browser so your files are not uploaded. Server-side features are optional and explicitly presented to the user.',
-            },
+            "@type": "SoftwareApplication",
+            "@id": "https://anyfileconverter.online/tools/jpg-to-pdf#app",
+            name: "JPG to PDF Converter",
+            applicationCategory: "FileConverter",
+            operatingSystem: "Web",
+            url: "https://anyfileconverter.online/tools/jpg-to-pdf",
+            description:
+                "Convert JPG, JPEG, and PNG images to PDF instantly. Reorder, rotate, and merge multiple images into one PDF. 100% private and processed in your browser.",
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD"
+            }
         },
         {
-            '@type': 'Question',
-            name: 'Which image formats are supported?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'We support JPG, JPEG and PNG (plus other common web image formats).',
-            },
+            "@type": "WebApplication",
+            "@id": "https://anyfileconverter.online/tools/jpg-to-pdf#webapp",
+            name: "JPG to PDF Converter",
+            description:
+                "Convert JPG, JPEG, and PNG images to PDF with reorder, rotate, merge and compression options. Fast client-side conversion.",
+            url: "https://anyfileconverter.online/tools/jpg-to-pdf",
+            applicationCategory: "Utility",
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD"
+            }
         },
         {
-            '@type': 'Question',
-            name: 'Can I combine multiple images into a single PDF?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Yes — upload multiple images, reorder them and convert to a single downloadable PDF.',
-            },
-        },
-    ],
-}
+            "@type": "FAQPage",
+            "@id": "https://anyfileconverter.online/tools/jpg-to-pdf#faq",
+            mainEntity: [
+                {
+                    "@type": "Question",
+                    name: "Is my data uploaded when converting JPG to PDF?",
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "No. All conversions are processed inside your browser using client-side technology. Your files are never uploaded unless you explicitly opt-in for server features."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    name: "Which image formats are supported?",
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "JPG, JPEG, and PNG images are supported, plus most common web photo formats."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    name: "Can I combine multiple images into a single PDF?",
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Yes. Upload multiple images, reorder them, rotate if needed, and convert them all into one PDF file."
+                    }
+                }
+            ]
+        }
+    ]
+};
 
 export default function ToolPage() {
     return (
         <>
-             <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
+            <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
                 <h1>JPG to PDF Converter Tool</h1>
                 <p className="small">
                     Drag & drop JPG/PNG files, reorder, and convert to a single PDF document instantly — all in your browser.
@@ -170,11 +204,7 @@ export default function ToolPage() {
             {/* Structured data for SEO */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppLd) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
         </>
     )
