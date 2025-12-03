@@ -1,6 +1,9 @@
 import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
-import AdPlaceholder from '../../../components/AdPlaceholder'
+const AdPlaceholder = dynamic(() => import("../../../components/AdPlaceholder"), {
+  ssr: false,
+  loading: () => <div style={{ height: 90 }} />, // keep layout stable for ads
+})
 const DropzoneClient = dynamic(() => import('../../../components/DropzoneClient'), { ssr: false })
 
 export const metadata: Metadata = {

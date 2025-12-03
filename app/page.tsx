@@ -1,8 +1,12 @@
 import Link from "next/link"
 import type { Metadata } from "next"
-import AdPlaceholder from "../components/AdPlaceholder"
 import { OpenConverterButton } from "../components/OpenConvertButton"
+import dynamic from "next/dynamic"
 
+const AdPlaceholder = dynamic(() => import("../components/AdPlaceholder"), {
+  ssr: false,
+  loading: () => <div style={{ height: 90 }} />, 
+})
 export const metadata: Metadata = {
     title: "Free JPG to PDF Converter Online | Fast & Secure",
     description:
