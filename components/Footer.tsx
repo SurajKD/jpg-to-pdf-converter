@@ -59,6 +59,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: "1.7" }}>
               <li><Link href="/">Home</Link></li>
               <li><Link href="/tools/jpg-to-pdf">JPG → PDF Tool</Link></li>
+              <li><Link href="/tools/compress-pdf">Compress PDF</Link></li>
               <li><Link href="/blog">Blog</Link></li>
             </ul>
           </nav>

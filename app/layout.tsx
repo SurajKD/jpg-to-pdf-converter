@@ -1,8 +1,8 @@
-import '../styles/globals.css'
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Script from 'next/script'
+import './globals.css'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Script>
             </head>
 
-            <body>
+             <body className="pt-16 bg-[var(--bg)]">
                 <Header />
                 <main className="container">{children}</main>
                 <Footer />

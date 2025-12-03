@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root theme tokens */
+:root {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --brandprimary: #0b74de;
+}
+
+/* Base layout */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  /* Better font scaling on mobile + desktop */
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Typography defaults */
+p {
+  color: var(--text);
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+}
+
+small,
+.small {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Headings – responsive using clamp() */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+  color: var(--brandprimary);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 2.5vw + 1rem, 2.4rem); /* ~28–38px */
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2vw + 0.8rem, 2rem); /* ~22–32px */
+}
+
+h3 {
+  font-size: clamp(1.2rem, 1.5vw + 0.7rem, 1.6rem); /* ~19–26px */
+}
+
+h4 {
+  font-size: 1.05rem;
+}
+
+h5 {
+  font-size: 0.95rem;
+}
+
+h6 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Links */
+a {
+  color: var(--brandprimary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul,
+ol {
+  margin: 0 0 0.9rem 1.2rem;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.35rem;
+}
+
+/* Images should not overflow */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Forms */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+input,
+select,
+textarea {
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--brandprimary);
+  box-shadow: 0 0 0 1px rgba(11, 116, 222, 0.15);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn {
+  background: var(--brandprimary);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.btn:hover {
+  filter: brightness(0.96);
+}
+
+/* Layout helpers */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+}
+
+/* Slightly more breathing room on larger screens */
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem 0;
+  }
+}
+
+/* Header layout (for any legacy usage) */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border: 1px solid #e6eef8;
+  padding: 16px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+}
+
+/* Footer links */
+.footerAFC a {
+  color: var(--brandprimary);
+  text-decoration: none;
+}
+
+.footerAFC a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive row for action buttons */
+.action-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .action-row {
+    flex-direction: row !important;
+  }
+}

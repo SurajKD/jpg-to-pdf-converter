@@ -4,143 +4,170 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
+  const [navOpen, setNavOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
 
-  const toggleMenu = () => setOpen(!open)
+  const toggleNav = () => setNavOpen(prev => !prev)
+  const toggleTools = () => setToolsOpen(prev => !prev)
+
+  const closeAll = () => {
+    setNavOpen(false)
+    setToolsOpen(false)
+  }
 
   return (
-    <header
-      style={{
-        padding: "12px 24px",
-        borderBottom: "1px solid #eef2f7",
-        background: "#fff",
-        position: "sticky",
-        top: 0,
-        zIndex: 99,
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+    <nav className="bg-white border-b border-slate-200 fixed w-full z-20 top-0 left-0">
+      <div className="max-w-6xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
         {/* Logo */}
         <Link
           href="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            textDecoration: "none",
-          }}
+          className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
             src="/anyfileconverterLogo.png"
             alt="AnyFileConverter Logo"
-            style={{
-              height: "42px",
-              width: "auto",   // Auto width as you requested
-              objectFit: "contain",
-            }}
+            className="h-9 w-auto object-contain"
           />
+     
         </Link>
 
-        {/* Desktop Menu */}
-        <nav
-          style={{
-            display: "flex",
-            gap: "20px",
-            alignItems: "center",
-          }}
-          className="desktop-nav"
-        >
-          <Link href="/tools/jpg-to-pdf" style={navLinkStyle}>Tool</Link>
-          <Link href="/blog" style={navLinkStyle}>Blog</Link>
-          <Link href="/about" style={navLinkStyle}>About</Link>
-          <Link href="/contact" style={navLinkStyle}>Contact</Link>
-          <Link href="/privacy" style={navLinkStyle}>Privacy</Link>
-        </nav>
-
-        {/* Mobile Hamburger */}
+        {/* Mobile burger */}
         <button
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-          className="mobile-menu-btn"
-          style={{
-            display: "none",
-            background: "transparent",
-            border: 0,
-            cursor: "pointer",
-            padding: "6px",
-          }}
+          type="button"
+          onClick={toggleNav}
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-700 rounded-lg md:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-300"
+          aria-controls="main-nav"
+          aria-expanded={navOpen}
         >
-          <div style={burgerLine}></div>
-          <div style={burgerLine}></div>
-          <div style={burgerLine}></div>
+          <span className="sr-only">Open main menu</span>
+          <svg
+            className="w-6 h-6"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+              d="M5 7h14M5 12h14M5 17h14"
+            />
+          </svg>
         </button>
-      </div>
 
-      {/* Mobile Menu Dropdown */}
-      {open && (
-        <nav
-          className="mobile-nav"
-          style={{
-            marginTop: 12,
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-            padding: "12px 8px",
-            background: "#f9fbff",
-            borderRadius: 8,
-            border: "1px solid #e2e8f0",
-          }}
+        {/* Desktop / mobile nav */}
+        <div
+          id="main-nav"
+          className={`${
+            navOpen ? 'block' : 'hidden'
+          } w-full md:block md:w-auto`}
         >
-          <Link onClick={() => setOpen(false)} href="/tools/jpg-to-pdf" style={mobileLinkStyle}>Tool</Link>
-          <Link onClick={() => setOpen(false)} href="/blog" style={mobileLinkStyle}>Blog</Link>
-          <Link onClick={() => setOpen(false)} href="/about" style={mobileLinkStyle}>About</Link>
-          <Link onClick={() => setOpen(false)} href="/contact" style={mobileLinkStyle}>Contact</Link>
-          <Link onClick={() => setOpen(false)} href="/privacy" style={mobileLinkStyle}>Privacy</Link>
-        </nav>
-      )}
+          <ul className="flex flex-col md:flex-row md:items-center font-medium p-4 md:p-0 mt-4 md:mt-0 border border-slate-200 md:border-0 rounded-lg bg-slate-50 md:bg-transparent md:space-x-6">
+            {/* Tools dropdown */}
+            <li className="relative">
+              <button
+                type="button"
+                onClick={toggleTools}
+                className="flex items-center justify-between w-full md:w-auto py-2 px-3 rounded-md text-slate-800 hover:bg-slate-100 md:hover:bg-transparent md:hover:text-[#0b74de] md:px-0"
+              >
+                Tools
+                <svg
+                  className="w-4 h-4 ms-1.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m19 9-7 7-7-7"
+                  />
+                </svg>
+              </button>
 
-      {/* Responsive Style Overrides */}
-      <style>{`
-        @media (max-width: 768px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-menu-btn {
-            display: block !important;
-          }
-        }
-      `}</style>
-    </header>
+              {/* Dropdown menu */}
+              <div
+                className={`${
+                  toolsOpen ? 'block' : 'hidden'
+                } md:absolute md:top-9 md:left-0 z-20 w-44 bg-white border border-slate-200 rounded-lg shadow-lg`}
+              >
+                <ul className="py-2 text-sm text-slate-700">
+                  <li>
+                    <Link
+                      href="/tools/jpg-to-pdf"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      JPG → PDF
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/compress-pdf"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      Compress PDF
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            {/* Blog */}
+            <li>
+              <Link
+                href="/blog"
+                onClick={closeAll}
+                className="block py-2 px-3 text-slate-800 rounded-md hover:bg-slate-100 md:hover:bg-transparent md:hover:text-[#0b74de] md:px-0"
+              >
+                Blog
+              </Link>
+            </li>
+
+            {/* About */}
+            <li>
+              <Link
+                href="/about"
+                onClick={closeAll}
+                className="block py-2 px-3 text-slate-800 rounded-md hover:bg-slate-100 md:hover:bg-transparent md:hover:text-[#0b74de] md:px-0"
+              >
+                About
+              </Link>
+            </li>
+
+            {/* Contact */}
+            <li>
+              <Link
+                href="/contact"
+                onClick={closeAll}
+                className="block py-2 px-3 text-slate-800 rounded-md hover:bg-slate-100 md:hover:bg-transparent md:hover:text-[#0b74de] md:px-0"
+              >
+                Contact
+              </Link>
+            </li>
+
+            {/* Privacy */}
+            <li>
+              <Link
+                href="/privacy"
+                onClick={closeAll}
+                className="block py-2 px-3 text-slate-800 rounded-md hover:bg-slate-100 md:hover:bg-transparent md:hover:text-[#0b74de] md:px-0"
+              >
+                Privacy
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   )
-}
-
-const navLinkStyle: React.CSSProperties = {
-  color: "#0b74de",
-  textDecoration: "none",
-  fontSize: "15px",
-  fontWeight: 500,
-}
-
-const mobileLinkStyle: React.CSSProperties = {
-  color: "#0b74de",
-  textDecoration: "none",
-  fontSize: "16px",
-  fontWeight: 600,
-  padding: "8px 4px",
-}
-
-const burgerLine: React.CSSProperties = {
-  width: "26px",
-  height: "3px",
-  background: "#0b74de",
-  marginBottom: "5px",
-  borderRadius: 2,
 }

@@ -84,7 +84,7 @@ const faqLd = {
 export default function ToolPage() {
     return (
         <>
-            <section>
+             <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
                 <h1>JPG to PDF Converter Tool</h1>
                 <p className="small">
                     Drag & drop JPG/PNG files, reorder, and convert to a single PDF document instantly — all in your browser.
@@ -165,7 +165,7 @@ export default function ToolPage() {
                 <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
                     <AdPlaceholder />
                 </div>
-            </section>
+            </main>
 
             {/* Structured data for SEO */}
             <script
