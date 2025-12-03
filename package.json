@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
+    "@quicktoolsone/pdf-compress": "^2.0.0",
+    "formidable": "^2.1.2",
     "gray-matter": "^4.0.3",
     "next": "14.0.0",
     "next-mdx-remote": "^4.2.0",
@@ -18,8 +20,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
-    "tesseract.js": "^2.1.5",
-    "formidable": "^2.1.2"
+    "tesseract.js": "^2.1.5"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
