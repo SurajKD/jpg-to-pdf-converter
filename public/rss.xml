@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+
+  <title>AnyFileConverter Blog RSS Feed</title>
+  <link>https://anyfileconverter.online/blog</link>
+  <description>Latest guides, tutorials, and tips for file conversion, PDF tools, and image optimization.</description>
+  <language>en</language>
+  <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+
+  <!-- Blog Posts -->
+
+  <item>
+    <title>How to Convert JPG to PDF — Step-by-Step Guide</title>
+    <link>https://anyfileconverter.online/blog/how-to-convert-jpg-to-pdf</link>
+    <guid>https://anyfileconverter.online/blog/how-to-convert-jpg-to-pdf</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>Learn how to quickly convert JPG images into a PDF using a secure, browser-based tool with no uploads required.</description>
+  </item>
+
+  <item>
+    <title>How to Convert JPG to PDF on Android</title>
+    <link>https://anyfileconverter.online/blog/jpg-to-pdf-android</link>
+    <guid>https://anyfileconverter.online/blog/jpg-to-pdf-android</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>A fast and simple guide to converting JPG images into PDF on Android using built-in features and online tools.</description>
+  </item>
+
+  <item>
+    <title>How to Convert JPG to PDF on iPhone</title>
+    <link>https://anyfileconverter.online/blog/jpg-to-pdf-iphone</link>
+    <guid>https://anyfileconverter.online/blog/jpg-to-pdf-iphone</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>Learn the easiest ways to convert JPG to PDF on iPhone using Files app, Shortcuts, and online converters.</description>
+  </item>
+
+  <item>
+    <title>How to Reduce PDF Size After Conversion</title>
+    <link>https://anyfileconverter.online/blog/reduce-pdf-size-after-conversion</link>
+    <guid>https://anyfileconverter.online/blog/reduce-pdf-size-after-conversion</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>Tips and methods to shrink large PDF files after converting from images or documents.</description>
+  </item>
+
+  <item>
+    <title>Best JPG to PDF Tools — Free & Paid Options</title>
+    <link>https://anyfileconverter.online/blog/best-jpg-to-pdf-tools</link>
+    <guid>https://anyfileconverter.online/blog/best-jpg-to-pdf-tools</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>A comparison of the top JPG to PDF converters, highlighting speed, quality, privacy, and platform support.</description>
+  </item>
+
+  <item>
+    <title>Best Ways to Compress a PDF (Without Losing Quality)</title>
+    <link>https://anyfileconverter.online/blog/compress-pdf</link>
+    <guid>https://anyfileconverter.online/blog/compress-pdf</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>A complete guide to shrinking PDF file sizes using browser tools, desktop apps, and cloud compressors.</description>
+  </item>
+
+  <item>
+    <title>How to Compress Images Online — JPG/PNG/WebP Optimizer</title>
+    <link>https://anyfileconverter.online/blog/image-compressor</link>
+    <guid>https://anyfileconverter.online/blog/image-compressor</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>Learn the best methods to compress images for upload, email, and sharing without losing visible quality.</description>
+  </item>
+
+  <item>
+    <title>How to Convert PDF to Word (Editable DOCX)</title>
+    <link>https://anyfileconverter.online/blog/pdf-to-word</link>
+    <guid>https://anyfileconverter.online/blog/pdf-to-word</guid>
+    <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+    <description>A complete guide to turning PDF documents into editable Word files using browser tools, desktop apps, and cloud services.</description>
+  </item>
+
+</channel>
+</rss>

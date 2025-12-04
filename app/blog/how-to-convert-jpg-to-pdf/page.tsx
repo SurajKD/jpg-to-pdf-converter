@@ -1,34 +1,35 @@
 import type { Metadata } from "next";
 import AdPlaceholder from "../../../components/AdPlaceholder";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "How to Convert JPG to PDF — Step-by-Step Guide",
   description:
-    "Learn how to convert JPG to PDF quickly using our free online tool. Fast, privacy-first, mobile-friendly, no login required.",
+    "Learn how to convert JPG to PDF using a fast, secure, privacy-first online tool. Works on mobile and desktop, no login required.",
   alternates: {
-    canonical: "https://your-netlify-domain.netlify.app/blog/how-to-convert-jpg-to-pdf",
+    canonical: "https://anyfileconverter.online/blog/how-to-convert-jpg-to-pdf",
   },
   openGraph: {
     title: "How to Convert JPG to PDF — Step-by-Step Guide",
     description:
-      "Convert JPG to PDF for free using our fast, privacy-first online converter. No signup, mobile-friendly.",
+      "Convert JPG to PDF for free using our fast, secure tool. No uploads required — fully client-side.",
     type: "article",
-    url: "https://your-netlify-domain.netlify.app/blog/how-to-convert-jpg-to-pdf",
+    url: "https://anyfileconverter.online/blog/how-to-convert-jpg-to-pdf",
     images: [
       {
-        url: '/og-jpg-to-pdf.png',
+        url: "https://anyfileconverter.online/og-tools.png",
         width: 1200,
         height: 630,
-        alt: 'JPG to PDF Converter Preview',
+        alt: "JPG to PDF Converter Preview",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'JPG to PDF Converter — Free Online Tool',
+    card: "summary_large_image",
+    title: "JPG to PDF Converter — Free Online Tool",
     description:
-      'Convert JPG and PNG images to PDF instantly. Secure, private, browser-based conversion.',
-    images: ['/og-jpg-to-pdf.png'],
+      "Convert JPG and PNG images to PDF instantly. 100% private, secure, and performed inside your browser.",
+    images: ["https://anyfileconverter.online/og-tools.png"],
   },
 };
 
@@ -38,21 +39,21 @@ export default function Page() {
     "@type": "Article",
     headline: "How to Convert JPG to PDF — Step-by-Step Guide",
     description:
-      "Step-by-step guide to converting JPG images to PDF online using our free, privacy-first tool.",
+      "Step-by-step instructions for converting JPG images to PDF using a free, privacy-first online tool.",
     author: {
       "@type": "Organization",
-      name: "JPG to PDF Converter",
+      name: "AnyFileConverter",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": "https://your-netlify-domain.netlify.app/blog/how-to-convert-jpg-to-pdf",
+      "@id": "https://anyfileconverter.online/blog/how-to-convert-jpg-to-pdf",
     },
     publisher: {
       "@type": "Organization",
-      name: "JPG to PDF Converter",
+      name: "AnyFileConverter",
       logo: {
         "@type": "ImageObject",
-        url: "https://your-netlify-domain.netlify.app/logo.png",
+        url: "https://anyfileconverter.online/logo.png",
       },
     },
     datePublished: "2025-12-01",
@@ -67,7 +68,7 @@ export default function Page() {
         name: "Is this JPG to PDF tool free?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes — the JPG to PDF converter is completely free to use.",
+          text: "Yes — the JPG to PDF converter is completely free to use with no limits.",
         },
       },
       {
@@ -75,7 +76,7 @@ export default function Page() {
         name: "Are my images uploaded to the server?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No — conversion is done client-side. Your files never leave your device.",
+          text: "No — all conversions run client-side in your browser. Your files never leave your device.",
         },
       },
       {
@@ -83,15 +84,15 @@ export default function Page() {
         name: "Can I combine multiple JPGs into one PDF?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes — upload multiple images, reorder them, and convert to a single PDF.",
+          text: "Yes — upload multiple images, reorder them, and convert into a single PDF document.",
         },
       },
     ],
   };
 
   return (
-    <main className="blog" style={{ padding: "24px", maxWidth: "900px", margin: "0 auto" }}>
-      {/* JSON-LD Structured Data */}
+    <main className="max-w-4xl mx-auto px-4 py-10 prose prose-lg">
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
@@ -101,104 +102,101 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQ) }}
       />
 
-      <h1 style={{ fontSize: "32px", marginBottom: "8px" }}>
-        How to Convert JPG to PDF (Step-by-Step Guide)
-      </h1>
-      <p style={{ color: "#666", marginBottom: "20px" }}>
+      <h1>How to Convert JPG to PDF (Step-by-Step Guide)</h1>
+
+      <p className="text-gray-600">
         The simplest way to turn images into a clean, share-ready PDF file —
-        completely free and privacy-friendly.
+        completely free, private, and mobile-friendly.
       </p>
 
-      <a
-        href="/tools/jpg-to-pdf"
-        style={{
-          display: "inline-block",
-          background: "#0b74de",
-          color: "#fff",
-          padding: "10px 16px",
-          textDecoration: "none",
-          borderRadius: "8px",
-          marginBottom: "28px",
-        }}
-      >
-        Open JPG → PDF Converter
-      </a>
+      {/* CTA Button */}
+      <div className="mt-4 mb-4">
+        <Link href="/tools/jpg-to-pdf">
+          <button className="btn px-4 py-2 rounded-lg text-white font-medium">
+            Open JPG → PDF Converter
+          </button>
+        </Link>
+      </div>
 
-      <section>
-        <h2 style={{ color: "#0b74de" }}>Why Convert JPG to PDF?</h2>
-        <p>
-          JPG images are great for viewing, but PDFs are preferred for official
-          submissions, printing, and sharing multi-page documents. PDF preserves
-          formatting, maintains quality, and is universally compatible.
-        </p>
+      <h2>Why Convert JPG to PDF?</h2>
+      <p>
+        JPG images are great for viewing, but PDFs are preferred for official submissions,
+        printing, and sharing multi-page documents. PDF preserves layout, maintains quality,
+        and ensures compatibility across devices.
+      </p>
 
-        <h2 style={{ color: "#0b74de" }}>How to Convert JPG to PDF Online</h2>
-        <ol>
-          <li>
-            <strong>Open the converter</strong> at{" "}
-            <a href="/tools/jpg-to-pdf">/tools/jpg-to-pdf</a>.
-          </li>
-          <li>
-            <strong>Upload your JPG images</strong> (drag &amp; drop supported).
-          </li>
-          <li>
-            <strong>Optional:</strong> Upload multiple images &amp; reorder them.
-          </li>
-          <li>
-            <strong>Click “Convert to PDF”</strong> and download your file.
-          </li>
-        </ol>
+      <h2>How to Convert JPG to PDF Online</h2>
+      <ol>
+        <li>
+          Open the converter:{" "}
+          <Link href="/tools/jpg-to-pdf" className="text-sky-700 font-medium">
+            /tools/jpg-to-pdf
+          </Link>
+        </li>
+        <li>Upload your JPG or PNG images (drag & drop supported).</li>
+        <li>Optional: Upload multiple images and reorder them.</li>
+        <li>Click “Convert to PDF” and download your file instantly.</li>
+      </ol>
 
-        <h2 style={{ color: "#0b74de" }}>What Makes Our Tool Better?</h2>
-        <ul>
-          <li>100% free</li>
-          <li>No login required</li>
-          <li>Privacy-first: client-side conversion</li>
-          <li>Mobile-friendly</li>
-          <li>Merge multiple JPGs into one PDF</li>
-        </ul>
+      <h2>What Makes Our Tool Better?</h2>
+      <ul>
+        <li>100% free — no hidden fees</li>
+        <li>No login or signup required</li>
+        <li>Fully client-side, privacy-first conversion</li>
+        <li>Works on mobile, desktop, and tablets</li>
+        <li>Merge multiple JPGs into a single PDF</li>
+      </ul>
 
-        <div
-          style={{
-            background: "#fff8e6",
-            borderLeft: "4px solid #ffd271",
-            padding: "12px",
-            borderRadius: "6px",
-            margin: "20px 0",
-          }}
-        >
-          <strong>Tip:</strong> Use clear, well-lit document images for better
-          PDF output.
-        </div>
+      {/* Highlight Tip Box */}
+      <div className="bg-yellow-50 border-l-4 border-yellow-300 p-4 rounded-md my-6">
+        <strong>Tip:</strong> For best results, use bright, well-lit images or clear document scans.
+      </div>
 
-        <h2 style={{ color: "#0b74de" }}>Convert on Mobile</h2>
-        <p>
-          Works on Android &amp; iPhone. Open the tool in your browser (Chrome
-          or Safari), select images from gallery, convert, and download.
-        </p>
+      <h2>Convert on Mobile (Android & iPhone)</h2>
+      <p>
+        You can convert images to PDF easily from your phone. Open the tool in Chrome (Android)
+        or Safari (iPhone), choose images from your gallery, convert, and download — no app needed.
+      </p>
 
-        <h2 style={{ color: "#0b74de" }}>Tips for High-Quality PDFs</h2>
-        <ul>
-          <li>Use medium-sized images to avoid huge file sizes.</li>
-          <li>Straighten and crop scanned pages.</li>
-          <li>Combine all pages into one PDF for easy sharing.</li>
-        </ul>
+      <h2>Tips for High-Quality PDFs</h2>
+      <ul>
+        <li>Use medium-sized images to avoid extremely large PDF files.</li>
+        <li>Straighten and crop your document images before converting.</li>
+        <li>Combine all pages into a single PDF for easier sharing.</li>
+      </ul>
 
-        <h2 style={{ color: "#0b74de" }}>FAQ</h2>
+      <h2>FAQ</h2>
 
-        <p>
-          <strong>Is this tool free?</strong> Yes — totally free.
-        </p>
-        <p>
-          <strong>Do you upload my files?</strong> No — everything processes on
-          your own device.
-        </p>
-        <p>
-          <strong>Can I combine multiple JPGs?</strong> Yes — upload and reorder
-          as you like.
-        </p>
-      </section>
-      <div style={{ marginTop: 12 }}>
+      <div className="space-y-3">
+        <details className="bg-white border border-slate-200 rounded-lg p-4">
+          <summary className="cursor-pointer list-none font-medium">
+            Is this tool free?
+          </summary>
+          <p className="mt-2 text-gray-700 text-sm">
+            Yes — completely free with no limits or signups.
+          </p>
+        </details>
+
+        <details className="bg-white border border-slate-200 rounded-lg p-4">
+          <summary className="cursor-pointer list-none font-medium">
+            Do you upload my files?
+          </summary>
+          <p className="mt-2 text-gray-700 text-sm">
+            No files are uploaded. Everything is processed on your device.
+          </p>
+        </details>
+
+        <details className="bg-white border border-slate-200 rounded-lg p-4">
+          <summary className="cursor-pointer list-none font-medium">
+            Can I combine multiple JPGs?
+          </summary>
+          <p className="mt-2 text-gray-700 text-sm">
+            Yes — upload as many images as you want and reorder them before converting.
+          </p>
+        </details>
+      </div>
+
+      <div className="mt-8">
         <AdPlaceholder />
       </div>
     </main>
