@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const CompressPdfClient = dynamic(
   () => import("../../../components/CompressPdfClient"),
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     images: [
       {
         // Add an OG image at this absolute URL if available
-        url: "https://anyfileconverter.online/og-compress-pdf.png",
+        url: "https://anyfileconverter.online/og-pdf-compressor.jpg",
         width: 1200,
         height: 630,
         alt: "Compress PDF — AnyFileConverter",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     title: "Compress PDF Online — Free PDF Compressor",
     description:
       "Reduce your PDF file size quickly in the browser. No signup. No upload required by default.",
-    images: ["https://anyfileconverter.online/og-compress-pdf.png"],
+    images: ["https://anyfileconverter.online/og-pdf-compressor.jpg"],
   },
 };
 
@@ -122,6 +123,9 @@ export default function CompressPdfPage() {
   return (
     <>
       <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
+        <nav aria-label="Breadcrumb" style={{ marginBottom: 12 }}>
+                    <Link href="/">Home</Link> {" / "} <Link href="/tools">Tools</Link> {" / "} Compress PDF
+                </nav>
         <h1>Compress PDF Online — Free & Secure</h1>
         <p style={{ color: "#555" }}>
           Reduce PDF file size quickly in your browser. Perfect for emailing, uploading, and sharing

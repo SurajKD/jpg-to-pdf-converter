@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
+import Link from 'next/link';
 const AdPlaceholder = dynamic(() => import("../../../components/AdPlaceholder"), {
     ssr: false,
     loading: () => <div style={{ height: 90 }} />, // keep layout stable for ads
@@ -119,6 +120,9 @@ export default function ToolPage() {
     return (
         <>
             <main style={{ padding: 24, maxWidth: 900, margin: "0 auto", lineHeight: 1.7 }}>
+                <nav aria-label="Breadcrumb" style={{ marginBottom: 12 }}>
+                    <Link href="/">Home</Link> {" / "} <Link href="/tools">Tools</Link> {" / "} JPG to PDF
+                </nav>
                 <h1>JPG to PDF Converter Tool</h1>
                 <p className="small">
                     Drag & drop JPG/PNG files, reorder, and convert to a single PDF document instantly — all in your browser.
