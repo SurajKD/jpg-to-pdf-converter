@@ -4,43 +4,49 @@ import type { Metadata } from "next";
 import { OpenConverterButton } from "../components/OpenConvertButton";
 import dynamic from "next/dynamic";
 import React from "react";
+import Image from "next/image";
 
 const AdPlaceholder = dynamic(() => import("../components/AdPlaceholder"), {
   ssr: false,
-  loading: () => <div style={{ height: 90 }} />,
+  loading: () => <div className="h-24" />, // preserves layout for ads
 });
 
 export const metadata: Metadata = {
-  title: "Free JPG to PDF Converter Online | Fast & Secure",
+  title: "AnyFileConverter — Free Online File Conversion Tools (JPG→PDF, Compress, Optimize)",
   description:
-    "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
-  keywords: ["jpg to pdf", "image to pdf", "convert jpg to pdf online", "free pdf converter"],
-  alternates: {
-    canonical: "https://anyfileconverter.online",
-  },
+    "AnyFileConverter.online: privacy-first, client-side file conversion tools. Convert JPG to PDF, compress PDFs, compress images and convert PDF→Word — fast, free and secure.",
+  keywords: [
+    "file converter",
+    "jpg to pdf",
+    "compress pdf",
+    "image compressor",
+    "pdf to word",
+    "online file conversion",
+  ],
+  alternates: { canonical: "https://anyfileconverter.online" },
   openGraph: {
-    title: "Free JPG to PDF Converter Online | Fast & Secure",
+    title: "AnyFileConverter — Free Online Tools (Convert, Compress, Optimize)",
     description:
-      "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
+      "Privacy-first file conversion tools. Convert JPG to PDF, compress PDFs, compress images and convert PDF to Word — fast, free and secure.",
     url: "https://anyfileconverter.online",
     siteName: "AnyFileConverter",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://anyfileconverter.online/og-jpg-to-pdf.png",
+        url: "https://anyfileconverter.online/landing-og.jpg",
         width: 1200,
         height: 630,
-        alt: "JPG to PDF Converter Preview",
+        alt: "AnyFileConverter Tools — JPG→PDF, Compress, Image Optimizer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "JPG to PDF Converter — Free Online Tool",
+    title: "AnyFileConverter — Free Online File Conversion Tools",
     description:
-      "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
-    images: ["https://anyfileconverter.online/og-jpg-to-pdf.png"],
+      "Convert files in your browser. JPG→PDF, PDF compression, image compression, and PDF to Word — fast, private and free.",
+    images: ["https://anyfileconverter.online/landing-og.jpg"],
   },
 };
 
@@ -52,10 +58,8 @@ const combinedJsonLd = {
       "@id": "https://anyfileconverter.online/#org",
       name: "AnyFileConverter",
       url: "https://anyfileconverter.online",
-      logo: "https://anyfileconverter.online/path-to-your-logo.png",
-      sameAs: [
-        // fill with absolute urls to social profiles if available
-      ],
+      logo: "https://anyfileconverter.online/logo.png",
+      sameAs: [],
       contactPoint: [
         {
           "@type": "ContactPoint",
@@ -69,8 +73,7 @@ const combinedJsonLd = {
       "@id": "https://anyfileconverter.online/#website",
       url: "https://anyfileconverter.online",
       name: "AnyFileConverter",
-      description:
-        "Privacy-first online file conversion tools. Convert JPG to PDF, compress PDFs and more — directly in your browser.",
+      description: "Privacy-first online file conversion tools. Convert, compress and optimize files directly in your browser.",
       publisher: { "@id": "https://anyfileconverter.online/#org" },
       potentialAction: {
         "@type": "SearchAction",
@@ -82,63 +85,58 @@ const combinedJsonLd = {
       "@type": "BreadcrumbList",
       "@id": "https://anyfileconverter.online/#breadcrumbs",
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://anyfileconverter.online/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Tools",
-          item: "https://anyfileconverter.online/tools",
-        },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://anyfileconverter.online/" },
+        { "@type": "ListItem", position: 2, name: "Tools", item: "https://anyfileconverter.online/tools" },
       ],
     },
     {
       "@type": "SoftwareApplication",
       "@id": "https://anyfileconverter.online/tools/jpg-to-pdf#app",
       name: "JPG to PDF Converter",
-      url: "https://anyfileconverter.online/tools/jpg-to-pdf",
       applicationCategory: "FileConverter",
       operatingSystem: "Web",
-      description:
-        "Convert JPG and PNG images to a single PDF file directly in your browser. No upload — conversions happen locally.",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
+      url: "https://anyfileconverter.online/tools/jpg-to-pdf",
+      description: "Convert JPG and PNG images to a PDF inside your browser. Reorder, rotate, and adjust layout — no upload required.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
     {
       "@type": "SoftwareApplication",
       "@id": "https://anyfileconverter.online/tools/pdf-compressor#app",
       name: "PDF Compressor",
-      url: "https://anyfileconverter.online/tools/pdf-compressor",
       applicationCategory: "FileConverter",
       operatingSystem: "Web",
-      description:
-        "Reduce PDF file size without uploading — compression runs inside the browser to maintain privacy.",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
+      url: "https://anyfileconverter.online/tools/pdf-compressor",
+      description: "Reduce PDF file size in the browser — fast and private compression.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/image-compressor#app",
+      name: "Image Compressor",
+      applicationCategory: "ImageTool",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/image-compressor",
+      description: "Compress JPG, PNG and WebP images directly in the browser.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/pdf-to-word#app",
+      name: "PDF to Word Converter",
+      applicationCategory: "FileConverter",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/pdf-to-word",
+      description: "Convert PDFs into editable DOCX files inside your browser — no uploads by default.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
     {
       "@type": "WebApplication",
       "@id": "https://anyfileconverter.online/#webapp",
-      name: "JPG to PDF Converter",
-      description:
-        "Convert JPG to PDF online, reorder images, rotate pages, and adjust margins. Easy, fast, and completely free—works on mobile and desktop.",
+      name: "AnyFileConverter",
       url: "https://anyfileconverter.online",
+      description: "A collection of privacy-first online file conversion tools that run in your browser.",
       applicationCategory: "Utility",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
     {
       "@type": "FAQPage",
@@ -146,26 +144,26 @@ const combinedJsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "Is my data secure?",
+          name: "Are my files uploaded to your servers?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. All processing happens on your device by default. We don't store or upload files unless you choose to use server-side features.",
+            text: "Most conversions run in your browser — files are not uploaded unless clearly stated.",
           },
         },
         {
           "@type": "Question",
-          name: "What file formats are supported?",
+          name: "Are the tools free to use?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "We support JPG, JPEG, and PNG image formats.",
+            text: "Yes — all current tools are free with no signup required.",
           },
         },
         {
           "@type": "Question",
-          name: "Do I need an account?",
+          name: "Which file types do you support?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No account or registration is required. Convert and download immediately.",
+            text: "Supported formats include JPG, PNG, WebP, PDF, and DOCX depending on the tool used.",
           },
         },
       ],
@@ -176,81 +174,131 @@ const combinedJsonLd = {
 export default function Home() {
   return (
     <>
-      <section>
-        <h1>Convert JPG to PDF — Fast, Secure & Free</h1>
-        <p className="small">Client-side conversion. Your files never leave your browser by default.</p>
+      <main className="min-h-screen text-gray-900">
+        <section className="max-w-5xl mx-auto px-4 py-8">
+          {/* HERO: stacked on mobile, two-column on md+ */}
+          <header className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight">
+                AnyFileConverter.online
+              </h1>
 
-        <div style={{ marginTop: 20 }}>
-          <Link href="/tools/jpg-to-pdf" aria-label="Open JPG to PDF converter">
-            <OpenConverterButton name="Open JPG → PDF Converter" />
-          </Link>
-        </div>
-        <div style={{ marginTop: 12 }}>
-          <AdPlaceholder />
-        </div>
+              <p className="mt-3 text-gray-600 text-base sm:text-lg">
+                Privacy-first, client-side file tools. Convert JPG → PDF, compress PDFs & images, and convert PDF → Word — fast, free and secure.
+              </p>
 
-        <article style={{ marginTop: 32, lineHeight: 1.6 }}>
-          <h2>Why Choose Our JPG to PDF Converter?</h2>
-          <p>
-            Converting JPG images to PDF has never been easier. Our free online converter allows you to transform your image files into professional PDF documents in seconds. Whether you need to combine multiple photos into a single PDF, create a photo album, or prepare images for printing, our tool handles it all effortlessly.
-          </p>
+              <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:space-x-3 gap-3">
+                <div className="w-full sm:w-auto">
+                  <Link href="/tools" className="inline-block w-full sm:w-auto">
+                    <button className="w-full sm:w-auto px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition">
+                      View All Tools
+                    </button>
+                  </Link>
+                </div>
+              </div>
 
-          <h3>Key Features</h3>
-          <ul style={{ marginLeft: 20 }}>
-            <li><strong>100% Privacy:</strong> All conversion happens in your browser. Your images are never uploaded to our servers.</li>
-            <li><strong>Fast Processing:</strong> Instant conversion without waiting or registration required.</li>
-            <li><strong>Multiple Images:</strong> Convert and combine multiple JPG/PNG images into a single PDF.</li>
-            <li><strong>Reorder Images:</strong> Drag and drop to arrange images before converting.</li>
-            <li><strong>Customizable Format:</strong> Choose between A4, Letter, and other page sizes.</li>
-            <li><strong>Quality Control:</strong> Adjust compression to balance file size and image quality.</li>
-            <li><strong>Works Everywhere:</strong> Compatible with Windows, Mac, iPhone, Android, and any device with a web browser.</li>
-          </ul>
+              <p className="mt-4 text-xs text-gray-500">
+                Fast, secure & free — no signup required. Files stay on your device unless you opt into server features.
+              </p>
+            </div>
 
-          <h3>How to Convert JPG to PDF</h3>
-          <ol style={{ marginLeft: 20 }}>
-            <li>Click the "Open JPG → PDF Converter" button above</li>
-            <li>Drag and drop your JPG or PNG images, or click to select files</li>
-            <li>Reorder images if needed by dragging them</li>
-            <li>Click "Convert to PDF" to create your document</li>
-            <li>Download your PDF instantly to your device</li>
-          </ol>
+            <div className="flex justify-center md:justify-end">
+              <Image
+                src="/landing-og.webp"
+                alt="AnyFileConverter Tools preview"
+                className="w-full max-w-xs md:max-w-sm rounded-lg shadow-sm object-cover"
+                width={420}
+                height={280}
+                loading="eager"
+              />
+            </div>
+          </header>
 
-          <h3>Perfect For</h3>
-          <p>
-            Our converter is ideal for photographers, students, professionals, and anyone who needs to create PDFs from images. Use it to digitize documents, create photo books, prepare images for printing, or combine multiple scans into a single file.
-          </p>
-
-          <h3>Frequently Asked Questions</h3>
-          <div id="faq" style={{ marginLeft: 20 }}>
-            {/* Visible FAQ content must match the JSON-LD for eligibility */}
-            <details>
-              <summary><strong>Is my data secure?</strong></summary>
-              <p>Yes. All processing happens on your device by default. We don't store, upload, or access your files unless you choose server-side features.</p>
-            </details>
-
-            <details>
-              <summary><strong>What file formats are supported?</strong></summary>
-              <p>We support JPG, JPEG, and PNG image formats.</p>
-            </details>
-
-            <details>
-              <summary><strong>Do I need an account?</strong></summary>
-              <p>No account or registration is required. Convert and download immediately.</p>
-            </details>
+          {/* Ad placeholder (non-intrusive) */}
+          <div className="mt-6">
+            <AdPlaceholder />
           </div>
-        </article>
 
-        <div style={{ marginTop: 12 }}>
-          <AdPlaceholder />
-        </div>
-      </section>
+          {/* Tools grid */}
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">Available tools</h2>
+            <p className="mt-2 text-gray-600">Quick client-side tools for most common file tasks.</p>
 
-      {/* Combined JSON-LD (Organization, WebSite, Breadcrumbs, SoftwareApplication, WebApplication, FAQ) */}
-      <script
-        type="application/ld+json"
-        // safe because combinedJsonLd is static JSON you control
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedJsonLd) }}
-      />
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <ToolCard href="/tools/jpg-to-pdf" title="JPG → PDF" desc="Combine images to a single PDF. Reorder, rotate & choose page size." tag="Client-side" />
+              <ToolCard href="/tools/pdf-compressor" title="PDF Compressor" desc="Reduce PDF size for email and uploads." tag="Client-side" />
+              <ToolCard href="/tools/image-compressor" title="Image Compressor" desc="Compress JPG, PNG & WebP images with quality control." tag="Client-side" />
+              <ToolCard href="/tools/pdf-to-word" title="PDF → Word" desc="Convert PDFs into editable DOCX files." tag="Client-side" />
+            </div>
+          </section>
+
+          {/* Benefits & How it works */}
+          <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold">Why choose AnyFileConverter?</h3>
+              <ul className="mt-3 list-inside list-disc text-gray-700 space-y-2">
+                <li><strong>Privacy-first:</strong> Conversions happen in your browser.</li>
+                <li><strong>No signup:</strong> Use instantly with no account.</li>
+                <li><strong>Fast & lightweight:</strong> Minimal UI, local processing.</li>
+                <li><strong>Mobile-ready:</strong> Designed to work smoothly on phones.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold">How it works</h3>
+              <ol className="mt-3 list-decimal list-inside text-gray-700 space-y-2">
+                <li>Select the tool you want to use.</li>
+                <li>Upload or drag & drop your files.</li>
+                <li>Adjust settings (quality, page size, order).</li>
+                <li>Convert & download instantly.</li>
+              </ol>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className="mt-8">
+            <h3 className="text-lg font-semibold">Frequently asked questions</h3>
+            <div className="mt-3 space-y-2 text-gray-700">
+              <details className="bg-white p-3 rounded-lg shadow-sm">
+                <summary className="cursor-pointer font-medium">Are my files uploaded to your servers?</summary>
+                <p className="mt-2 text-sm text-gray-600">Most conversions run in your browser — files are not uploaded unless you explicitly enable a server feature.</p>
+              </details>
+
+              <details className="bg-white p-3 rounded-lg shadow-sm">
+                <summary className="cursor-pointer font-medium">Are the tools free to use?</summary>
+                <p className="mt-2 text-sm text-gray-600">Yes — all core tools are free with no signup required.</p>
+              </details>
+
+              <details className="bg-white p-3 rounded-lg shadow-sm">
+                <summary className="cursor-pointer font-medium">Which formats are supported?</summary>
+                <p className="mt-2 text-sm text-gray-600">Formats vary by tool: JPG/PNG/WebP for image tools, PDF for PDF tools and DOCX for Word outputs.</p>
+              </details>
+            </div>
+          </section>
+
+          <div className="mt-10">
+            <AdPlaceholder />
+          </div>
+        </section>
+      </main>
+
+      {/* Structured data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedJsonLd) }} />
     </>
+  );
+}
+
+/* -------------------------
+   Small helper: ToolCard (tailwind)
+   ------------------------- */
+function ToolCard({ href, title, desc, tag }: { href: string; title: string; desc: string; tag?: string }) {
+  return (
+    <Link href={href} className="block bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition">
+      <div className="flex justify-between items-start">
+        <h4 className="text-md font-semibold">{title}</h4>
+        {tag && <span className="text-xs text-slate-500">{tag}</span>}
+      </div>
+      <p className="mt-2 text-sm text-gray-600">{desc}</p>
+    </Link>
   );
 }
