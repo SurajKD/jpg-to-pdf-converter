@@ -6,17 +6,15 @@ import React from "react";
 
 const PdfToWordClient = dynamic(
   () => import("../../../components/PdfToWordClient"),
-  { ssr: false, loading: () => <div style={{ height: 200 }} /> }
+  { ssr: false, loading: () => <div className="h-48" /> }
 );
 
 const AdPlaceholder = dynamic(
   () => import("../../../components/AdPlaceholder"),
-  { ssr: false, loading: () => <div style={{ height: 90 }} /> }
+  { ssr: false, loading: () => <div className="h-24" /> }
 );
 
-/* ─────────────────────────────────────────
-   ✔ SEO METADATA
-────────────────────────────────────────── */
+/* SEO METADATA */
 export const metadata: Metadata = {
   title: "PDF to Word Converter — Free Online PDF → DOCX (Fast & Private)",
   description:
@@ -58,9 +56,7 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─────────────────────────────────────────
-   ✔ Combined JSON-LD (SoftwareApp + WebApp + Breadcrumbs + FAQ)
-────────────────────────────────────────── */
+/* Combined JSON-LD (SoftwareApp + WebApp + Breadcrumbs + FAQ) */
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -89,24 +85,9 @@ const pageJsonLd = {
       "@type": "BreadcrumbList",
       "@id": "https://anyfileconverter.online/tools/pdf-to-word#breadcrumbs",
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://anyfileconverter.online/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Tools",
-          item: "https://anyfileconverter.online/tools",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "PDF to Word",
-          item: "https://anyfileconverter.online/tools/pdf-to-word",
-        },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://anyfileconverter.online/" },
+        { "@type": "ListItem", position: 2, name: "Tools", item: "https://anyfileconverter.online/tools" },
+        { "@type": "ListItem", position: 3, name: "PDF to Word", item: "https://anyfileconverter.online/tools/pdf-to-word" },
       ],
     },
     {
@@ -134,7 +115,7 @@ const pageJsonLd = {
           name: "Will formatting be preserved?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Most PDF layouts—including paragraphs, headings and images—convert accurately. Complex formatting may vary slightly.",
+            text: "Most PDF layouts — including paragraphs, headings and images — convert accurately. Complex formatting may vary slightly.",
           },
         },
         {
@@ -142,7 +123,7 @@ const pageJsonLd = {
           name: "Do I need an account or subscription?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No sign-up required. The PDF to Word converter is completely free to use.",
+            text: "No sign-up required. The PDF to Word converter is free to use.",
           },
         },
       ],
@@ -150,133 +131,86 @@ const pageJsonLd = {
   ],
 };
 
-/* ─────────────────────────────────────────
-   ✔ PAGE COMPONENT
-────────────────────────────────────────── */
+/* PAGE COMPONENT */
 export default function PdfToWordPage() {
   return (
     <>
-      <main
-        style={{
-          padding: 24,
-          maxWidth: 900,
-          margin: "0 auto",
-          lineHeight: 1.7,
-        }}
-      >
+      <main className="max-w-4xl mx-auto px-4 py-10">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" style={{ marginBottom: 12 }}>
+        <nav aria-label="Breadcrumb" className="text-sm mb-3 text-slate-600">
           <Link href="/">Home</Link> {" / "}
           <Link href="/tools">Tools</Link> {" / "}
-          PDF to Word
+          <span>PDF to Word</span>
         </nav>
 
         {/* Header */}
-        <h1>PDF → Word (DOCX) — Free & Accurate Conversion</h1>
-        <p style={{ color: "#555" }}>
-          Convert your PDF files into fully editable Word documents (DOCX). Fast,
-          accurate and privacy-first. No upload required unless you enable OCR
-          for scanned PDFs.
-        </p>
+        <header className="mb-4">
+          <h1 className="text-3xl font-semibold leading-tight">PDF → Word (DOCX) — Free &amp; Accurate Conversion</h1>
+          <p className="text-gray-600 mt-2">
+            Convert your PDF files into fully editable Word documents (DOCX). Fast, accurate and privacy-first.
+            No upload required unless you enable OCR for scanned PDFs.
+          </p>
+        </header>
 
         {/* Tool UI */}
-        <section style={{ marginTop: 20 }}>
-          <PdfToWordClient />
+        <section className="mt-4">
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100">
+            <PdfToWordClient />
+          </div>
         </section>
 
-        <div style={{ marginTop: 20 }}>
+        <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
 
         {/* SEO Content */}
-        <article style={{ marginTop: 32 }}>
+        <article className="prose prose-lg mt-8">
           <h2>How the PDF to Word Converter Works</h2>
-          <ol style={{ marginLeft: 20 }}>
-            <li>
-              <strong>Upload your PDF</strong> — drag & drop or select a file.
-            </li>
-            <li>
-              <strong>Process the PDF</strong> — detects text, layout, images,
-              tables and paragraphs.
-            </li>
-            <li>
-              <strong>Convert to DOCX</strong> — formatting is preserved as
-              closely as possible.
-            </li>
-            <li>
-              <strong>Download your Word file</strong> — open in Microsoft Word,
-              Google Docs, or Apple Pages.
-            </li>
+          <ol>
+            <li><strong>Upload your PDF</strong> — drag &amp; drop or select a file.</li>
+            <li><strong>Process the PDF</strong> — detects text, layout, images, tables and paragraphs.</li>
+            <li><strong>Convert to DOCX</strong> — formatting is preserved as closely as possible.</li>
+            <li><strong>Download your Word file</strong> — open in Microsoft Word, Google Docs, or Apple Pages.</li>
           </ol>
 
           <h2>Why Choose This PDF → Word Tool?</h2>
-          <ul style={{ marginLeft: 20 }}>
-            <li>
-              <strong>Private:</strong> Conversion happens entirely in your
-              browser unless OCR is enabled.
-            </li>
-            <li>
-              <strong>Accurate:</strong> Preserves paragraphs, spacing, fonts,
-              bold/italic text, and images.
-            </li>
-            <li>
-              <strong>Free:</strong> No signup, no limits.
-            </li>
-            <li>
-              <strong>Universal:</strong> Works on phones, laptops and tablets.
-            </li>
+          <ul>
+            <li><strong>Private:</strong> Conversion happens in your browser unless OCR is enabled.</li>
+            <li><strong>Accurate:</strong> Preserves paragraphs, spacing, fonts, bold/italic text, and images.</li>
+            <li><strong>Free:</strong> No signup, no limits.</li>
+            <li><strong>Universal:</strong> Works on phones, laptops and tablets.</li>
           </ul>
 
           <h2>Frequently Asked Questions</h2>
 
           <details>
-            <summary>
-              <strong>Is my PDF uploaded to your servers?</strong>
-            </summary>
-            <p>
-              No. Conversion happens in your browser unless you enable
-              server-based OCR for scanned PDFs.
-            </p>
+            <summary><strong>Is my PDF uploaded to your servers?</strong></summary>
+            <p>No. Conversion happens in your browser unless you enable server-based OCR for scanned PDFs.</p>
           </details>
 
           <details>
-            <summary>
-              <strong>Does this work for scanned PDFs?</strong>
-            </summary>
-            <p>
-              Yes — but scanned/image PDFs require OCR to become editable. OCR
-              mode is optional.
-            </p>
+            <summary><strong>Does this work for scanned PDFs?</strong></summary>
+            <p>Yes — scanned/image PDFs require OCR to become editable. OCR mode is optional.</p>
           </details>
 
           <details>
-            <summary>
-              <strong>Will formatting be preserved?</strong>
-            </summary>
-            <p>
-              Most formatting converts accurately including images and layout.
-              Very complex PDFs may vary slightly.
-            </p>
+            <summary><strong>Will formatting be preserved?</strong></summary>
+            <p>Most formatting converts accurately including images and layout. Very complex PDFs may vary slightly.</p>
           </details>
 
           <details>
-            <summary>
-              <strong>Do I need an account?</strong>
-            </summary>
+            <summary><strong>Do I need an account?</strong></summary>
             <p>No — the tool is completely free to use.</p>
           </details>
         </article>
 
-        <div style={{ marginTop: 24 }}>
+        <div className="mt-8 flex justify-center">
           <AdPlaceholder />
         </div>
       </main>
 
       {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }} />
     </>
   );
 }
