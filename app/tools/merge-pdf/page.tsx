@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://anyfileconverter.online/og-merge-pdf.jpg",
+        url: "https://anyfileconverter.online/og-tools.png",
         width: 1200,
         height: 630,
         alt: "Merge PDF Preview",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Merge PDF — Free Online Tool",
     description: "Merge multiple PDF files into one single PDF. Private client-side merging.",
-    images: ["https://anyfileconverter.online/og-merge-pdf.jpg"],
+    images: ["https://anyfileconverter.online/og-tools.png"],
   },
 };
 
