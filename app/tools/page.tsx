@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "pdf compressor",
     "image compressor",
     "pdf to word",
+    "merge pdf",
     "online file tools",
     "anyfileconverter",
   ],
@@ -73,6 +74,15 @@ const tools = [
     short:
       "Convert text-based PDFs to editable Word (.docx) files in your browser. Best for native/text PDFs.",
     features: ["Client-side extraction", "Quick .docx download", "Preview"],
+  },
+  // <-- Added Merge PDF tool
+  {
+    id: "merge-pdf",
+    title: "Merge PDF",
+    href: "/tools/merge-pdf",
+    short:
+      "Combine multiple PDF files into a single PDF. Reorder pages, merge client-side and download instantly.",
+    features: ["Client-side", "Reorder files", "No upload required"],
   },
 ];
 

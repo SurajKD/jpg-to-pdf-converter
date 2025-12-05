@@ -66,6 +66,12 @@ const posts = [
     date: "2025-03-17",
     excerpt: "A full guide to converting PDFs into editable Word docs, with tips for scanned PDFs and OCR usage.",
   },
+    {
+    href: "/blog/how-to-merge-pdf",
+    title: "How to Merge PDF Files — Step-by-Step Guide (Fast & Free)",
+    date: "2025-03-17",
+    excerpt: "Learn how to merge multiple PDF files into a single document. Compare methods: browser-based tools, desktop apps, and mobile solutions. Simple, secure & free.",
+  },
 ];
 
 const jsonLd = {
@@ -163,6 +169,7 @@ export default function BlogIndex() {
               <li><Link href="/tools/pdf-compressor" className=" hover:underline">PDF Compressor</Link></li>
               <li><Link href="/tools/image-compressor" className=" hover:underline">Image Compressor</Link></li>
               <li><Link href="/tools/pdf-to-word" className=" hover:underline">PDF → Word</Link></li>
+              <li><Link href="/tools/merge-pdf" className=" hover:underline">Merge PDF</Link></li>
             </ul>
           </div>
 
