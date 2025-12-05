@@ -19,12 +19,6 @@ function genId() {
   return Math.random().toString(36).slice(2, 9);
 }
 
-/**
- * Tailwind-based Image Compressor (responsive)
- * - Uses canvas to compress/resize to maxDim
- * - Supports JPEG / WebP / PNG outputs
- * - Mobile-first responsive controls and item actions
- */
 export default function ImageCompressorClient() {
   const [items, setItems] = useState<Item[]>([]);
   const [quality, setQuality] = useState<number>(0.75);
