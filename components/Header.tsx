@@ -44,7 +44,7 @@ export default function Header() {
       setToolsOpen(false)
     }
     // no router import to keep simple; if you want auto close on route change, import useRouter and listen to events.
-    return () => {}
+    return () => { }
   }, [])
 
   return (
@@ -141,7 +141,24 @@ export default function Header() {
                       JPG → PDF
                     </Link>
                   </li>
-
+                  <li>
+                    <Link
+                      href="/tools/pdf-to-word"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      PDF → Word
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/merge-pdf"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      Merge PDF
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       href="/tools/compress-pdf"
@@ -162,34 +179,17 @@ export default function Header() {
                     </Link>
                   </li>
 
-                  {/* <li>
-                    <Link
-                      href="/tools/bg-remover"
-                      onClick={closeAll}
-                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
-                    >
-                      Background Remover
-                    </Link>
-                  </li> */}
-
                   <li>
                     <Link
-                      href="/tools/pdf-to-word"
+                      href="/tools/remove-bg"
                       onClick={closeAll}
                       className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
                     >
-                      PDF → Word
+                      Remove Background
                     </Link>
                   </li>
-<li>
-                    <Link
-                      href="/tools/merge-pdf"
-                      onClick={closeAll}
-                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
-                    >
-                      Merge PDF
-                    </Link>
-                  </li>
+
+
                   {/* <li>
                     <Link
                       href="/tools/ai-pdf-summarizer"

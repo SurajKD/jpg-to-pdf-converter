@@ -40,8 +40,14 @@
     <priority>0.88</priority>
   </url>
 
-    <url>
+  <url>
     <loc>https://anyfileconverter.online/tools/merge-pdf</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://anyfileconverter.online/tools/remove-bg</loc>
     <changefreq>weekly</changefreq>
     <priority>0.88</priority>
   </url>
