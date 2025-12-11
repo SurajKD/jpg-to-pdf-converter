@@ -1,7 +1,6 @@
 // app/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
-import { OpenConverterButton } from "../components/OpenConvertButton";
 import dynamic from "next/dynamic";
 import React from "react";
 import Image from "next/image";
@@ -22,6 +21,8 @@ export const metadata: Metadata = {
     "image compressor",
     "pdf to word",
     "online file conversion",
+    "background remover",
+    "remove background online",
   ],
   alternates: { canonical: "https://anyfileconverter.online" },
   openGraph: {
@@ -89,6 +90,8 @@ const combinedJsonLd = {
         { "@type": "ListItem", position: 2, name: "Tools", item: "https://anyfileconverter.online/tools" },
       ],
     },
+
+    // Individual tool entries
     {
       "@type": "SoftwareApplication",
       "@id": "https://anyfileconverter.online/tools/jpg-to-pdf#app",
@@ -129,7 +132,7 @@ const combinedJsonLd = {
       description: "Convert PDFs into editable DOCX files inside your browser — no uploads by default.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
-    // NEW: Merge PDF entry for homepage structured data
+    // Merge PDF
     {
       "@type": "SoftwareApplication",
       "@id": "https://anyfileconverter.online/tools/merge-pdf#app",
@@ -140,6 +143,18 @@ const combinedJsonLd = {
       description: "Combine multiple PDF files into a single merged PDF directly in your browser.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
+    // New: Remove Image Background
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/remove-bg#app",
+      name: "Remove Image Background",
+      applicationCategory: "ImageTool",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/remove-bg",
+      description: "Remove photo backgrounds in the browser to create transparent PNGs or composite with a solid color. Client-side AI-powered.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+
     {
       "@type": "WebApplication",
       "@id": "https://anyfileconverter.online/#webapp",
@@ -158,7 +173,7 @@ const combinedJsonLd = {
           name: "Are my files uploaded to your servers?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Most conversions run in your browser — files are not uploaded unless clearly stated.",
+            text: "Most conversions run in your browser — files are not uploaded unless you explicitly enable a server feature.",
           },
         },
         {
@@ -195,7 +210,7 @@ export default function Home() {
               </h1>
 
               <p className="mt-3 text-gray-600 text-base sm:text-lg">
-                Privacy-first, client-side file tools. Convert JPG → PDF, compress PDFs & images, and convert PDF → Word — fast, free and secure.
+                Privacy-first, client-side file tools. Convert JPG → PDF, compress PDFs & images, remove backgrounds, and convert PDF → Word — fast, free and secure.
               </p>
 
               <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:space-x-3 gap-3">
@@ -240,9 +255,8 @@ export default function Home() {
               <ToolCard href="/tools/pdf-compressor" title="PDF Compressor" desc="Reduce PDF size for email and uploads." tag="Client-side" />
               <ToolCard href="/tools/image-compressor" title="Image Compressor" desc="Compress JPG, PNG & WebP images with quality control." tag="Client-side" />
               <ToolCard href="/tools/pdf-to-word" title="PDF → Word" desc="Convert PDFs into editable DOCX files." tag="Client-side" />
-
-              {/* Merge PDF added to homepage */}
               <ToolCard href="/tools/merge-pdf" title="Merge PDF" desc="Combine multiple PDFs into one. Reorder files & download instantly." tag="Client-side" />
+              <ToolCard href="/tools/remove-bg" title="Remove Background" desc="Produce transparent PNGs or composite with a color." tag="Client-side" />
             </div>
           </section>
 

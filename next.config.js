@@ -1,28 +1,15 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  webpack(config) {
+    // Ensure .mjs files are parsed as ESM/javascript modules
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: 'javascript/auto',
+    });
 
-  images: {
-    unoptimized: true,
-  },
-
-  // Required for SharedArrayBuffer → boosts @imgly/background-removal performance
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin",
-          },
-          {
-            key: "Cross-Origin-Embedder-Policy",
-            value: "require-corp",
-          },
-        ],
-      },
-    ];
+    return config;
   },
 };
 
