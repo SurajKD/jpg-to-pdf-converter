@@ -1,433 +1,355 @@
-// components/RemoveBgClient.tsx
-'use client';
+// components/RemoveBgViaCDN.tsx
+'use client'
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useEffect, useRef, useState } from 'react'
 
-type Item = {
-  id: string;
-  file: File;
-  url: string;
-  resultUrl?: string;
-  beforeKB?: number;
-  afterKB?: number;
-  outName?: string;
-  status?: "idle" | "processing" | "done" | "failed";
-  processedBy?: "client" | "server" | null;
-  error?: string | null;
-};
+const MODEL_URL = '/models/bg_remover.onnx'
+const MODEL_SIZE = 512
+const ORT_CDN = 'https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js' // UMD global: window.ort
 
-function genId() {
-  return Math.random().toString(36).slice(2, 9);
+declare global {
+  interface Window {
+    ort: any
+  }
 }
 
-export default function RemoveBgClient() {
-  const [items, setItems] = useState<Item[]>([]);
-  const itemsRef = useRef<Item[]>([]);
+/** helper to ensure the CDN script is loaded and window.ort is available */
+function ensureOrtScript(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') return reject(new Error('client only'))
+    if ((window as any).ort) return resolve()
+
+    const existing = document.querySelector(`script[src="${ORT_CDN}"]`) as HTMLScriptElement | null
+    if (existing) {
+      existing.addEventListener('load', () => resolve())
+      existing.addEventListener('error', (e) => reject(e))
+      return
+    }
+
+    const s = document.createElement('script')
+    s.src = ORT_CDN
+    s.async = true
+    s.onload = () => {
+      setTimeout(() => {
+        if ((window as any).ort) resolve()
+        else reject(new Error('onnxruntime-web loaded but window.ort missing'))
+      }, 0)
+    }
+    s.onerror = (e) => reject(e)
+    document.head.appendChild(s)
+  })
+}
+
+/** draw image cover */
+function drawImageCoverToCanvas(img: HTMLImageElement, size = MODEL_SIZE) {
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')!
+  ctx.fillStyle = 'black'
+  ctx.fillRect(0, 0, size, size)
+  const iw = img.naturalWidth
+  const ih = img.naturalHeight
+  const scale = Math.max(size / iw, size / ih)
+  const nw = iw * scale
+  const nh = ih * scale
+  const dx = (size - nw) / 2
+  const dy = (size - nh) / 2
+  ctx.drawImage(img, dx, dy, nw, nh)
+  return canvas
+}
+
+/** build float32 CHW tensor */
+async function imageToFloat32CHW(img: HTMLImageElement, size = MODEL_SIZE) {
+  const canvas = drawImageCoverToCanvas(img, size)
+  const ctx = canvas.getContext('2d')!
+  const d = ctx.getImageData(0, 0, size, size).data
+  const px = size * size
+  const arr = new Float32Array(1 * 3 * px)
+  for (let i = 0; i < px; i++) {
+    arr[i] = d[i * 4 + 0] / 255.0
+    arr[px + i] = d[i * 4 + 1] / 255.0
+    arr[2 * px + i] = d[i * 4 + 2] / 255.0
+  }
+  return { tensorData: arr, canvas }
+}
+
+/** convert float alpha array to ImageData */
+function alphaToImageData(alpha: Float32Array | number[], size = MODEL_SIZE) {
+  const px = size * size
+  const out = new ImageData(size, size)
+  for (let i = 0; i < px; i++) {
+    const v = Math.max(0, Math.min(1, (alpha as any)[i] ?? 0))
+    const u = Math.round(v * 255)
+    out.data[i * 4 + 0] = u
+    out.data[i * 4 + 1] = u
+    out.data[i * 4 + 2] = u
+    out.data[i * 4 + 3] = 255
+  }
+  return out
+}
+
+/** feather via canvas blur + threshold */
+function featherAlpha(alphaImage: ImageData, featherPx = 6, threshold = 0.45) {
+  const size = alphaImage.width
+  const c1 = document.createElement('canvas')
+  c1.width = size
+  c1.height = size
+  const c1ctx = c1.getContext('2d')!
+  c1ctx.putImageData(alphaImage, 0, 0)
+
+  const c2 = document.createElement('canvas')
+  c2.width = size
+  c2.height = size
+  const c2ctx = c2.getContext('2d')!
+  c2ctx.filter = `blur(${featherPx}px)`
+  c2ctx.drawImage(c1, 0, 0)
+
+  const blurred = c2ctx.getImageData(0, 0, size, size)
+  const out = c1ctx.createImageData(size, size)
+  const px = size * size
+  for (let i = 0; i < px; i++) {
+    const v = blurred.data[i * 4] / 255
+    const a = Math.max(0, Math.min(1, (v - threshold) / (1 - threshold)))
+    const u = Math.round(a * 255)
+    out.data[i * 4 + 0] = u
+    out.data[i * 4 + 1] = u
+    out.data[i * 4 + 2] = u
+    out.data[i * 4 + 3] = 255
+  }
+  return out
+}
+
+/** composite final RGBA */
+function compositeWithAlpha(srcCanvas: HTMLCanvasElement, alphaImg: ImageData) {
+  const size = srcCanvas.width
+  const out = document.createElement('canvas')
+  out.width = size
+  out.height = size
+  const ctx = out.getContext('2d')!
+  ctx.drawImage(srcCanvas, 0, 0)
+  const src = ctx.getImageData(0, 0, size, size)
+  const dst = ctx.createImageData(size, size)
+  const px = size * size
+  for (let i = 0; i < px; i++) {
+    const a = alphaImg.data[i * 4] / 255
+    dst.data[i * 4 + 0] = src.data[i * 4 + 0]
+    dst.data[i * 4 + 1] = src.data[i * 4 + 1]
+    dst.data[i * 4 + 2] = src.data[i * 4 + 2]
+    dst.data[i * 4 + 3] = Math.round(a * 255)
+  }
+  ctx.putImageData(dst, 0, 0)
+  return out
+}
+
+export default function RemoveBgViaCDN() {
+  const [status, setStatus] = useState('idle')
+  const [session, setSession] = useState<any | null>(null)
+  const fileRef = useRef<HTMLInputElement | null>(null)
+  const imgRef = useRef<HTMLImageElement | null>(null)
+  const outRef = useRef<HTMLDivElement | null>(null)
+  const [featherPx, setFeatherPx] = useState(6)
+  const [threshold, setThreshold] = useState(0.45)
+  const [imageSrc, setImageSrc] = useState<string | null>(null)
+
   useEffect(() => {
-    itemsRef.current = items;
-  }, [items]);
+    return () => { }
+  }, [])
 
-  const [processingId, setProcessingId] = useState<string | null>(null);
-  const [progressText, setProgressText] = useState<string | null>(null);
-  const [bgColor, setBgColor] = useState<string>("transparent");
-
-  // imgly wrapper: { lib: defaultExportOrFunction, raw: moduleExports }
-  const imglyRef = useRef<any | null>(null);
-  const preloadedRef = useRef(false);
-  const mountedRef = useRef(true);
-
-  useEffect(() => {
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-    };
-  }, []);
-
-  // ---------- dropzone ----------
-  const onDrop = useCallback((accepted: File[]) => {
-    const added = accepted.map((f) => ({
-      id: genId(),
-      file: f,
-      url: URL.createObjectURL(f),
-      beforeKB: +(f.size / 1024).toFixed(1),
-      status: "idle" as const,
-      processedBy: null,
-      error: null,
-    }));
-    setItems((prev) => [...prev, ...added]);
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: { "image/*": [] },
-    multiple: true,
-    maxSize: 25 * 1024 * 1024, // 25MB per file cap (tweak as needed)
-  });
-
-  // revoke object URLs for one item
-  const cleanupItem = (id: string) => {
-    setItems((prev) => {
-      const found = prev.find((p) => p.id === id);
-      if (found) {
-        try {
-          URL.revokeObjectURL(found.url);
-        } catch {}
-        if (found.resultUrl) {
-          try {
-            URL.revokeObjectURL(found.resultUrl);
-          } catch {}
-        }
-      }
-      return prev.filter((p) => p.id !== id);
-    });
-  };
-
-  // revoke and clear all
-  const clearAll = () => {
-    setItems((prev) => {
-      prev.forEach((it) => {
-        try {
-          URL.revokeObjectURL(it.url);
-        } catch {}
-        if (it.resultUrl) {
-          try {
-            URL.revokeObjectURL(it.resultUrl);
-          } catch {}
-        }
-      });
-      return [];
-    });
-    setProcessingId(null);
-    setProgressText(null);
-  };
-
-  // cleanup on unmount (revoke any created object urls)
-  useEffect(() => {
-    return () => {
-      itemsRef.current.forEach((it) => {
-        try {
-          URL.revokeObjectURL(it.url);
-        } catch {}
-        if (it.resultUrl) {
-          try {
-            URL.revokeObjectURL(it.resultUrl);
-          } catch {}
-        }
-      });
-    };
-  }, []);
-
-  // ---------- IMG.LY helpers (robust) ----------
-  const ensureImgly = useCallback(async (opts?: { preload?: boolean }) => {
-    if (imglyRef.current) return imglyRef.current;
-    if (!mountedRef.current) throw new Error("component unmounted");
-
-    setProgressText("Loading @imgly/background-removal…");
+  async function loadModel() {
     try {
-      const mod = await import("@imgly/background-removal");
-      // Log the exported shape for debugging
-      console.info("@imgly/background-removal exports:", {
-        hasDefault: !!(mod as any).default,
-        hasRemoveBackground: !!(mod as any).removeBackground,
-        hasPreload: !!(mod as any).preload,
-        moduleKeys: Object.keys(mod),
-      });
-
-      // Normalize wrapper
-      const lib = (mod && ((mod as any).default || mod)) ?? mod;
-      imglyRef.current = { lib, raw: mod };
-
-      // Optional preload
-      if (opts?.preload && typeof (mod as any).preload === "function" && !preloadedRef.current) {
-        setProgressText("Preloading models & wasm (first run may take a while)…");
-        try {
-          await (mod as any).preload({
-            debug: true,
-            progress: (key: string, cur: number, tot: number) => {
-              if (!mountedRef.current) return;
-              setProgressText(`Downloading ${key}: ${cur}/${tot}`);
-            },
-          });
-          preloadedRef.current = true;
-        } catch (err) {
-          console.warn("Imgly preload failed (non-fatal):", err);
-        }
-      }
-
-      if (mountedRef.current) setProgressText(null);
-      return imglyRef.current;
-    } catch (err) {
-      if (mountedRef.current) setProgressText(null);
-      console.error("Failed importing @imgly/background-removal:", err);
-      throw err;
+      setStatus('loading runtime...')
+      await ensureOrtScript()
+      setStatus('runtime loaded, fetching model bytes...')
+      const absolute = new URL(MODEL_URL, window.location.href).toString()
+      const resp = await fetch(absolute)
+      if (!resp.ok) throw new Error(`Failed to fetch model ${resp.status}`)
+      const buf = await resp.arrayBuffer()
+      const bytes = new Uint8Array(buf)
+      setStatus('creating session from bytes (wasm)...')
+      const s = await (window as any).ort.InferenceSession.create(bytes, { executionProviders: ['wasm'] })
+      setSession(s)
+      setStatus('model loaded')
+      console.log('ORT session ready', s)
+      return s
+    } catch (err: any) {
+      console.error('Failed to load model', err)
+      setStatus('Failed to load model: ' + (err?.message ?? err))
+      throw err
     }
-  }, []);
+  }
 
-  // single image processing with imgly — robust to lib input shape (prefer blob URL)
-  const processOneImgly = useCallback(
-    async (it: Item): Promise<{ blob: Blob; name: string }> => {
-      const wrapper = await ensureImgly({ preload: true });
-      if (!mountedRef.current) throw new Error("component unmounted");
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0]
+    if (!f) return
+    const url = URL.createObjectURL(f)
+    if (imgRef.current) imgRef.current.src = url
+    setImageSrc(url)
+    setTimeout(() => URL.revokeObjectURL(url), 20000)
+  }
 
-      // Try to locate the callable: many versions export a default function or named removeBackground
-      const libFunc =
-        (wrapper && (wrapper.lib || (wrapper.raw && ((wrapper.raw as any).removeBackground || (wrapper.raw as any).default)))) ||
-        null;
+  async function run() {
+    if (!imgRef.current) return alert('No image')
+    if (!imgRef.current.complete) return alert('Image not loaded yet')
+    const s = session ?? (await loadModel())
+    if (!s) return
 
-      if (!libFunc || typeof libFunc !== "function") {
-        throw new Error("Unexpected @imgly/background-removal export shape (no callable found)");
-      }
-
-      const callLib = async (input: any) => {
-        const config: any = {
-          debug: true,
-          output: { format: "image/png", quality: 0.92, type: "foreground" },
-        };
-        return await libFunc(input, config);
-      };
-
-      setProgressText("Removing background (client)…");
-
-      let lastErr: any = null;
-      let resultBlob: Blob | null = null;
-
-      // 1) Preferred: pass blob-url string (some versions expect string and call .replace)
-      try {
-        const blobUrl = it.url || URL.createObjectURL(it.file);
-        console.debug("Trying imgly with blob URL:", typeof blobUrl, blobUrl?.slice?.(0, 120));
-        resultBlob = await callLib(blobUrl);
-      } catch (err: any) {
-        lastErr = err;
-        console.warn("imgly with blob URL failed:", err);
-      }
-
-      // 2) Fallback: pass File/Blob directly
-      if (!resultBlob) {
-        try {
-          console.debug("Trying imgly with File/Blob:", it.file.name, it.file.type);
-          resultBlob = await callLib(it.file);
-        } catch (err: any) {
-          lastErr = err;
-          console.warn("imgly with file/blob failed:", err);
-        }
-      }
-
-      // 3) Last resort: ArrayBuffer / Uint8Array
-      if (!resultBlob) {
-        try {
-          const ab = await it.file.arrayBuffer();
-          console.debug("Trying imgly with ArrayBuffer length:", ab.byteLength);
-          resultBlob = await callLib(ab);
-        } catch (err: any) {
-          lastErr = err;
-          console.warn("imgly with arraybuffer failed:", err);
-        }
-      }
-
-      if (!resultBlob) {
-        console.error("Background removal failed for", it.file.name, lastErr);
-        throw lastErr || new Error("Background removal returned no blob");
-      }
-
-      const baseName = it.file.name.replace(/\.[^/.]+$/, "");
-      const name = `${baseName}-nobg.png`;
-      return { blob: resultBlob, name };
-    },
-    [ensureImgly]
-  );
-
-  // ---------- orchestrator ----------
-  const processAll = async () => {
-    // snapshot current items to avoid stale closures
-    const list = itemsRef.current.slice();
-    if (!list.length) return;
-    setProcessingId("batch");
-    setProgressText(null);
-
-    // mark all as processing initially
-    setItems((prev) => prev.map((p) => ({ ...p, status: "processing", error: null })));
-
+    setStatus('preprocessing')
+    const { tensorData, canvas } = await imageToFloat32CHW(imgRef.current, MODEL_SIZE)
+    const ort = (window as any).ort
+    const inputTensor = new ort.Tensor('float32', tensorData, [1, 3, MODEL_SIZE, MODEL_SIZE])
+    setStatus('running model')
+    let outputs = {}
     try {
-      for (const it of list) {
-        if (!mountedRef.current) break;
-        setProcessingId(it.id);
-        setItems((prev) => prev.map((p) => (p.id === it.id ? { ...p, status: "processing", error: null } : p)));
-
-        try {
-          const result = await processOneImgly(it);
-          if (!mountedRef.current) break;
-          const url = URL.createObjectURL(result.blob);
-
-          setItems((prev) =>
-            prev.map((p) => {
-              if (p.id !== it.id) return p;
-              if (p.resultUrl && p.resultUrl !== url) {
-                try {
-                  URL.revokeObjectURL(p.resultUrl);
-                } catch {}
-              }
-              return {
-                ...p,
-                resultUrl: url,
-                afterKB: +(result.blob.size / 1024).toFixed(1),
-                outName: result.name,
-                status: "done",
-                processedBy: "client",
-                error: null,
-              };
-            })
-          );
-        } catch (err: any) {
-          console.error("Failed to process", it.file.name, err);
-          setItems((prev) =>
-            prev.map((p) => (p.id === it.id ? { ...p, status: "failed", processedBy: "client", error: err?.message || String(err) } : p))
-          );
-        }
-
-        // throttle briefly so UI can breathe
-        await new Promise((r) => setTimeout(r, 120));
-      }
-    } finally {
-      if (mountedRef.current) {
-        setProcessingId(null);
-        setProgressText(null);
-      }
+      outputs = await s.run({ input: inputTensor })
+    } catch (err: any) {
+      console.error('run failed', err)
+      setStatus('run failed: ' + (err?.message ?? err))
+      return
     }
-  };
-
-  const downloadAll = async () => {
-    for (const it of itemsRef.current) {
-      if (!it.resultUrl) continue;
-      const a = document.createElement("a");
-      a.href = it.resultUrl;
-      a.download = it.outName || `${it.file.name.replace(/\.[^/.]+$/, "")}-nobg.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      await new Promise((r) => setTimeout(r, 200));
+    setStatus('postprocessing')
+    const outKey = Object.keys(outputs)[0]
+    const alphaTensor: any = (outputs as any)[outKey]
+    let alphaArr = alphaTensor.data as Float32Array
+    const px = MODEL_SIZE * MODEL_SIZE
+    if (alphaArr.length > px) alphaArr = alphaArr.slice(0, px)
+    const alphaImage = alphaToImageData(alphaArr, MODEL_SIZE)
+    const feathered = featherAlpha(alphaImage, featherPx, threshold)
+    const composed = compositeWithAlpha(canvas, feathered)
+    if (outRef.current) {
+      outRef.current.innerHTML = ''
+      const im = document.createElement('img')
+      im.src = composed.toDataURL('image/png')
+      im.alt = 'foreground'
+      im.className = 'rounded-md shadow-sm w-40 md:w-56'
+      outRef.current.appendChild(im)
+      const a = document.createElement('a')
+      a.href = composed.toDataURL('image/png')
+      a.download = 'fg.png'
+      a.textContent = 'Download PNG'
+      a.className = 'ml-3 inline-block px-3 py-2 bg-sky-600 text-white rounded-md text-sm hover:bg-sky-700'
+      outRef.current.appendChild(a)
     }
-  };
+    setStatus('done')
+  }
 
-  // Try to preload assets on mount (non-fatal)
-  useEffect(() => {
-    ensureImgly({ preload: true }).catch(() => {});
-  }, [ensureImgly]);
-
-  // ---------- render ----------
   return (
-    <div className="w-full">
-      <div
-        {...getRootProps()}
-        aria-label="File dropzone"
-        className={`w-full border-2 rounded-lg p-4 cursor-pointer transition-colors ${isDragActive ? "border-blue-300 bg-blue-50" : "border-sky-100 bg-white"
-          }`}
-      >
-        <input {...getInputProps()} aria-hidden />
-        <p className="m-0 text-sm text-slate-700">{isDragActive ? "Drop images here..." : "Drag & drop images, or click to select"}</p>
-        <small className="text-xs text-slate-500">Supports JPG, PNG, WEBP. Multiple files supported. Max 25MB each.</small>
+    <div className="p-4 md:p-8 max-w-4xl mx-auto">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg md:text-xl font-semibold text-slate-800">Remove BG (CDN ONNX loader)</h3>
+        <div className="text-sm">
+          <span className="inline-block mr-2 text-slate-600">Status</span>
+          <span
+            className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${status === 'done'
+                ? 'bg-green-100 text-green-800'
+                : status.startsWith('loading') || status.startsWith('runtime') || status.startsWith('running')
+                  ? 'bg-amber-100 text-amber-800'
+                  : 'bg-gray-100 text-gray-700'
+              }`}
+          >
+            {status}
+          </span>
+        </div>
       </div>
 
-      {items.length > 0 && (
-        <>
-          <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="flex items-center gap-3">
-                <label className="text-sm w-28" htmlFor="bg-select">Background</label>
-                <select id="bg-select" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="px-2 py-1 text-sm border rounded w-44">
-                  <option value="transparent">Transparent (PNG)</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#000000">Black</option>
-                  <option value="#f7f7f7">Light Gray</option>
-                  <option value="#fffcdb">Cream</option>
-                </select>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-sm w-28">Model</span>
-                <span className="text-xs text-slate-500">Imgly (in-browser)</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2 w-full sm:w-auto sm:flex-row sm:items-center">
+      <div className="space-y-4">
+        {/* Controls */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="md:col-span-2 space-y-3">
+            <label className="block text-sm font-medium text-slate-700">Source image</label>
+            <div className="flex gap-2 items-center">
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFile}
+                className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 cursor-pointer"
+              />
               <button
-                onClick={processAll}
-                disabled={!!processingId}
-                className="w-full sm:w-auto px-4 py-2 rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
-                aria-disabled={!!processingId}
+                onClick={loadModel}
+                className="px-3 py-2 bg-slate-700 text-white rounded-md text-sm hover:bg-slate-800 min-w-[80px]"
+                type="button"
               >
-                {processingId ? "Processing..." : "Remove Background"}
+                Load model
               </button>
-
               <button
-                onClick={downloadAll}
-                disabled={items.every((i) => !i.resultUrl)}
-                className="w-full sm:w-auto px-4 py-2 rounded-md text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
-                aria-disabled={items.every((i) => !i.resultUrl)}
+                onClick={run}
+                className="px-3 py-2 text-white rounded-md text-sm hover:bg-sky-700 min-w-[80px] btn"
+                type="button"
               >
-                Download All
+                Run
               </button>
-
               <button
-                onClick={() => clearAll()}
-                className="w-full sm:w-auto px-4 py-2 rounded-md border bg-white text-slate-700 hover:bg-slate-50"
+                onClick={() => window.location.reload()}
+                className="px-3 py-2 bg-slate-400 text-white rounded-md text-sm hover:bg-slate-500 min-w-[80px]"
+                type="button"
               >
                 Reset
               </button>
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div>
+                <label className="block text-sm text-slate-600 mb-1">Feather: <span className="font-medium">{featherPx}px</span></label>
+                <input
+                  type="range"
+                  min={0}
+                  max={30}
+                  value={featherPx}
+                  onChange={(e) => setFeatherPx(Number(e.target.value))}
+                  className="w-full"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-slate-600 mb-1">Threshold: <span className="font-medium">{Math.round(threshold * 100)}%</span></label>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={Math.round(threshold * 100)}
+                  onChange={(e) => setThreshold(Number(e.target.value) / 100)}
+                  className="w-full"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Input / Output canvases on larger area */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          <div className="flex-1">
+            <p className="text-sm font-medium text-slate-700 mb-2">Input</p>
+            <div className="rounded-md border border-slate-200 bg-white p-3 flex items-center justify-center">
+              <div className="w-[192px] h-[192px] md:w-[256px] md:h-[256px] bg-gray-50 rounded-md flex items-center justify-center overflow-hidden">
+                {/* actual image element (hidden until loaded) */}
+                <img
+                  ref={imgRef}
+                  alt="input"
+                  className="object-contain w-full h-full"
+                  style={{ display: imageSrc ? undefined : 'none' }}
+                />
+                {/* placeholder */}
+                {!imageSrc && (
+                  <div className="text-sm text-slate-400">No image selected</div>
+                )}
+              </div>
+            </div>
           </div>
 
-          <div className="mt-3 space-y-3">
-            {progressText && <div className="text-sm text-slate-600">{progressText}</div>}
-
-            <ul className="space-y-3">
-              {items.map((it) => (
-                <li key={it.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-2 border rounded-md">
-                  <div className="w-full sm:w-24 flex-shrink-0">
-                    <img
-                      src={it.resultUrl || it.url}
-                      alt={it.file.name}
-                      className="w-full h-16 object-cover rounded-sm"
-                      style={{ backgroundColor: it.resultUrl && bgColor !== "transparent" ? bgColor : undefined }}
-                    />
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold truncate text-sm" title={it.file.name}>
-                      {it.file.name}
-                    </div>
-                    <div className="text-xs text-slate-500 mt-1">
-                      {it.beforeKB} KB {it.afterKB ? `→ ${it.afterKB} KB` : ""} {it.outName ? ` / ${it.outName}` : ""}
-                    </div>
-
-                    <div className="text-xs mt-1">
-                      {it.status === "processing" && <span className="text-blue-600">Processing…</span>}
-                      {it.status === "done" && it.processedBy && <span className="text-green-600">Done ({it.processedBy === "client" ? "client" : "server"})</span>}
-                      {it.status === "failed" && <span className="text-red-600">Error: {it.error}</span>}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 mt-2 sm:mt-0">
-                    {it.resultUrl && (
-                      <a
-                        href={it.resultUrl}
-                        download={it.outName || `${it.file.name.replace(/\.[^/.]+$/, "")}-nobg.png`}
-                        className="text-sm text-white bg-green-600 hover:bg-green-700 px-3 py-2 rounded-md text-center"
-                      >
-                        Download
-                      </a>
-                    )}
-
-                    <button onClick={() => cleanupItem(it.id)} className="text-sm bg-white border px-3 py-2 rounded-md hover:bg-slate-50">
-                      Remove
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-slate-700 mb-2">Output</p>
+            <div className="rounded-md border border-slate-200 bg-white p-3 flex items-center justify-center">
+            <div className="rounded-md border border-slate-200 bg-white p-3 w-[192px] h-[192px] md:w-[256px] md:h-[256px] flex items-center justify-center" style={{ backgroundImage: 'url(/pngBg.png)' }}>
+              <div ref={outRef} className="flex items-center justify-center gap-3 flex-wrap" />
+            </div>
           </div>
-        </>
-      )}
+        </div>
+      </div>
+
+      {/* <div className="text-sm text-slate-500">
+        Tip: model assets are loaded from <code className="bg-slate-100 px-1 rounded">/models/bg_remover.onnx</code>. For production host your model on a fast CDN.
+      </div> */}
     </div>
-  );
+    </div >
+  )
 }

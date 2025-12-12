@@ -1,4 +1,3 @@
-// app/tools/remove-bg/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
@@ -14,25 +13,32 @@ const AdPlaceholder = dynamic(() => import("../../../components/AdPlaceholder"),
   loading: () => <div className="h-24" />
 });
 
+/* -------------------------------------------------------
+   🔥 SEO METADATA (Improved)
+-------------------------------------------------------- */
 export const metadata: Metadata = {
   title: "Remove Image Background — Free AI Background Remover (Client-side)",
   description:
-    "Remove backgrounds from photos right in your browser. Produce transparent PNGs or composite a solid color. Private, fast and no uploads by default — ideal for portraits and product shots.",
+    "Remove backgrounds from photos directly in your browser using fast, private client-side AI. Create transparent PNGs instantly without uploading anything.",
   keywords: [
     "remove background",
     "background remover",
-    "remove image background online",
-    "transparent png",
-    "background eraser",
-    "image matting",
-    "photo background remover",
+    "image background remover",
+    "remove background online",
+    "transparent background",
+    "AI background remover",
+    "photo background eraser",
+    "free background remover",
+    "remove bg tool",
     "in-browser background removal",
   ],
-  alternates: { canonical: "https://anyfileconverter.online/tools/remove-bg" },
+  alternates: {
+    canonical: "https://anyfileconverter.online/tools/remove-bg",
+  },
   openGraph: {
     title: "Remove Image Background — AnyFileConverter",
     description:
-      "Remove backgrounds from photos in the browser (client-side AI). Create transparent PNGs or swap the background with a color — no upload required.",
+      "Remove backgrounds from photos in your browser using fast, private AI. Create transparent PNGs instantly with no upload required.",
     url: "https://anyfileconverter.online/tools/remove-bg",
     siteName: "AnyFileConverter",
     type: "website",
@@ -50,11 +56,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Remove Image Background — AnyFileConverter",
     description:
-      "Remove backgrounds from photos directly in your browser. Fast, private and free — generate transparent PNGs with client-side AI.",
+      "Remove image backgrounds instantly using fast in-browser AI. Transparent PNG output, no upload required.",
     images: ["https://anyfileconverter.online/og-tools.png"],
   },
 };
 
+/* -------------------------------------------------------
+   🔥 JSON-LD Structured Data (SEO Boost)
+-------------------------------------------------------- */
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -66,7 +75,7 @@ const pageJsonLd = {
       "operatingSystem": "Web",
       "url": "https://anyfileconverter.online/tools/remove-bg",
       "description":
-        "Client-side background remover that uses in-browser AI to produce transparent PNGs or images with a solid background color.",
+        "Client-side background remover powered by in-browser AI. Produces transparent PNGs instantly, without uploading images.",
       "offers": { "@type": "Offer", price: "0", priceCurrency: "USD" }
     },
     {
@@ -75,7 +84,7 @@ const pageJsonLd = {
       "name": "Remove Image Background",
       "url": "https://anyfileconverter.online/tools/remove-bg",
       "description":
-        "Browser-based background remover — private, fast and easy to use. No uploads by default.",
+        "Remove backgrounds from images directly in your browser using privacy-friendly, fast AI.",
       "applicationCategory": "Utility",
       "offers": { "@type": "Offer", price: "0", priceCurrency: "USD" }
     },
@@ -94,34 +103,34 @@ const pageJsonLd = {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is processing done on my device or uploaded to a server?",
+          "name": "Is image processing done locally?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "By default processing runs entirely in your browser using client-side WASM/ONNX models, so your images do not leave your device. There is no upload unless you explicitly choose any server-side features."
+            "text": "Yes. All processing happens entirely in your browser using an in-browser AI model. Your images never leave your device unless you explicitly choose a cloud feature."
           }
         },
         {
           "@type": "Question",
-          "name": "Which file types are supported?",
+          "name": "Which file formats are supported?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Common image formats are supported: JPG/JPEG, PNG and WebP. The resulting transparent output is saved as PNG by default."
+            "text": "You can upload JPG, JPEG, PNG, and WebP. The output is a transparent PNG."
           }
         },
         {
           "@type": "Question",
-          "name": "Why does the first run take longer?",
+          "name": "Why is the first run slower?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "On first use the browser downloads the WASM and ONNX assets required by the model. Subsequent runs are much faster because assets are cached by the browser. You can optionally preload assets via the 'Preload Assets' button."
+            "text": "The model (ONNX/WASM) must be downloaded once. After that, the browser caches it, and future runs are almost instant."
           }
         },
         {
           "@type": "Question",
-          "name": "How do I improve edge quality for hair or complex objects?",
+          "name": "How can I improve hair edges?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For fine hair or challenging masks try: (1) using high-resolution images, (2) toggling model settings if available (smaller vs medium), and (3) performing a small manual touch-up in an image editor. For the highest quality across all image types, consider a server-side model or commercial API as a fallback."
+            "text": "Use high-resolution images and adjust feather/threshold settings. Extremely fine edges may require a higher-tier model or server fallback."
           }
         }
       ]
@@ -133,105 +142,114 @@ export default function RemoveBgPage() {
   return (
     <>
       <main className="max-w-4xl mx-auto px-4 py-10">
+        {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="text-sm mb-3 text-slate-600">
-          <Link href="/">Home</Link> {" / "} <Link href="/tools">Tools</Link> {" / "} Remove Image Background
+          <Link href="/">Home</Link> {" / "}
+          <Link href="/tools">Tools</Link> {" / "}
+          Remove Image Background
         </nav>
 
+        {/* Header Section */}
         <header className="mb-4">
           <h1 className="text-3xl font-semibold leading-tight">
             Remove Image Background — AI Background Remover (Client-side)
           </h1>
           <p className="text-gray-600 mt-2">
-            Remove backgrounds from photos directly in your browser using an in-browser AI model. Create transparent PNGs or instantly replace the background with a solid color — no signup, no upload by default.
+            Remove backgrounds from images directly in your browser using fast, private AI. No upload,
+            no signup — generate transparent PNGs instantly.
           </p>
 
-          <div className="mt-4 text-sm text-slate-500">
-            <strong>Tip:</strong> Use the “Preload Assets” button to fetch model files ahead of time for a faster first-run experience.
-          </div>
+          <p className="mt-4 text-sm text-slate-500">
+            <strong>Tip:</strong> Preload the model to speed up your first removal.
+          </p>
         </header>
 
+        {/* Tool Component */}
         <section className="mt-4">
           <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100">
             <RemoveBgClient />
           </div>
         </section>
 
+        {/* Ad Spot */}
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
 
+        {/* SEO Article Section */}
         <article className="prose prose-lg mt-8">
-          <h2>How it works</h2>
+          <h2>How this background remover works</h2>
           <p>
-            This tool uses an AI matting/segmentation model that runs in the browser (WASM/ONNX). The model separates foreground pixels (subject) from background pixels, then outputs a PNG with an alpha channel (transparent background) or a composite with a chosen solid color.
+            This tool uses an optimized ONNX segmentation model running locally in your browser via WASM.
+            The model identifies foreground pixels and outputs a transparent PNG, without uploading anything.
           </p>
 
-          <h3>Why client-side matters</h3>
+          <h3>Why client-side AI?</h3>
           <ul>
-            <li><strong>Privacy:</strong> images stay on your device unless you explicitly use a server feature.</li>
-            <li><strong>Speed:</strong> no upload/download latency for most photos — especially on modern devices.</li>
-            <li><strong>Cost-free:</strong> no server costs for you (or for us) when you run the model locally.</li>
+            <li><strong>Zero uploads:</strong> Your images stay on your device.</li>
+            <li><strong>Faster:</strong> No network delay for processing.</li>
+            <li><strong>Private:</strong> Perfect for sensitive or personal photos.</li>
           </ul>
 
-          <h3>When to consider server-side</h3>
+          <h3>When to consider server-side tools</h3>
           <p>
-            In-browser models are excellent for portraits and straightforward subjects. For extremely fine-grained masks (very wispy hair, translucent objects, complex reflections) a larger server model (U²-Net variants) or a commercial API can produce subtly better results. We can add an opt-in server fallback if you prefer maximum quality across every image.
+            For very complex images such as detailed hair, reflections, or transparent objects, a larger
+            server-side AI model can produce cleaner masks. A hybrid option may be added later.
           </p>
 
-          <h2>Best practices for great results</h2>
+          <h2>Best practices for excellent results</h2>
           <ul>
-            <li>Upload high-resolution images (larger source images produce cleaner masks).</li>
-            <li>Prefer photos where the subject contrasts with the background.</li>
-            <li>Use the Preload Assets option before a batch to avoid first-run downloads during processing.</li>
-            <li>If you need a colored background, choose the color after removal rather than editing manually — the tool composites for you.</li>
+            <li>Use higher resolution photos.</li>
+            <li>Increase subject/background contrast when shooting photos.</li>
+            <li>Use feather/threshold controls to fine-tune the output.</li>
+            <li>Use "Preload Assets" before batch processing.</li>
           </ul>
 
-          <h2>Troubleshooting & browser notes</h2>
+          <h2>Troubleshooting</h2>
           <h4>First run is slow</h4>
-          <p>The first run downloads the model and wasm files from IMG.LY's CDN — use Preload to control when that happens.</p>
+          <p>The model and WebAssembly runtime must be loaded once, then cached.</p>
 
-          <h4>Performance and shared memory</h4>
+          <h4>Performance tips</h4>
           <p>
-            For best performance (WebGPU / SharedArrayBuffer) enable COOP/COEP headers on your site:
+            For maximum speed, enable:
             <code className="mx-1">Cross-Origin-Opener-Policy: same-origin</code> and
             <code className="mx-1">Cross-Origin-Embedder-Policy: require-corp</code>.
-            These are optional but significantly speed up inference on supported browsers.
           </p>
 
-          <h4>Supported browsers</h4>
+          <h4>Browser support</h4>
           <p>
-            Modern Chromium-based browsers (Chrome, Edge) and Firefox work well. Mobile performance varies by device — newer phones handle the model acceptably, older phones may be slower.
+            Chrome, Edge, and Firefox work best. Mobile performance varies by device.
           </p>
 
-          <h2 className="mt-6">Frequently asked questions</h2>
+          <h2>FAQ</h2>
 
           <details>
             <summary><strong>Do I need an account?</strong></summary>
-            <p>No — this tool is free to use and requires no registration for client-side removal.</p>
+            <p>No — fully free and no signup required.</p>
           </details>
 
           <details>
-            <summary><strong>What file types can I upload?</strong></summary>
-            <p>Upload JPG, PNG, or WebP images. Output is PNG when you choose transparent background.</p>
+            <summary><strong>Will my images be uploaded?</strong></summary>
+            <p>No uploads happen unless you choose server processing.</p>
           </details>
 
           <details>
-            <summary><strong>Will my image be uploaded?</strong></summary>
-            <p>Not by default. Client-side processing keeps the image local. If you use a server-side fallback (optional), you’ll be informed and the upload will be explicit.</p>
-          </details>
-
-          <details>
-            <summary><strong>Can I self-host the model files?</strong></summary>
-            <p>Yes — advanced users can host the ONNX/WASM assets and configure the library’s <code>publicPath</code> to point to your assets for faster, private hosting.</p>
+            <summary><strong>Can I host the model myself?</strong></summary>
+            <p>Yes — advanced users can self-host ONNX + WASM assets for full control.</p>
           </details>
         </article>
 
+        {/* Ad Spot Bottom */}
         <div className="mt-8 flex justify-center">
           <AdPlaceholder />
         </div>
       </main>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }} />
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
+      />
     </>
   );
 }
