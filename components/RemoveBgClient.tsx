@@ -146,6 +146,7 @@ function compositeWithAlphaSized(srcCanvas: HTMLCanvasElement, alphaImgData: Ima
 export default function RemoveBgViaCDN() {
   const [status, setStatus] = useState('idle')
   const [session, setSession] = useState<any | null>(null)
+  const [processing, setProcessing] = useState(false)
   const fileRef = useRef<HTMLInputElement | null>(null)
   const imgRef = useRef<HTMLImageElement | null>(null)
   const outRef = useRef<HTMLDivElement | null>(null)
@@ -192,73 +193,77 @@ export default function RemoveBgViaCDN() {
   async function run() {
     if (!imgRef.current) return alert('No image')
     if (!imgRef.current.complete) return alert('Image not loaded yet')
-    const s = session ?? (await loadModel())
-    if (!s) return
-
-    setStatus('preprocessing')
-    const { tensorData, canvas, meta } = await imageToFloat32CHW(imgRef.current, MODEL_SIZE)
-    const ort = (window as any).ort
-    const inputTensor = new ort.Tensor('float32', tensorData, [1, 3, MODEL_SIZE, MODEL_SIZE])
-    setStatus('running model')
-    let outputs = {}
+    setProcessing(true)
+    setStatus('removing background...')
     try {
-      outputs = await s.run({ input: inputTensor })
+      const s = session ?? (await loadModel())
+      if (!s) return
+
+      setStatus('preprocessing')
+      const { tensorData, canvas, meta } = await imageToFloat32CHW(imgRef.current, MODEL_SIZE)
+      const ort = (window as any).ort
+      const inputTensor = new ort.Tensor('float32', tensorData, [1, 3, MODEL_SIZE, MODEL_SIZE])
+      setStatus('running model')
+      let outputs = {}
+      try {
+        outputs = await s.run({ input: inputTensor })
+      } catch (err: any) {
+        console.error('run failed', err)
+        setStatus('run failed: ' + (err?.message ?? err))
+        return
+      }
+      setStatus('postprocessing')
+      const outKey = Object.keys(outputs)[0]
+      const alphaTensor: any = (outputs as any)[outKey]
+      let alphaArr = alphaTensor.data as Float32Array
+      const px = MODEL_SIZE * MODEL_SIZE
+      if (alphaArr.length > px) alphaArr = alphaArr.slice(0, px)
+      const alphaImage = alphaToImageData(alphaArr, MODEL_SIZE)
+
+      // Remap alpha region from model-square to original image size
+      const { iw, ih, nw, nh, dx, dy } = meta
+      const alphaModelCanvas = document.createElement('canvas')
+      alphaModelCanvas.width = MODEL_SIZE
+      alphaModelCanvas.height = MODEL_SIZE
+      const actx = alphaModelCanvas.getContext('2d')!
+      actx.putImageData(alphaImage, 0, 0)
+      const alphaResizedCanvas = document.createElement('canvas')
+      alphaResizedCanvas.width = iw
+      alphaResizedCanvas.height = ih
+      const aResCtx = alphaResizedCanvas.getContext('2d')!
+      aResCtx.drawImage(alphaModelCanvas, dx, dy, nw, nh, 0, 0, iw, ih)
+      const alphaResizedImageData = aResCtx.getImageData(0, 0, iw, ih)
+
+      // Compose final output at original image size
+      const origCanvas = document.createElement('canvas')
+      origCanvas.width = iw
+      origCanvas.height = ih
+      const origCtx = origCanvas.getContext('2d')!
+      origCtx.drawImage(imgRef.current, 0, 0, iw, ih)
+      const feathered = featherAlpha(alphaResizedImageData, featherPx, threshold)
+      const featheredComposed = compositeWithAlphaSized(origCanvas, feathered)
+
+      if (outRef.current) {
+        outRef.current.innerHTML = ''
+        const im = document.createElement('img')
+        im.src = featheredComposed.toDataURL('image/png')
+        im.alt = 'foreground'
+        im.className = 'rounded-md shadow-sm w-40 md:w-56'
+        outRef.current.appendChild(im)
+        const a = document.createElement('a')
+        a.href = featheredComposed.toDataURL('image/png')
+        a.download = 'fg.png'
+        a.textContent = 'Download PNG'
+        a.className = 'ml-3 inline-block px-3 py-2 bg-sky-600 text-white rounded-md text-sm hover:bg-sky-700'
+        outRef.current.appendChild(a)
+      }
+      setStatus('done')
     } catch (err: any) {
-      console.error('run failed', err)
-      setStatus('run failed: ' + (err?.message ?? err))
-      return
+      console.error(err)
+      setStatus('Failed: ' + (err?.message ?? err))
+    } finally {
+      setProcessing(false)
     }
-    setStatus('postprocessing')
-    const outKey = Object.keys(outputs)[0]
-    const alphaTensor: any = (outputs as any)[outKey]
-    let alphaArr = alphaTensor.data as Float32Array
-    const px = MODEL_SIZE * MODEL_SIZE
-    if (alphaArr.length > px) alphaArr = alphaArr.slice(0, px)
-    const alphaImage = alphaToImageData(alphaArr, MODEL_SIZE)
-
-    // Remap alpha region from model-square to original image size
-    const { iw, ih, nw, nh, dx, dy } = meta
-    // alpha model-sized canvas
-    const alphaModelCanvas = document.createElement('canvas')
-    alphaModelCanvas.width = MODEL_SIZE
-    alphaModelCanvas.height = MODEL_SIZE
-    const actx = alphaModelCanvas.getContext('2d')!
-    actx.putImageData(alphaImage, 0, 0)
-    // alpha resized to original image size: draw only the image region (dx,dy,nw,nh) -> full (0,0,iw,ih)
-    const alphaResizedCanvas = document.createElement('canvas')
-    alphaResizedCanvas.width = iw
-    alphaResizedCanvas.height = ih
-    const aResCtx = alphaResizedCanvas.getContext('2d')!
-    aResCtx.drawImage(alphaModelCanvas, dx, dy, nw, nh, 0, 0, iw, ih)
-    const alphaResizedImageData = aResCtx.getImageData(0, 0, iw, ih)
-
-    // Compose final output at original image size
-    const origCanvas = document.createElement('canvas')
-    origCanvas.width = iw
-    origCanvas.height = ih
-    const origCtx = origCanvas.getContext('2d')!
-    origCtx.drawImage(imgRef.current, 0, 0, iw, ih)
-    const composed = compositeWithAlphaSized(origCanvas, alphaResizedImageData)
-
-    // optionally feather final alpha (on resized alpha)
-    const feathered = featherAlpha(alphaResizedImageData, featherPx, threshold)
-    const featheredComposed = compositeWithAlphaSized(origCanvas, feathered)
-
-    if (outRef.current) {
-      outRef.current.innerHTML = ''
-      const im = document.createElement('img')
-      im.src = featheredComposed.toDataURL('image/png')
-      im.alt = 'foreground'
-      im.className = 'rounded-md shadow-sm w-40 md:w-56'
-      outRef.current.appendChild(im)
-      const a = document.createElement('a')
-      a.href = featheredComposed.toDataURL('image/png')
-      a.download = 'fg.png'
-      a.textContent = 'Download PNG'
-      a.className = 'ml-3 inline-block px-3 py-2 bg-sky-600 text-white rounded-md text-sm hover:bg-sky-700'
-      outRef.current.appendChild(a)
-    }
-    setStatus('done')
   }
 
   return (
@@ -304,10 +309,11 @@ export default function RemoveBgViaCDN() {
               { /* Run button */}
               <button
                 onClick={run}
-                className="px-3 py-2 text-white rounded-md text-sm hover:bg-sky-700 w-full mt-[8px] md:min-w-[80px] md:w-auto md:mt-0 btn"
+                disabled={!imageSrc || processing}
+                className={`px-3 py-2 text-white rounded-md text-sm w-full mt-[8px] md:min-w-[80px] md:w-auto md:mt-0 btn ${(!imageSrc || processing) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-sky-700'}`}
                 type="button"
               >
-                Remove Background
+                {processing ? "Removing background..." : "Remove Background"}
               </button>
               { /* Reset button */}
               <button
