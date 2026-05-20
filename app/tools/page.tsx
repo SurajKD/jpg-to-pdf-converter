@@ -99,6 +99,46 @@ const tools = [
     features: ["Client-side (WASM)", "Transparent PNG output", "Preload assets"],
   },
   {
+    id: "svg-to-png",
+    title: "SVG → PNG",
+    href: "/tools/svg-to-png",
+    short:
+      "Render SVG files or markup as PNG images in the browser. Download raster output with no uploads.",
+    features: ["SVG file support", "PNG export", "Browser-based"],
+  },
+  {
+    id: "json-formatter",
+    title: "JSON Formatter",
+    href: "/tools/json-formatter",
+    short:
+      "Validate, format and download JSON quickly in the browser. Great for debugging APIs and configs.",
+    features: ["Validate JSON", "Pretty-print", "Download JSON"],
+  },
+  {
+    id: "markdown-to-html",
+    title: "Markdown → HTML",
+    href: "/tools/markdown-to-html",
+    short:
+      "Convert Markdown text into HTML and download a complete page. Perfect for docs and static site content.",
+    features: ["Markdown preview", "HTML export", "Browser-first"],
+  },
+  {
+    id: "csv-to-json",
+    title: "CSV → JSON",
+    href: "/tools/csv-to-json",
+    short:
+      "Transform CSV rows into structured JSON arrays. Ideal for APIs and spreadsheet exports.",
+    features: ["Header-based parsing", "JSON output", "No upload required"],
+  },
+  {
+    id: "epoch-converter",
+    title: "Epoch Converter",
+    href: "/tools/epoch-converter",
+    short:
+      "Convert epoch timestamps into readable date and time values quickly in the browser.",
+    features: ["Seconds or milliseconds", "Date preview", "Instant conversion"],
+  },
+  {
     id: "pdf-to-text",
     title: "PDF to Text",
     href: "/tools/pdf-to-text",

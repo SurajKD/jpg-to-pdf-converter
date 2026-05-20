@@ -73,5 +73,41 @@
       <description>Learn how to extract text from PDF files using browser-based extraction, desktop tools, and OCR.</description>
     </item>
 
+    <!-- New tool blog posts -->
+    <item>
+      <title>Convert SVG to PNG</title>
+      <link>https://anyfileconverter.online/blog/svg-to-png</link>
+      <guid>https://anyfileconverter.online/blog/svg-to-png</guid>
+      <description>Render SVG markup or files to PNG images directly in your browser with no uploads.</description>
+    </item>
+
+    <item>
+      <title>JSON Formatter & Validator</title>
+      <link>https://anyfileconverter.online/blog/json-formatter</link>
+      <guid>https://anyfileconverter.online/blog/json-formatter</guid>
+      <description>Validate and pretty-print JSON for debugging and API testing in your browser.</description>
+    </item>
+
+    <item>
+      <title>Markdown to HTML</title>
+      <link>https://anyfileconverter.online/blog/markdown-to-html</link>
+      <guid>https://anyfileconverter.online/blog/markdown-to-html</guid>
+      <description>Convert Markdown to HTML for quick previews, documentation, and static page generation.</description>
+    </item>
+
+    <item>
+      <title>CSV to JSON</title>
+      <link>https://anyfileconverter.online/blog/csv-to-json</link>
+      <guid>https://anyfileconverter.online/blog/csv-to-json</guid>
+      <description>Transform CSV tables into JSON objects for APIs and data processing.</description>
+    </item>
+
+    <item>
+      <title>Epoch Time Converter</title>
+      <link>https://anyfileconverter.online/blog/epoch-converter</link>
+      <guid>https://anyfileconverter.online/blog/epoch-converter</guid>
+      <description>Convert epoch timestamps (seconds or milliseconds) into human-readable dates and times.</description>
+    </item>
+
   </channel>
 </rss>

@@ -199,6 +199,51 @@ export default function Header() {
                     </Link>
                   </li>
 
+                  <li>
+                    <Link
+                      href="/tools/svg-to-png"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      SVG → PNG
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/json-formatter"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      JSON Formatter
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/markdown-to-html"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      Markdown → HTML
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/csv-to-json"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      CSV → JSON
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/epoch-converter"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      Epoch Converter
+                    </Link>
+                  </li>
 
                   {/* <li>
                     <Link

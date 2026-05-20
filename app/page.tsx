@@ -258,6 +258,11 @@ export default function Home() {
               <ToolCard href="/tools/pdf-to-text" title="PDF → Text" desc="Extract editable text from PDF files." tag="Client-side" />
               <ToolCard href="/tools/merge-pdf" title="Merge PDF" desc="Combine multiple PDFs into one. Reorder files & download instantly." tag="Client-side" />
               <ToolCard href="/tools/remove-bg" title="Remove Background" desc="Produce transparent PNGs or composite with a color." tag="Client-side" />
+              <ToolCard href="/tools/svg-to-png" title="SVG → PNG" desc="Render SVG files or markup as downloadable PNG images." tag="Client-side" />
+              <ToolCard href="/tools/json-formatter" title="JSON Formatter" desc="Validate and pretty-print JSON text for APIs and debugging." tag="Client-side" />
+              <ToolCard href="/tools/markdown-to-html" title="Markdown → HTML" desc="Convert Markdown to HTML and download a ready-made HTML page." tag="Client-side" />
+              <ToolCard href="/tools/csv-to-json" title="CSV → JSON" desc="Transform CSV rows into JSON arrays for APIs and data processing." tag="Client-side" />
+              <ToolCard href="/tools/epoch-converter" title="Epoch Converter" desc="Translate epoch timestamps into readable date and time output." tag="Client-side" />
             </div>
           </section>
 

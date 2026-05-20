@@ -1,6 +1,6 @@
 'use client'
 
-import React, { JSX, useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { PDFDocument } from "pdf-lib";
 
@@ -17,7 +17,7 @@ type FileItem = { id: string; file: File };
 
 const uid = () => Math.random().toString(36).slice(2, 9);
 
-export default function MergePdfClient(): JSX.Element {
+export default function MergePdfClient(): React.ReactElement {
   const [files, setFiles] = useState<FileItem[]>([]);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -1,7 +1,7 @@
 // components/PdfToWordClient.tsx
 'use client'
 
-import React, { JSX, useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 /**
@@ -18,7 +18,7 @@ import { useDropzone } from "react-dropzone";
  * - For production-scale, consider server-side conversion for large PDFs or better fidelity.
  */
 
-export default function PdfToWordClient(): JSX.Element {
+export default function PdfToWordClient(): React.ReactElement {
     const [file, setFile] = useState<File | null>(null);
     const [processing, setProcessing] = useState(false);
     const [extractedText, setExtractedText] = useState<string | null>(null);
