@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false)
@@ -152,6 +153,15 @@ export default function Header() {
                   </li>
                   <li>
                     <Link
+                      href="/tools/pdf-to-text"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      PDF → Text
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="/tools/merge-pdf"
                       onClick={closeAll}
                       className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
@@ -245,6 +255,11 @@ export default function Header() {
               >
                 Privacy
               </Link>
+            </li>
+
+            {/* Theme toggle */}
+            <li className="pt-2 md:pt-0">
+              <ThemeToggle />
             </li>
           </ul>
         </div>

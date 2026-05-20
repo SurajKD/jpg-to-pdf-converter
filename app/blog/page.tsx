@@ -66,6 +66,12 @@ const posts = [
     date: "2025-03-17",
     excerpt: "A full guide to converting PDFs into editable Word docs, with tips for scanned PDFs and OCR usage.",
   },
+  {
+    href: "/blog/pdf-to-text",
+    title: "PDF to Text — Extract Text from PDF Files Quickly",
+    date: "2025-03-18",
+    excerpt: "Learn how to extract text from PDF documents using browser tools, desktop apps, and OCR. Perfect for editing and search.",
+  },
     {
     href: "/blog/how-to-merge-pdf",
     title: "How to Merge PDF Files — Step-by-Step Guide (Fast & Free)",

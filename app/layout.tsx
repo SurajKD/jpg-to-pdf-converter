@@ -6,7 +6,7 @@ import './globals.css'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
                 {/* Favicon */}
                 <link rel="icon" href="https://anyfileconverter.online/favicon.ico" />
@@ -32,6 +32,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         gtag('config', 'G-VHBD43982P');
                     `}
                 </Script>
+
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `(function(){try{var theme=localStorage.getItem('theme'); if(!theme){theme=window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';} document.documentElement.dataset.theme=theme;}catch(e){}})();`,
+                    }}
+                />
             </head>
 
             <body className="pt-16 bg-[var(--bg)]">

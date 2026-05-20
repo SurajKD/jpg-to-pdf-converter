@@ -7,7 +7,7 @@ export default function Footer() {
       style={{
         marginTop: 40,
         padding: "32px 24px",
-        borderTop: "1px solid #eef2f7",
+        borderTop: "1px solid #eef2f717",
         background: "#fafbfd",
       }}
     >
@@ -45,7 +45,7 @@ export default function Footer() {
               />
             </div>
 
-            <p style={{ margin: "8px 0 0", color: "#666", fontSize: 14 }}>
+            <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 14 }}>
               © {new Date().getFullYear()} AnyFileConverter.online<br />
               Fast, secure & privacy-first file tools.
             </p>

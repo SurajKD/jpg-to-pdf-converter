@@ -438,33 +438,33 @@ export default function PdfToWordClient(): JSX.Element {
                 aria-label="PDF dropzone"
                 style={{
                     padding: 14,
-                    border: "2px dashed #e6eef8",
+                    border: "2px dashed var(--border)",
                     borderRadius: 8,
                     cursor: "pointer",
-                    background: isDragActive ? "#f4fbff" : "#fff",
+                    background: isDragActive ? "rgba(59,130,246,0.12)" : "var(--surface)",
                 }}
             >
                 <input {...getInputProps()} aria-hidden />
-                <p style={{ margin: 0, color: "#333", fontWeight: 500 }}>
+                <p style={{ margin: 0, color: "var(--text)", fontWeight: 500 }}>
                     {isDragActive ? "Drop PDF here..." : "Drag & drop a PDF here, or click to select"}
                 </p>
-                <small style={{ color: "#666" }}>
+                <small style={{ color: "var(--muted)" }}>
                     Default: extract editable text via PDF.js. Use "Preserve layout" to embed page images into the DOCX.
                 </small>
             </div>
 
             {error && (
-                <div role="alert" style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "#fff5f5", border: "1px solid #ffd6d6", color: "#7a1a1a" }}>
+                <div role="alert" style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}>
                     {error}
                 </div>
             )}
 
             {file && (
-                <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "#f9fbff", border: "1px solid #e2e8f0" }}>
+                <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
                         <div>
                             <div style={{ fontWeight: 700 }}>{file.name}</div>
-                            <div style={{ color: "#475569", fontSize: 13 }}>{formatBytes(file.size)}</div>
+                            <div style={{ color: "var(--muted)", fontSize: 13 }}>{formatBytes(file.size)}</div>
                         </div>
 
                         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -499,20 +499,20 @@ export default function PdfToWordClient(): JSX.Element {
                                 {processing ? "Working..." : preserveLayout ? (useOcr ? "Images + OCR → DOCX" : "Images → DOCX") : (useOcr ? "OCR → DOCX" : "Text → DOCX")}
                             </button>
 
-                            <button onClick={reset} disabled={processing} style={{ background: "#fff", border: "1px solid #e6eef8", padding: "8px 12px", borderRadius: 8, cursor: processing ? "not-allowed" : "pointer" }}>
+                            <button onClick={reset} disabled={processing} style={{ background: "var(--surface)", border: "1px solid var(--border)", padding: "8px 12px", borderRadius: 8, cursor: processing ? "not-allowed" : "pointer", color: "var(--text)" }}>
                                 Reset
                             </button>
                         </div>
                     </div>
 
-                    <div style={{ marginTop: 8, color: "#475569", fontSize: 13 }}>
+                    <div style={{ marginTop: 8, color: "var(--muted)", fontSize: 13 }}>
                         <strong>Note:</strong> Embedding images preserves visual fidelity (but text won't be selectable). Text extraction produces editable text but may lose layout and images. OCR is CPU-intensive.
                     </div>
                 </div>
             )}
 
             {ocrProgress && (
-                <div style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "#fffaf0", border: "1px solid #fde3a7", color: "#66510a" }}>
+                <div style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}>
                     <div style={{ fontWeight: 600 }}>Status</div>
                     <div style={{ marginTop: 6 }}>{ocrProgress.status} {ocrProgress.page ? `— page ${ocrProgress.page}` : ""} {typeof ocrProgress.progress === 'number' ? `(${Math.round((ocrProgress.progress || 0) * 100)}%)` : ""}</div>
                 </div>
@@ -521,7 +521,7 @@ export default function PdfToWordClient(): JSX.Element {
             {extractedText && (
                 <div style={{ marginTop: 12 }}>
                     <h4 style={{ margin: "6px 0" }}>Preview{!showFullPreview ? " (first ~1000 chars)" : ""}:</h4>
-                    <pre style={{ whiteSpace: "pre-wrap", background: "#fff", border: "1px solid #efefef", padding: 12, borderRadius: 8, maxHeight: 420, overflow: "auto" }}>
+                    <pre style={{ whiteSpace: "pre-wrap", background: "var(--surface)", border: "1px solid var(--border)", padding: 12, borderRadius: 8, maxHeight: 420, overflow: "auto", color: "var(--text)" }}>
                         {previewSnippet}
                     </pre>
 

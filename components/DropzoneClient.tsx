@@ -174,18 +174,18 @@ export default function DropzoneClient() {
                 {...getRootProps()}
                 style={{
                     padding: 12,
-                    border: '2px dashed #e6eef8',
+                    border: '2px dashed var(--border)',
                     borderRadius: 8,
                     cursor: 'pointer',
-                    background: isDragActive ? '#f4fbff' : 'transparent',
+                    background: isDragActive ? 'rgba(59,130,246,0.12)' : 'transparent',
                 }}
                 aria-disabled={processing || animating}
             >
                 <input {...getInputProps()} />
-                <p style={{ margin: 0, color: '#333' }}>
+                <p style={{ margin: 0, color: 'var(--text)' }}>
                     {isDragActive ? 'Drop images here...' : 'Drag & drop images here, or click to select'}
                 </p>
-                <small style={{ color: '#666' }}>Supports JPG, JPEG, PNG, WEBP</small>
+                <small style={{ color: 'var(--muted)' }}>Supports JPG, JPEG, PNG, WEBP</small>
             </div>
 
             {/* File list */}
@@ -196,14 +196,14 @@ export default function DropzoneClient() {
                             <img src={it.url} alt={it.file.name} width={64} height={64} style={{ objectFit: 'cover', borderRadius: 6 }} />
                             <div style={{ flex: 1 }}>
                                 <div style={{ fontWeight: 600 }}>{it.file.name}</div>
-                                <div style={{ color: '#666', fontSize: 13 }}>{(it.file.size / 1024).toFixed(1)} KB</div>
+                                <div style={{ color: 'var(--muted)', fontSize: 13 }}>{(it.file.size / 1024).toFixed(1)} KB</div>
                             </div>
                             <button
                                 onClick={() => remove(it.id)}
                                 style={{
                                     background: 'transparent',
-                                    border: '1px solid #eee',
-                                    color: '#333',
+                                    border: '1px solid var(--border)',
+                                    color: 'var(--text)',
                                     padding: '8px 10px',
                                     borderRadius: 8,
                                     cursor: 'pointer',
@@ -253,7 +253,7 @@ export default function DropzoneClient() {
                                 animation: 'spin 1s linear infinite',
                             }}
                         />
-                        <div style={{ color: '#333', fontWeight: 600 }}>Finalizing your PDF...</div>
+                        <div style={{ color: 'var(--text)', fontWeight: 600 }}>Finalizing your PDF...</div>
 
                         <style>{`
               @keyframes spin {
@@ -304,11 +304,11 @@ export default function DropzoneClient() {
                             onClick={resetAll}
                             style={{
                                 width: "100%",
-                                background: "#fff",
-                                color: "#333",
+                                    background: "var(--surface)",
+                                    color: "var(--text)",
                                 padding: "12px 20px",
                                 borderRadius: 10,
-                                border: "1px solid #e6eef8",
+                                    border: "1px solid var(--border)",
                                 cursor: "pointer",
                                 fontWeight: 600,
                             }}
@@ -320,7 +320,7 @@ export default function DropzoneClient() {
 
                 {/* If not converted and no items - show disabled convert hint */}
                 {!converted && !animating && items.length === 0 && (
-                    <div style={{ color: '#666' }}>Add images to enable conversion</div>
+                    <div style={{ color: 'var(--muted)' }}>Add images to enable conversion</div>
                 )}
             </div>
         </div>

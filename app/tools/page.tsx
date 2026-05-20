@@ -98,6 +98,14 @@ const tools = [
       "Remove photo backgrounds directly in your browser to create transparent PNGs or composite with a solid color. Privacy-first.",
     features: ["Client-side (WASM)", "Transparent PNG output", "Preload assets"],
   },
+  {
+    id: "pdf-to-text",
+    title: "PDF to Text",
+    href: "/tools/pdf-to-text",
+    short:
+      "Extract plain text from PDF files in your browser. Ideal for copying, editing, and searching PDF content.",
+    features: ["PDF text extraction", "Plain text output", "Client-side"],
+  },
 ];
 
 const pageJsonLd = {

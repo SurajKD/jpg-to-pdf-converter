@@ -121,14 +121,14 @@ export default function AiPdfSummarizerClient() {
 
   return (
     <div>
-      <div {...getRootProps()} style={{ padding: 14, border: "2px dashed #e6eef8", borderRadius: 8, cursor: "pointer", background: isDragActive ? "#f4fbff" : "#fff" }}>
+      <div {...getRootProps()} style={{ padding: 14, border: "2px dashed var(--border)", borderRadius: 8, cursor: "pointer", background: isDragActive ? "rgba(59,130,246,0.12)" : "var(--surface)" }}>
         <input {...getInputProps()} />
-        <p style={{ margin: 0, color: "#333" }}>{isDragActive ? "Drop PDF here..." : "Drag & drop a PDF here, or click to select"}</p>
-        <small style={{ color: "#666" }}>Local extractive summarizer (works best with selectable/text PDFs).</small>
+        <p style={{ margin: 0, color: "var(--text)" }}>{isDragActive ? "Drop PDF here..." : "Drag & drop a PDF here, or click to select"}</p>
+        <small style={{ color: "var(--muted)" }}>Local extractive summarizer (works best with selectable/text PDFs).</small>
       </div>
 
       {file && (
-        <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "#f9fbff", border: "1px solid #e2e8f0" }}>
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)" }}>
           <div style={{ fontWeight: 600 }}>{file.name}</div>
           <div className="small">{(file.size / 1024).toFixed(1)} KB</div>
 
@@ -139,7 +139,7 @@ export default function AiPdfSummarizerClient() {
             </label>
 
             <button onClick={handleSummarize} disabled={processing} className="btn">{processing ? "Summarizing..." : "Summarize"}</button>
-            <button onClick={reset} style={{ background: "#fff", border: "1px solid #e6eef8", padding: "8px 12px", borderRadius: 8 }}>Reset</button>
+            <button onClick={reset} style={{ background: "var(--surface)", border: "1px solid var(--border)", padding: "8px 12px", borderRadius: 8, color: "var(--text)" }}>Reset</button>
           </div>
         </div>
       )}
@@ -147,7 +147,7 @@ export default function AiPdfSummarizerClient() {
       {summary && (
         <div style={{ marginTop: 12 }}>
           <h4>Summary</h4>
-          <div style={{ background: "#fff", border: "1px solid #efefef", padding: 12 }}>{summary}</div>
+          <div style={{ background: "var(--surface)", border: "1px solid var(--border)", padding: 12, color: "var(--text)" }}>{summary}</div>
           <div style={{ marginTop: 8 }}>
             <button onClick={() => { navigator.clipboard?.writeText(summary); }} className="btn">Copy Summary</button>
           </div>
@@ -157,7 +157,7 @@ export default function AiPdfSummarizerClient() {
       {rawText && (
         <div style={{ marginTop: 12 }}>
           <h4>Raw extracted text (preview)</h4>
-          <pre style={{ whiteSpace: "pre-wrap", background: "#fff", border: "1px solid #efefef", padding: 12, maxHeight: 240, overflow: "auto" }}>{rawText.slice(0, 3000)}</pre>
+          <pre style={{ whiteSpace: "pre-wrap", background: "var(--surface)", border: "1px solid var(--border)", padding: 12, maxHeight: 240, overflow: "auto", color: "var(--text)" }}>{rawText.slice(0, 3000)}</pre>
         </div>
       )}
     </div>

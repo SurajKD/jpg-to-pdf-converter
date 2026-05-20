@@ -131,19 +131,19 @@ export default function CompressPdfClient() {
         {...getRootProps()}
         style={{
           padding: 16,
-          border: "2px dashed #e6eef8",
+          border: "2px dashed var(--border)",
           borderRadius: 8,
           cursor: "pointer",
-          background: isDragActive ? "#f4fbff" : "#fff",
+          background: isDragActive ? "rgba(59,130,246,0.12)" : "var(--surface)",
         }}
       >
         <input {...getInputProps()} />
-        <p style={{ margin: 0, color: "#333", fontWeight: 500 }}>
+        <p style={{ margin: 0, color: "var(--text)", fontWeight: 500 }}>
           {isDragActive
             ? "Drop your PDF here..."
             : "Drag & drop a PDF here, or click to select"}
         </p>
-        <small style={{ color: "#666" }}>
+        <small style={{ color: "var(--muted)" }}>
           Lightweight optimization using pdf-lib. Best for cleaning up existing PDFs.
         </small>
       </div>
@@ -157,12 +157,12 @@ export default function CompressPdfClient() {
             marginTop: 16,
             padding: 12,
             borderRadius: 8,
-            background: "#f9fbff",
-            border: "1px solid #e2e8f0",
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
           }}
         >
           <div style={{ fontWeight: 600 }}>{state.file.name}</div>
-          <div style={{ fontSize: 13, color: "#555" }}>
+          <div style={{ fontSize: 13, color: "var(--muted)" }}>
             Original size: <strong>{originalLabel}</strong>
           </div>
 
@@ -224,7 +224,7 @@ export default function CompressPdfClient() {
                 animation: "spin 1s linear infinite",
               }}
             />
-            <span style={{ color: "#333", fontWeight: 600 }}>
+            <span style={{ color: "var(--text)", fontWeight: 600 }}>
               Finalizing compressed PDF...
             </span>
 
@@ -260,11 +260,11 @@ export default function CompressPdfClient() {
             <button
               onClick={reset}
               style={{
-                background: "#fff",
-                color: "#333",
+                background: "var(--surface)",
+                color: "var(--text)",
                 padding: "10px 14px",
                 borderRadius: 8,
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--border)",
                 cursor: "pointer",
               }}
             >
@@ -276,7 +276,7 @@ export default function CompressPdfClient() {
 
       {/* Hint when nothing selected */}
       {state.status === "idle" && (
-        <div style={{ marginTop: 8, fontSize: 13, color: "#666" }}>
+        <div style={{ marginTop: 8, fontSize: 13, color: "var(--muted)" }}>
           Select a PDF to enable compression.
         </div>
       )}

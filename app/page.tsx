@@ -255,6 +255,7 @@ export default function Home() {
               <ToolCard href="/tools/pdf-compressor" title="PDF Compressor" desc="Reduce PDF size for email and uploads." tag="Client-side" />
               <ToolCard href="/tools/image-compressor" title="Image Compressor" desc="Compress JPG, PNG & WebP images with quality control." tag="Client-side" />
               <ToolCard href="/tools/pdf-to-word" title="PDF → Word" desc="Convert PDFs into editable DOCX files." tag="Client-side" />
+              <ToolCard href="/tools/pdf-to-text" title="PDF → Text" desc="Extract editable text from PDF files." tag="Client-side" />
               <ToolCard href="/tools/merge-pdf" title="Merge PDF" desc="Combine multiple PDFs into one. Reorder files & download instantly." tag="Client-side" />
               <ToolCard href="/tools/remove-bg" title="Remove Background" desc="Produce transparent PNGs or composite with a color." tag="Client-side" />
             </div>

@@ -160,33 +160,33 @@ export default function MergePdfClient(): JSX.Element {
         aria-label="PDF merge dropzone"
         style={{
           padding: 14,
-          border: "2px dashed #e6eef8",
+          border: "2px dashed var(--border)",
           borderRadius: 8,
           cursor: "pointer",
-          background: isDragActive ? "#f4fbff" : "#fff",
+          background: isDragActive ? "rgba(59,130,246,0.12)" : "var(--surface)",
         }}
       >
         <input {...getInputProps()} aria-hidden />
-        <p style={{ margin: 0, color: "#333", fontWeight: 600 }}>
+        <p style={{ margin: 0, color: "var(--text)", fontWeight: 600 }}>
           {isDragActive ? "Drop PDFs here..." : "Drag & drop PDF files here, or click to select"}
         </p>
-        <small style={{ color: "#666" }}>
+        <small style={{ color: "var(--muted)" }}>
           Reorder files before merging. Merging happens in your browser — no upload required.
         </small>
       </div>
 
       {error && (
-        <div role="alert" style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "#fff5f5", border: "1px solid #ffd6d6", color: "#7a1a1a" }}>
+        <div role="alert" style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}>
           {error}
         </div>
       )}
 
       {files.length > 0 && (
-        <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "#f9fbff", border: "1px solid #e2e8f0" }}>
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
             <div>
               <div style={{ fontWeight: 700 }}>{files.length} file(s) selected</div>
-              <div style={{ color: "#475569", fontSize: 13 }}>{formatBytes(totalSize)} total</div>
+              <div style={{ color: "var(--muted)", fontSize: 13 }}>{formatBytes(totalSize)} total</div>
             </div>
 
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -197,7 +197,7 @@ export default function MergePdfClient(): JSX.Element {
                   padding: "8px 14px",
                   borderRadius: 8,
                   border: "none",
-                  background: processing ? "#9bbbe9" : "#2563eb",
+                  background: processing ? "rgba(59,130,246,0.5)" : "var(--brandprimary)",
                   color: "#fff",
                   cursor: processing ? "default" : "pointer",
                 }}
@@ -210,19 +210,19 @@ export default function MergePdfClient(): JSX.Element {
                 onClick={() => {
                   setShowHelp((s) => !s);
                 }}
-                style={{ background: "#fff", border: "1px solid #e6eef8", padding: "8px 12px", borderRadius: 8, cursor: "pointer" }}
+                style={{ background: "var(--surface)", border: "1px solid var(--border)", padding: "8px 12px", borderRadius: 8, cursor: "pointer", color: "var(--text)" }}
               >
                 {showHelp ? "Hide" : "Help"}
               </button>
 
-              <button onClick={reset} disabled={processing} style={{ background: "#fff", border: "1px solid #e6eef8", padding: "8px 12px", borderRadius: 8, cursor: processing ? "not-allowed" : "pointer" }}>
+              <button onClick={reset} disabled={processing} style={{ background: "var(--surface)", border: "1px solid var(--border)", padding: "8px 12px", borderRadius: 8, cursor: processing ? "not-allowed" : "pointer", color: "var(--text)" }}>
                 Reset
               </button>
             </div>
           </div>
 
           {showHelp && (
-            <div style={{ marginTop: 10, color: "#475569", fontSize: 13 }}>
+            <div style={{ marginTop: 10, color: "var(--muted)", fontSize: 13 }}>
               <strong>Tip:</strong> Use the ↑ / ↓ buttons to reorder files. The top file will appear first in the merged PDF.
             </div>
           )}
@@ -230,23 +230,23 @@ export default function MergePdfClient(): JSX.Element {
           <div style={{ marginTop: 12 }}>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 8 }}>
               {files.map((f, idx) => (
-                <li key={f.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: 8, borderRadius: 8, background: "#fff", border: "1px solid #eef2ff" }}>
+                <li key={f.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: 8, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)" }}>
                   <div style={{ flex: "1 1 0", minWidth: 0 }}>
                     <div style={{ fontWeight: 700, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.file.name}</div>
-                    <div style={{ color: "#64748b", fontSize: 13 }}>{formatBytes(f.file.size)}</div>
+                    <div style={{ color: "var(--muted)", fontSize: 13 }}>{formatBytes(f.file.size)}</div>
                   </div>
 
                   <div style={{ display: "flex", gap: 6 }}>
                     <button onClick={() => moveFile(idx, -1)} disabled={idx === 0 || processing} title="Move up"
-                      style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid #e6eef8", background: "#fff", cursor: idx === 0 || processing ? "not-allowed" : "pointer" }}>
+                      style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid var(--border)", background: "var(--surface)", cursor: idx === 0 || processing ? "not-allowed" : "pointer", color: "var(--text)" }}>
                       ↑
                     </button>
                     <button onClick={() => moveFile(idx, 1)} disabled={idx === files.length - 1 || processing} title="Move down"
-                      style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid #e6eef8", background: "#fff", cursor: idx === files.length - 1 || processing ? "not-allowed" : "pointer" }}>
+                      style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid var(--border)", background: "var(--surface)", cursor: idx === files.length - 1 || processing ? "not-allowed" : "pointer", color: "var(--text)" }}>
                       ↓
                     </button>
                     <button onClick={() => removeFile(f.id)} disabled={processing} title="Remove"
-                      style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid #fee2e2", background: "#fff", color: "#dc2626", cursor: processing ? "not-allowed" : "pointer" }}>
+                      style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid #fee2e2", background: "var(--surface)", color: "#dc2626", cursor: processing ? "not-allowed" : "pointer" }}>
                       ✕
                     </button>
                   </div>
@@ -258,12 +258,12 @@ export default function MergePdfClient(): JSX.Element {
       )}
 
       {info && (
-        <div style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "#f0f9ff", border: "1px solid #dbeafe", color: "#083344" }}>
+        <div style={{ marginTop: 12, padding: 10, borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}>
           {info}
         </div>
       )}
 
-      <div style={{ marginTop: 12, color: "#475569", fontSize: 13 }}>
+      <div style={{ marginTop: 12, color: "var(--muted)", fontSize: 13 }}>
         <strong>Note:</strong> Merging happens in your browser. For extremely large files or many pages, prefer a server-side merge to avoid running out of memory.
       </div>
     </div>
