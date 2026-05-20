@@ -40,7 +40,7 @@ function ensureOrtScript(): Promise<void> {
   })
 }
 
-/** draw image cover */
+/** draw image cover -> return canvas AND transform metadata */
 function drawImageCoverToCanvas(img: HTMLImageElement, size = MODEL_SIZE) {
   const canvas = document.createElement('canvas')
   canvas.width = size
@@ -56,12 +56,12 @@ function drawImageCoverToCanvas(img: HTMLImageElement, size = MODEL_SIZE) {
   const dx = (size - nw) / 2
   const dy = (size - nh) / 2
   ctx.drawImage(img, dx, dy, nw, nh)
-  return canvas
+  return { canvas, iw, ih, nw, nh, dx, dy, scale }
 }
 
 /** build float32 CHW tensor */
 async function imageToFloat32CHW(img: HTMLImageElement, size = MODEL_SIZE) {
-  const canvas = drawImageCoverToCanvas(img, size)
+  const { canvas, iw, ih, nw, nh, dx, dy, scale } = drawImageCoverToCanvas(img, size)
   const ctx = canvas.getContext('2d')!
   const d = ctx.getImageData(0, 0, size, size).data
   const px = size * size
@@ -71,7 +71,7 @@ async function imageToFloat32CHW(img: HTMLImageElement, size = MODEL_SIZE) {
     arr[px + i] = d[i * 4 + 1] / 255.0
     arr[2 * px + i] = d[i * 4 + 2] / 255.0
   }
-  return { tensorData: arr, canvas }
+  return { tensorData: arr, canvas, meta: { iw, ih, nw, nh, dx, dy, scale } }
 }
 
 /** convert float alpha array to ImageData */
@@ -120,19 +120,20 @@ function featherAlpha(alphaImage: ImageData, featherPx = 6, threshold = 0.45) {
   return out
 }
 
-/** composite final RGBA */
-function compositeWithAlpha(srcCanvas: HTMLCanvasElement, alphaImg: ImageData) {
-  const size = srcCanvas.width
+/** composite final RGBA for arbitrary size */
+function compositeWithAlphaSized(srcCanvas: HTMLCanvasElement, alphaImgData: ImageData) {
+  const w = srcCanvas.width
+  const h = srcCanvas.height
   const out = document.createElement('canvas')
-  out.width = size
-  out.height = size
+  out.width = w
+  out.height = h
   const ctx = out.getContext('2d')!
-  ctx.drawImage(srcCanvas, 0, 0)
-  const src = ctx.getImageData(0, 0, size, size)
-  const dst = ctx.createImageData(size, size)
-  const px = size * size
+  ctx.drawImage(srcCanvas, 0, 0, w, h)
+  const src = ctx.getImageData(0, 0, w, h)
+  const dst = ctx.createImageData(w, h)
+  const px = w * h
   for (let i = 0; i < px; i++) {
-    const a = alphaImg.data[i * 4] / 255
+    const a = alphaImgData.data[i * 4] / 255
     dst.data[i * 4 + 0] = src.data[i * 4 + 0]
     dst.data[i * 4 + 1] = src.data[i * 4 + 1]
     dst.data[i * 4 + 2] = src.data[i * 4 + 2]
@@ -145,6 +146,7 @@ function compositeWithAlpha(srcCanvas: HTMLCanvasElement, alphaImg: ImageData) {
 export default function RemoveBgViaCDN() {
   const [status, setStatus] = useState('idle')
   const [session, setSession] = useState<any | null>(null)
+  const [processing, setProcessing] = useState(false)
   const fileRef = useRef<HTMLInputElement | null>(null)
   const imgRef = useRef<HTMLImageElement | null>(null)
   const outRef = useRef<HTMLDivElement | null>(null)
@@ -191,60 +193,91 @@ export default function RemoveBgViaCDN() {
   async function run() {
     if (!imgRef.current) return alert('No image')
     if (!imgRef.current.complete) return alert('Image not loaded yet')
-    const s = session ?? (await loadModel())
-    if (!s) return
-
-    setStatus('preprocessing')
-    const { tensorData, canvas } = await imageToFloat32CHW(imgRef.current, MODEL_SIZE)
-    const ort = (window as any).ort
-    const inputTensor = new ort.Tensor('float32', tensorData, [1, 3, MODEL_SIZE, MODEL_SIZE])
-    setStatus('running model')
-    let outputs = {}
+    setProcessing(true)
+    setStatus('removing background...')
     try {
-      outputs = await s.run({ input: inputTensor })
+      const s = session ?? (await loadModel())
+      if (!s) return
+
+      setStatus('preprocessing')
+      const { tensorData, canvas, meta } = await imageToFloat32CHW(imgRef.current, MODEL_SIZE)
+      const ort = (window as any).ort
+      const inputTensor = new ort.Tensor('float32', tensorData, [1, 3, MODEL_SIZE, MODEL_SIZE])
+      setStatus('running model')
+      let outputs = {}
+      try {
+        outputs = await s.run({ input: inputTensor })
+      } catch (err: any) {
+        console.error('run failed', err)
+        setStatus('run failed: ' + (err?.message ?? err))
+        return
+      }
+      setStatus('postprocessing')
+      const outKey = Object.keys(outputs)[0]
+      const alphaTensor: any = (outputs as any)[outKey]
+      let alphaArr = alphaTensor.data as Float32Array
+      const px = MODEL_SIZE * MODEL_SIZE
+      if (alphaArr.length > px) alphaArr = alphaArr.slice(0, px)
+      const alphaImage = alphaToImageData(alphaArr, MODEL_SIZE)
+
+      // Remap alpha region from model-square to original image size
+      const { iw, ih, nw, nh, dx, dy } = meta
+      const alphaModelCanvas = document.createElement('canvas')
+      alphaModelCanvas.width = MODEL_SIZE
+      alphaModelCanvas.height = MODEL_SIZE
+      const actx = alphaModelCanvas.getContext('2d')!
+      actx.putImageData(alphaImage, 0, 0)
+      const alphaResizedCanvas = document.createElement('canvas')
+      alphaResizedCanvas.width = iw
+      alphaResizedCanvas.height = ih
+      const aResCtx = alphaResizedCanvas.getContext('2d')!
+      aResCtx.drawImage(alphaModelCanvas, dx, dy, nw, nh, 0, 0, iw, ih)
+      const alphaResizedImageData = aResCtx.getImageData(0, 0, iw, ih)
+
+      // Compose final output at original image size
+      const origCanvas = document.createElement('canvas')
+      origCanvas.width = iw
+      origCanvas.height = ih
+      const origCtx = origCanvas.getContext('2d')!
+      origCtx.drawImage(imgRef.current, 0, 0, iw, ih)
+      const feathered = featherAlpha(alphaResizedImageData, featherPx, threshold)
+      const featheredComposed = compositeWithAlphaSized(origCanvas, feathered)
+
+      if (outRef.current) {
+        outRef.current.innerHTML = ''
+        const im = document.createElement('img')
+        im.src = featheredComposed.toDataURL('image/png')
+        im.alt = 'foreground'
+        im.className = 'rounded-md shadow-sm w-40 md:w-56'
+        outRef.current.appendChild(im)
+        const a = document.createElement('a')
+        a.href = featheredComposed.toDataURL('image/png')
+        a.download = 'fg.png'
+        a.textContent = 'Download PNG'
+        a.className = 'ml-3 inline-block px-3 py-2 bg-sky-600 text-white rounded-md text-sm hover:bg-sky-700'
+        outRef.current.appendChild(a)
+      }
+      setStatus('done')
     } catch (err: any) {
-      console.error('run failed', err)
-      setStatus('run failed: ' + (err?.message ?? err))
-      return
+      console.error(err)
+      setStatus('Failed: ' + (err?.message ?? err))
+    } finally {
+      setProcessing(false)
     }
-    setStatus('postprocessing')
-    const outKey = Object.keys(outputs)[0]
-    const alphaTensor: any = (outputs as any)[outKey]
-    let alphaArr = alphaTensor.data as Float32Array
-    const px = MODEL_SIZE * MODEL_SIZE
-    if (alphaArr.length > px) alphaArr = alphaArr.slice(0, px)
-    const alphaImage = alphaToImageData(alphaArr, MODEL_SIZE)
-    const feathered = featherAlpha(alphaImage, featherPx, threshold)
-    const composed = compositeWithAlpha(canvas, feathered)
-    if (outRef.current) {
-      outRef.current.innerHTML = ''
-      const im = document.createElement('img')
-      im.src = composed.toDataURL('image/png')
-      im.alt = 'foreground'
-      im.className = 'rounded-md shadow-sm w-40 md:w-56'
-      outRef.current.appendChild(im)
-      const a = document.createElement('a')
-      a.href = composed.toDataURL('image/png')
-      a.download = 'fg.png'
-      a.textContent = 'Download PNG'
-      a.className = 'ml-3 inline-block px-3 py-2 bg-sky-600 text-white rounded-md text-sm hover:bg-sky-700'
-      outRef.current.appendChild(a)
-    }
-    setStatus('done')
   }
 
   return (
-    <div className="p-4 md:p-8 max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg md:text-xl font-semibold text-slate-800">Remove BG (CDN ONNX loader)</h3>
         <div className="text-sm">
           <span className="inline-block mr-2 text-slate-600">Status</span>
           <span
             className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${status === 'done'
-                ? 'bg-green-100 text-green-800'
-                : status.startsWith('loading') || status.startsWith('runtime') || status.startsWith('running')
-                  ? 'bg-amber-100 text-amber-800'
-                  : 'bg-gray-100 text-gray-700'
+              ? 'bg-green-100 text-green-800'
+              : status.startsWith('loading') || status.startsWith('runtime') || status.startsWith('running')
+                ? 'bg-amber-100 text-amber-800'
+                : 'bg-gray-100 text-gray-700'
               }`}
           >
             {status}
@@ -257,31 +290,35 @@ export default function RemoveBgViaCDN() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="md:col-span-2 space-y-3">
             <label className="block text-sm font-medium text-slate-700">Source image</label>
-            <div className="flex gap-2 items-center">
+            <div className="md:flex sm:block gap-2 items-center">
               <input
                 ref={fileRef}
                 type="file"
                 accept="image/*"
                 onChange={handleFile}
-                className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 cursor-pointer"
+                className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 cursor-pointer w-full md:w-auto"
               />
+              { /* Load model button */}
               <button
                 onClick={loadModel}
-                className="px-3 py-2 bg-slate-700 text-white rounded-md text-sm hover:bg-slate-800 min-w-[80px]"
+                className="px-3 py-2 bg-slate-700 text-white rounded-md text-sm hover:bg-slate-800 w-full mt-[8px] md:min-w-[80px] md:w-auto md:mt-0"
                 type="button"
               >
                 Load model
               </button>
+              { /* Run button */}
               <button
                 onClick={run}
-                className="px-3 py-2 text-white rounded-md text-sm hover:bg-sky-700 min-w-[80px] btn"
+                disabled={!imageSrc || processing}
+                className={`px-3 py-2 text-white rounded-md text-sm w-full mt-[8px] md:min-w-[80px] md:w-auto md:mt-0 btn ${(!imageSrc || processing) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-sky-700'}`}
                 type="button"
               >
-                Run
+                {processing ? "Removing background..." : "Remove Background"}
               </button>
+              { /* Reset button */}
               <button
                 onClick={() => window.location.reload()}
-                className="px-3 py-2 bg-slate-400 text-white rounded-md text-sm hover:bg-slate-500 min-w-[80px]"
+                className="px-3 py-2 bg-slate-400 text-white rounded-md text-sm hover:bg-slate-500 w-full mt-[8px] md:min-w-[80px] md:w-auto md:mt-0"
                 type="button"
               >
                 Reset
@@ -339,17 +376,17 @@ export default function RemoveBgViaCDN() {
           <div className="flex-1">
             <p className="text-sm font-medium text-slate-700 mb-2">Output</p>
             <div className="rounded-md border border-slate-200 bg-white p-3 flex items-center justify-center">
-            <div className="rounded-md border border-slate-200 bg-white p-3 w-[192px] h-[192px] md:w-[256px] md:h-[256px] flex items-center justify-center" style={{ backgroundImage: 'url(/pngBg.png)' }}>
-              <div ref={outRef} className="flex items-center justify-center gap-3 flex-wrap" />
+              <div className="rounded-md border border-slate-200 bg-white p-3 w-[192px] h-[192px] md:w-[256px] md:h-[256px] flex items-center justify-center" style={{ backgroundImage: 'url(/pngBg.png)' }}>
+                <div ref={outRef} className="flex items-center justify-center gap-3 flex-wrap" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* <div className="text-sm text-slate-500">
+        {/* <div className="text-sm text-slate-500">
         Tip: model assets are loaded from <code className="bg-slate-100 px-1 rounded">/models/bg_remover.onnx</code>. For production host your model on a fast CDN.
       </div> */}
-    </div>
+      </div>
     </div >
   )
 }
