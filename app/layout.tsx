@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="shortcut icon" href="https://anyfileconverter.online/favicon.ico" />
                 <link rel="apple-touch-icon" sizes="180x180" href="https://anyfileconverter.online/apple-touch-icon.png" />
                 <link rel="manifest" href="/site.webmanifest" />
-
+                <meta name="google-site-verification" content="lwubSR15p_JRwpeiXrvnT-mpvbZSa59cvUc5MBQm124" />
 
                 {/* Google Analytics */}
                 <Script
