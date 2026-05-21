@@ -1,53 +1,67 @@
 // app/page.tsx
+
 import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
 import Image from "next/image";
 
-const AdPlaceholder = dynamic(() => import("../components/AdPlaceholder"), {
-  ssr: false,
-  loading: () => <div className="h-24" />, // preserves layout for ads
-});
+export const revalidate = 86400;
+
+const AdPlaceholder = dynamic(
+  () => import("../components/AdPlaceholder"),
+  {
+    ssr: true,
+    loading: () => <div className="h-24" />,
+  }
+);
 
 export const metadata: Metadata = {
-  title: "AnyFileConverter — Free Online File Conversion Tools (JPG→PDF, Compress, Optimize)",
+  title: "AnyFileConverter – Free PDF, JPG & Image Converter",
   description:
-    "AnyFileConverter.online: privacy-first, client-side file conversion tools. Convert JPG to PDF, compress PDFs, compress images and convert PDF→Word — fast, free and secure.",
+    "Free online PDF and image tools. Convert JPG to PDF, compress PDFs, remove backgrounds, merge PDFs, and optimize images securely in your browser.",
+
   keywords: [
-    "file converter",
+    "pdf converter",
     "jpg to pdf",
-    "compress pdf",
-    "image compressor",
-    "pdf to word",
-    "online file conversion",
-    "background remover",
-    "remove background online",
+    "image converter",
+    "pdf compressor",
+    "merge pdf",
+    "remove background",
+    "compress image",
+    "online file converter",
+    "pdf tools",
+    "free converter",
   ],
-  alternates: { canonical: "https://anyfileconverter.online" },
+
+  alternates: {
+    canonical: "https://anyfileconverter.online",
+  },
+
   openGraph: {
-    title: "AnyFileConverter — Free Online Tools (Convert, Compress, Optimize)",
+    title: "AnyFileConverter – Free PDF, JPG & Image Converter",
     description:
-      "Privacy-first file conversion tools. Convert JPG → PDF, compress PDFs, compress images and convert PDF → Word — fast, free and secure.",
+      "Convert JPG to PDF, compress PDFs, optimize images and remove backgrounds online for free.",
     url: "https://anyfileconverter.online",
     siteName: "AnyFileConverter",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://anyfileconverter.online/landing-og.jpg",
+        url: "https://anyfileconverter.online/landing-og.webp",
         width: 1200,
         height: 630,
-        alt: "AnyFileConverter Tools — JPG→PDF, Compress, Image Optimizer",
+        alt: "AnyFileConverter online tools preview",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "AnyFileConverter — Free Online File Conversion Tools",
+    title: "AnyFileConverter – Free PDF & Image Tools",
     description:
-      "Convert files in your browser. JPG→PDF, PDF compression, image compression, and PDF to Word — fast, private and free.",
-    images: ["https://anyfileconverter.online/landing-og.jpg"],
+      "Convert JPG to PDF, compress files, optimize images and edit PDFs online for free.",
+    images: ["https://anyfileconverter.online/landing-og.webp"],
   },
 };
 
@@ -60,165 +74,33 @@ const combinedJsonLd = {
       name: "AnyFileConverter",
       url: "https://anyfileconverter.online",
       logo: "https://anyfileconverter.online/logo.png",
-      sameAs: [],
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          contactType: "customer support",
-          email: "support@anyfileconverter.online",
-        },
-      ],
     },
+
     {
       "@type": "WebSite",
       "@id": "https://anyfileconverter.online/#website",
       url: "https://anyfileconverter.online",
       name: "AnyFileConverter",
-      description: "Privacy-first online file conversion tools. Convert, compress and optimize files directly in your browser.",
-      publisher: { "@id": "https://anyfileconverter.online/#org" },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://anyfileconverter.online/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
+      description:
+        "Free browser-based PDF and image conversion tools.",
+      publisher: {
+        "@id": "https://anyfileconverter.online/#org",
       },
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://anyfileconverter.online/#breadcrumbs",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://anyfileconverter.online/" },
-        { "@type": "ListItem", position: 2, name: "Tools", item: "https://anyfileconverter.online/tools" },
-      ],
-    },
-
-    // Individual tool entries
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/jpg-to-pdf#app",
-      name: "JPG to PDF Converter",
-      applicationCategory: "FileConverter",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/jpg-to-pdf",
-      description: "Convert JPG and PNG images to a PDF inside your browser. Reorder, rotate, and adjust layout — no upload required.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/pdf-compressor#app",
-      name: "PDF Compressor",
-      applicationCategory: "FileConverter",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/pdf-compressor",
-      description: "Reduce PDF file size in the browser — fast and private compression.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/image-compressor#app",
-      name: "Image Compressor",
-      applicationCategory: "ImageTool",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/image-compressor",
-      description: "Compress JPG, PNG and WebP images directly in the browser.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/pdf-to-word#app",
-      name: "PDF to Word Converter",
-      applicationCategory: "FileConverter",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/pdf-to-word",
-      description: "Convert PDFs into editable DOCX files inside your browser — no uploads by default.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // Merge PDF
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/merge-pdf#app",
-      name: "Merge PDF",
-      applicationCategory: "FileConverter",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/merge-pdf",
-      description: "Combine multiple PDF files into a single merged PDF directly in your browser.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // New: Remove Image Background
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/remove-bg#app",
-      name: "Remove Image Background",
-      applicationCategory: "ImageTool",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/remove-bg",
-      description: "Remove photo backgrounds in the browser to create transparent PNGs or composite with a solid color. Client-side AI-powered.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // JWT Decoder
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/jwt-decoder#app",
-      name: "JWT Decoder",
-      applicationCategory: "Utility",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/jwt-decoder",
-      description: "Instantly decode JWT tokens to view headers, payload and signature claims. Validate token expiration and inspect data.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // QR Code Generator
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/qr-code-generator#app",
-      name: "QR Code Generator",
-      applicationCategory: "Utility",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/qr-code-generator",
-      description: "Create customizable QR codes for text, URLs, emails and WiFi credentials. Adjust size, colors and error correction levels.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // Base64 Encoder/Decoder
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/base64-encoder-decoder#app",
-      name: "Base64 Encoder/Decoder",
-      applicationCategory: "Utility",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/base64-encoder-decoder",
-      description: "Encode text and files to Base64 or decode Base64 strings back to readable text. Validate Base64 format.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // JSON ↔ CSV Converter
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/json-csv-converter#app",
-      name: "JSON ↔ CSV Converter",
-      applicationCategory: "FileConverter",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/json-csv-converter",
-      description: "Convert between JSON arrays and CSV format in both directions. Auto-detect delimiters and preview data.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    // PDF Splitter
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://anyfileconverter.online/tools/pdf-splitter#app",
-      name: "PDF Splitter",
-      applicationCategory: "FileConverter",
-      operatingSystem: "Web",
-      url: "https://anyfileconverter.online/tools/pdf-splitter",
-      description: "Extract and reorder pages from PDF files. Select individual pages or ranges to create new PDF documents.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
 
     {
       "@type": "WebApplication",
       "@id": "https://anyfileconverter.online/#webapp",
       name: "AnyFileConverter",
-      url: "https://anyfileconverter.online",
-      description: "A collection of privacy-first online file conversion tools that run in your browser.",
       applicationCategory: "Utility",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      operatingSystem: "Web",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
     },
+
     {
       "@type": "FAQPage",
       "@id": "https://anyfileconverter.online/#faq",
@@ -228,23 +110,25 @@ const combinedJsonLd = {
           name: "Are my files uploaded to your servers?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Most conversions run in your browser — files are not uploaded unless you explicitly enable a server feature.",
+            text: "Most tools work entirely inside your browser so your files remain on your device.",
           },
         },
+
         {
           "@type": "Question",
-          name: "Are the tools free to use?",
+          name: "Are the tools free?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes — all current tools are free with no signup required.",
+            text: "Yes. All core conversion and optimization tools are free to use.",
           },
         },
+
         {
           "@type": "Question",
-          name: "Which file types do you support?",
+          name: "Which file formats are supported?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Supported formats include JPG, PNG, WebP, PDF, and DOCX depending on the tool used.",
+            text: "Supported formats include JPG, PNG, WebP, PDF and DOCX depending on the selected tool.",
           },
         },
       ],
@@ -256,143 +140,356 @@ export default function Home() {
   return (
     <>
       <main className="min-h-screen text-gray-900">
-        <section className="max-w-5xl mx-auto px-4 py-8">
-          {/* HERO: stacked on mobile, two-column on md+ */}
-          <header className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <section className="max-w-6xl mx-auto px-4 py-8">
+          {/* HERO */}
+          <header className="grid grid-cols-1 md:grid-cols-1 gap-8 items-center">
             <div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight">
-                AnyFileConverter.online
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
+                Free PDF, JPG & Image Converter Tools
               </h1>
 
-              <p className="mt-3 text-gray-600 text-base sm:text-lg">
-                Privacy-first, client-side file tools. Convert JPG → PDF, compress PDFs & images, remove backgrounds, and convert PDF → Word — fast, free and secure.
+              <p className="mt-4 text-gray-600 text-base sm:text-lg leading-7">
+                AnyFileConverter provides free online converter
+                tools for PDFs, JPG images, PNG files and
+                document optimization directly in your browser.
+                Convert files instantly without signup while
+                keeping your data private and secure.
               </p>
 
-              <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:space-x-3 gap-3">
-                <div className="w-full sm:w-auto">
-                  <Link href="/tools" className="inline-block w-full sm:w-auto">
-                    <button className="btn w-full sm:w-auto px-5 py-3 rounded-lg text-white text-sm font-medium transition">
-                      View All Tools
-                    </button>
-                  </Link>
-                </div>
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/tools"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-white font-medium btn"
+                >
+                  Explore All Tools
+                </Link>
               </div>
 
-              <p className="mt-4 text-xs text-gray-500">
-                Fast, secure & free — no signup required. Files stay on your device unless you opt into server features.
+              <p className="mt-5 text-sm text-gray-500">
+                Fast, secure and privacy-focused file conversion
+                tools for desktop and mobile users.
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-end">
+            {/* <div className="flex justify-center md:justify-end">
               <Image
                 src="/landing-og.webp"
-                alt="AnyFileConverter Tools preview"
-                className="w-full max-w-xs md:max-w-sm rounded-lg shadow-sm object-cover"
-                width={420}
-                height={280}
-                loading="eager"
+                alt="AnyFileConverter PDF and image tools preview"
+                width={520}
+                height={340}
+                priority
+                className="rounded-2xl shadow-lg object-cover"
               />
-            </div>
+            </div> */}
           </header>
 
-          {/* Ad placeholder (non-intrusive) */}
-          <div className="mt-6">
+          {/* Ad */}
+          {/* <div className="mt-4">
             <AdPlaceholder />
-          </div>
+          </div> */}
 
-          {/* Tools grid */}
-          <section className="mt-8">
-            <h2 className="text-xl font-semibold">Available tools</h2>
-            <p className="mt-2 text-gray-600">Quick client-side tools for most common file tasks.</p>
+          {/* Tools */}
+          <section className="mt-12">
+            <h2 className="text-2xl font-bold">
+              Popular PDF & Image Tools
+            </h2>
 
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <ToolCard href="/tools/jpg-to-pdf" title="JPG → PDF" desc="Combine images to a single PDF. Reorder, rotate & choose page size." tag="Client-side" />
-              <ToolCard href="/tools/pdf-compressor" title="PDF Compressor" desc="Reduce PDF size for email and uploads." tag="Client-side" />
-              <ToolCard href="/tools/image-compressor" title="Image Compressor" desc="Compress JPG, PNG & WebP images with quality control." tag="Client-side" />
-              <ToolCard href="/tools/pdf-to-word" title="PDF → Word" desc="Convert PDFs into editable DOCX files." tag="Client-side" />
-              <ToolCard href="/tools/pdf-to-text" title="PDF → Text" desc="Extract editable text from PDF files." tag="Client-side" />
-              <ToolCard href="/tools/merge-pdf" title="Merge PDF" desc="Combine multiple PDFs into one. Reorder files & download instantly." tag="Client-side" />
-              <ToolCard href="/tools/remove-bg" title="Remove Background" desc="Produce transparent PNGs or composite with a color." tag="Client-side" />
-              <ToolCard href="/tools/svg-to-png" title="SVG → PNG" desc="Render SVG files or markup as downloadable PNG images." tag="Client-side" />
-              <ToolCard href="/tools/json-formatter" title="JSON Formatter" desc="Validate and pretty-print JSON text for APIs and debugging." tag="Client-side" />
-              <ToolCard href="/tools/markdown-to-html" title="Markdown → HTML" desc="Convert Markdown to HTML and download a ready-made HTML page." tag="Client-side" />
-              <ToolCard href="/tools/csv-to-json" title="CSV → JSON" desc="Transform CSV rows into JSON arrays for APIs and data processing." tag="Client-side" />
-              <ToolCard href="/tools/epoch-converter" title="Epoch Converter" desc="Translate epoch timestamps into readable date and time output." tag="Client-side" />
-              <ToolCard href="/tools/jwt-decoder" title="JWT Decoder" desc="Decode and validate JWT tokens with claim inspection." tag="Client-side" />
-              <ToolCard href="/tools/qr-code-generator" title="QR Code Generator" desc="Create custom QR codes for text, URLs, email and WiFi." tag="Client-side" />
-              <ToolCard href="/tools/base64-encoder-decoder" title="Base64 Encoder/Decoder" desc="Encode text and files to Base64 or decode back." tag="Client-side" />
-              <ToolCard href="/tools/json-csv-converter" title="JSON ↔ CSV" desc="Convert between JSON arrays and CSV format bidirectionally." tag="Client-side" />
-              <ToolCard href="/tools/pdf-splitter" title="PDF Splitter" desc="Extract and reorder PDF pages. Download selected pages." tag="Client-side" />
+            <p className="mt-3 text-gray-600">
+              Browser-based tools for converting, compressing,
+              optimizing and editing files online.
+            </p>
+
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <ToolCard
+                href="/tools/jpg-to-pdf"
+                title="Convert JPG to PDF"
+                desc="Convert multiple JPG and PNG images into a single PDF document."
+              />
+
+              <ToolCard
+                href="/tools/pdf-compressor"
+                title="Compress PDF Online"
+                desc="Reduce PDF file size for faster sharing and uploads."
+              />
+
+              <ToolCard
+                href="/tools/image-compressor"
+                title="Compress Images"
+                desc="Optimize JPG, PNG and WebP images with quality control."
+              />
+
+              <ToolCard
+                href="/tools/pdf-to-word"
+                title="PDF to Word Converter"
+                desc="Transform PDFs into editable DOCX documents."
+              />
+
+              <ToolCard
+                href="/tools/merge-pdf"
+                title="Merge PDF Files"
+                desc="Combine multiple PDF files into one organized document."
+              />
+
+              <ToolCard
+                href="/tools/remove-bg"
+                title="Remove Image Background"
+                desc="Create transparent PNG images instantly online."
+              />
+
+              <ToolCard
+                href="/tools/pdf-splitter"
+                title="Split PDF Pages"
+                desc="Extract selected pages from large PDF documents."
+              />
+
+              <ToolCard
+                href="/tools/qr-code-generator"
+                title="Generate QR Codes"
+                desc="Create custom QR codes for URLs, text and WiFi."
+              />
             </div>
           </section>
 
-          {/* Benefits & How it works */}
-          <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Benefits */}
+          <section className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
-              <h3 className="text-lg font-semibold">Why choose AnyFileConverter?</h3>
-              <ul className="mt-3 list-inside list-disc text-gray-700 space-y-2">
-                <li><strong>Privacy-first:</strong> Conversions happen in your browser.</li>
-                <li><strong>No signup:</strong> Use instantly with no account.</li>
-                <li><strong>Fast & lightweight:</strong> Minimal UI, local processing.</li>
-                <li><strong>Mobile-ready:</strong> Designed to work smoothly on phones.</li>
+              <h3 className="text-xl font-semibold">
+                Why choose AnyFileConverter?
+              </h3>
+
+              <ul className="mt-4 list-disc list-inside text-gray-700 space-y-3">
+                <li>
+                  Privacy-first browser processing for secure file handling.
+                </li>
+
+                <li>
+                  No signup or account creation required.
+                </li>
+
+                <li>
+                  Fast conversion speeds on desktop and mobile devices.
+                </li>
+
+                <li>
+                  Lightweight tools with simple user interfaces.
+                </li>
+
+                <li>
+                  Works directly in modern browsers without software installation.
+                </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold">How it works</h3>
-              <ol className="mt-3 list-decimal list-inside text-gray-700 space-y-2">
-                <li>Select the tool you want to use.</li>
-                <li>Upload or drag & drop your files.</li>
-                <li>Adjust settings (quality, page size, order).</li>
-                <li>Convert & download instantly.</li>
+              <h3 className="text-xl font-semibold">
+                How the tools work
+              </h3>
+
+              <ol className="mt-4 list-decimal list-inside text-gray-700 space-y-3">
+                <li>Select a conversion or optimization tool.</li>
+
+                <li>Upload files or drag and drop them.</li>
+
+                <li>
+                  Configure quality, layout or compression settings.
+                </li>
+
+                <li>
+                  Convert files instantly and download the result.
+                </li>
               </ol>
             </div>
           </section>
 
+          {/* SEO CONTENT */}
+          <section className="mt-14">
+            <h3 className="text-2xl font-bold">
+              Popular file conversion tasks
+            </h3>
+
+            <div className="mt-5 space-y-5 text-gray-700 leading-8">
+              <p>
+                Convert JPG images into professional PDF
+                documents for resumes, invoices, reports,
+                assignments and presentations directly in your browser.
+              </p>
+
+              <p>
+                Compress PDF documents to reduce upload times,
+                improve email sharing and save cloud storage space
+                without noticeably reducing quality.
+              </p>
+
+              <p>
+                Optimize PNG, JPG and WebP images for websites,
+                ecommerce stores, blogs and social media platforms
+                to improve page loading performance.
+              </p>
+
+              <p>
+                Merge multiple PDFs into a single organized file
+                for contracts, presentations, reports and scanned documents.
+              </p>
+
+              <p>
+                Remove image backgrounds instantly for product photography,
+                design projects, profile pictures and marketing graphics.
+              </p>
+
+              <p>
+                Browser-based file processing improves privacy because
+                most tools work directly on your device instead of uploading
+                files to external servers.
+              </p>
+            </div>
+          </section>
+
+          {/* EXTRA CONTENT */}
+          <section className="mt-14">
+            <h3 className="text-2xl font-bold">
+              Why browser-based tools matter
+            </h3>
+
+            <div className="mt-5 space-y-5 text-gray-700 leading-8">
+              <p>
+                Traditional online converters often require uploading
+                sensitive documents to remote servers. AnyFileConverter
+                focuses on browser-based processing whenever possible,
+                helping improve privacy and security.
+              </p>
+
+              <p>
+                Local processing also improves speed because files do not
+                need to be transferred across the internet before conversion.
+                This creates a faster and smoother user experience.
+              </p>
+
+              <p>
+                Students, professionals, developers, businesses and content
+                creators use online file tools daily for productivity,
+                collaboration and content optimization.
+              </p>
+
+              <p>
+                Whether you need to compress PDFs, optimize website images,
+                merge documents or convert file formats, browser-based tools
+                provide a fast and accessible workflow from any device.
+              </p>
+            </div>
+          </section>
+
           {/* FAQ */}
-          <section className="mt-8">
-            <h3 className="text-lg font-semibold">Frequently asked questions</h3>
-            <div className="mt-3 space-y-2 text-gray-700">
-              <details className="bg-white p-3 rounded-lg shadow-sm">
-                <summary className="cursor-pointer font-medium">Are my files uploaded to your servers?</summary>
-                <p className="mt-2 text-sm text-gray-600">Most conversions run in your browser — files are not uploaded unless you explicitly enable a server feature.</p>
+          <section className="mt-14">
+            <h3 className="text-2xl font-bold">
+              Frequently asked questions
+            </h3>
+
+            <div className="mt-5 space-y-4">
+              <details className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 p-4 rounded-xl shadow-sm">
+                <summary className="cursor-pointer font-medium text-gray-900 dark:text-white">
+                  Are my files uploaded to servers?
+                </summary>
+
+                <p className="mt-3 text-gray-600 dark:text-gray-300">
+                  Most tools process files directly in your browser
+                  without uploading them to external servers.
+                </p>
               </details>
 
-              <details className="bg-white p-3 rounded-lg shadow-sm">
-                <summary className="cursor-pointer font-medium">Are the tools free to use?</summary>
-                <p className="mt-2 text-sm text-gray-600">Yes — all core tools are free with no signup required.</p>
+              <details className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 p-4 rounded-xl shadow-sm">
+                <summary className="cursor-pointer font-medium text-gray-900 dark:text-white">
+                  Are these tools free?
+                </summary>
+
+                <p className="mt-3 text-gray-600 dark:text-gray-300">
+                  Yes. All core file conversion and optimization
+                  tools are completely free to use.
+                </p>
               </details>
 
-              <details className="bg-white p-3 rounded-lg shadow-sm">
-                <summary className="cursor-pointer font-medium">Which formats are supported?</summary>
-                <p className="mt-2 text-sm text-gray-600">Formats vary by tool: JPG/PNG/WebP for image tools, PDF for PDF tools and DOCX for Word outputs.</p>
+              <details className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 p-4 rounded-xl shadow-sm">
+                <summary className="cursor-pointer font-medium text-gray-900 dark:text-white">
+                  Which file formats are supported?
+                </summary>
+
+                <p className="mt-3 text-gray-600 dark:text-gray-300">
+                  Supported formats include JPG, PNG, WebP,
+                  PDF and DOCX depending on the selected tool.
+                </p>
               </details>
             </div>
           </section>
 
-          <div className="mt-10">
+          {/* External Links */}
+          <section className="mt-14 text-sm text-gray-600">
+            <h3 className="text-lg font-semibold">
+              Helpful resources
+            </h3>
+
+            <ul className="mt-4 list-disc list-inside space-y-2">
+              <li>
+                Learn more about the PDF format from{" "}
+                <a
+                  href="https://www.adobe.com/acrobat/about-adobe-pdf.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Adobe PDF documentation
+                </a>
+              </li>
+
+              <li>
+                Explore image optimization best practices from{" "}
+                <a
+                  href="https://developers.google.com/speed/docs/insights/OptimizeImages"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Google PageSpeed Insights
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <div className="mt-12">
             <AdPlaceholder />
           </div>
         </section>
       </main>
 
-      {/* Structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(combinedJsonLd),
+        }}
+      />
     </>
   );
 }
 
-/* -------------------------
-   Small helper: ToolCard (tailwind)
-   ------------------------- */
-function ToolCard({ href, title, desc, tag }: { href: string; title: string; desc: string; tag?: string }) {
+function ToolCard({
+  href,
+  title,
+  desc,
+}: {
+  href: string;
+  title: string;
+  desc: string;
+}) {
   return (
-    <Link href={href} className="block bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition">
-      <div className="flex justify-between items-start">
-        <h4 className="text-md font-semibold">{title}</h4>
-        {tag && <span className="text-xs text-slate-500">{tag}</span>}
-      </div>
-      <p className="mt-2 text-sm text-gray-600">{desc}</p>
+    <Link
+      href={href}
+      className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition"
+    >
+      <h4 className="text-lg font-semibold">
+        {title}
+      </h4>
+
+      <p className="mt-3 text-sm text-gray-600 leading-6">
+        {desc}
+      </p>
     </Link>
   );
 }
