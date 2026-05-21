@@ -146,6 +146,46 @@ const tools = [
       "Extract plain text from PDF files in your browser. Ideal for copying, editing, and searching PDF content.",
     features: ["PDF text extraction", "Plain text output", "Client-side"],
   },
+  {
+    id: "jwt-decoder",
+    title: "JWT Decoder",
+    href: "/tools/jwt-decoder",
+    short:
+      "Instantly decode JWT tokens to view headers, payload and signature claims. Validate token expiration and inspect data.",
+    features: ["Claim inspection", "Token validation", "Expiration check"],
+  },
+  {
+    id: "qr-code-generator",
+    title: "QR Code Generator",
+    href: "/tools/qr-code-generator",
+    short:
+      "Create customizable QR codes for text, URLs, emails and WiFi credentials. Adjust size, colors and error correction levels.",
+    features: ["Multiple types", "Color customization", "PNG download"],
+  },
+  {
+    id: "base64-encoder-decoder",
+    title: "Base64 Encoder/Decoder",
+    href: "/tools/base64-encoder-decoder",
+    short:
+      "Encode text and files to Base64 or decode Base64 strings back to readable text. Validate Base64 format.",
+    features: ["Text & file support", "Format validation", "Copy & download"],
+  },
+  {
+    id: "json-csv-converter",
+    title: "JSON ↔ CSV Converter",
+    href: "/tools/json-csv-converter",
+    short:
+      "Convert between JSON arrays and CSV format in both directions. Auto-detect delimiters and preview data.",
+    features: ["Bidirectional", "Delimiter selection", "Data preview"],
+  },
+  {
+    id: "pdf-splitter",
+    title: "PDF Splitter",
+    href: "/tools/pdf-splitter",
+    short:
+      "Extract and reorder pages from PDF files. Select individual pages or ranges to create new PDF documents.",
+    features: ["Page selection", "Range input", "Visual grid"],
+  },
 ];
 
 const pageJsonLd = {

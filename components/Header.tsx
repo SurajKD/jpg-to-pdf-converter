@@ -244,6 +244,51 @@ export default function Header() {
                       Epoch Converter
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      href="/tools/jwt-decoder"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      JWT Decoder
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/qr-code-generator"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      QR Code Generator
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/base64-encoder-decoder"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      Base64 Encoder/Decoder
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/json-csv-converter"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      JSON ↔ CSV
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tools/pdf-splitter"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      PDF Splitter
+                    </Link>
+                  </li>
 
                   {/* <li>
                     <Link

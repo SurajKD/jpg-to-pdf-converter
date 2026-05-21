@@ -154,6 +154,61 @@ const combinedJsonLd = {
       description: "Remove photo backgrounds in the browser to create transparent PNGs or composite with a solid color. Client-side AI-powered.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
+    // JWT Decoder
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/jwt-decoder#app",
+      name: "JWT Decoder",
+      applicationCategory: "Utility",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/jwt-decoder",
+      description: "Instantly decode JWT tokens to view headers, payload and signature claims. Validate token expiration and inspect data.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+    // QR Code Generator
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/qr-code-generator#app",
+      name: "QR Code Generator",
+      applicationCategory: "Utility",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/qr-code-generator",
+      description: "Create customizable QR codes for text, URLs, emails and WiFi credentials. Adjust size, colors and error correction levels.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+    // Base64 Encoder/Decoder
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/base64-encoder-decoder#app",
+      name: "Base64 Encoder/Decoder",
+      applicationCategory: "Utility",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/base64-encoder-decoder",
+      description: "Encode text and files to Base64 or decode Base64 strings back to readable text. Validate Base64 format.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+    // JSON ↔ CSV Converter
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/json-csv-converter#app",
+      name: "JSON ↔ CSV Converter",
+      applicationCategory: "FileConverter",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/json-csv-converter",
+      description: "Convert between JSON arrays and CSV format in both directions. Auto-detect delimiters and preview data.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+    // PDF Splitter
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://anyfileconverter.online/tools/pdf-splitter#app",
+      name: "PDF Splitter",
+      applicationCategory: "FileConverter",
+      operatingSystem: "Web",
+      url: "https://anyfileconverter.online/tools/pdf-splitter",
+      description: "Extract and reorder pages from PDF files. Select individual pages or ranges to create new PDF documents.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
 
     {
       "@type": "WebApplication",
@@ -263,6 +318,11 @@ export default function Home() {
               <ToolCard href="/tools/markdown-to-html" title="Markdown → HTML" desc="Convert Markdown to HTML and download a ready-made HTML page." tag="Client-side" />
               <ToolCard href="/tools/csv-to-json" title="CSV → JSON" desc="Transform CSV rows into JSON arrays for APIs and data processing." tag="Client-side" />
               <ToolCard href="/tools/epoch-converter" title="Epoch Converter" desc="Translate epoch timestamps into readable date and time output." tag="Client-side" />
+              <ToolCard href="/tools/jwt-decoder" title="JWT Decoder" desc="Decode and validate JWT tokens with claim inspection." tag="Client-side" />
+              <ToolCard href="/tools/qr-code-generator" title="QR Code Generator" desc="Create custom QR codes for text, URLs, email and WiFi." tag="Client-side" />
+              <ToolCard href="/tools/base64-encoder-decoder" title="Base64 Encoder/Decoder" desc="Encode text and files to Base64 or decode back." tag="Client-side" />
+              <ToolCard href="/tools/json-csv-converter" title="JSON ↔ CSV" desc="Convert between JSON arrays and CSV format bidirectionally." tag="Client-side" />
+              <ToolCard href="/tools/pdf-splitter" title="PDF Splitter" desc="Extract and reorder PDF pages. Download selected pages." tag="Client-side" />
             </div>
           </section>
 

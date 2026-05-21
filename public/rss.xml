@@ -109,5 +109,40 @@
       <description>Convert epoch timestamps (seconds or milliseconds) into human-readable dates and times.</description>
     </item>
 
+    <item>
+      <title>JWT Decoder — Decode & Validate JSON Web Tokens</title>
+      <link>https://anyfileconverter.online/blog/jwt-decoder</link>
+      <guid>https://anyfileconverter.online/blog/jwt-decoder</guid>
+      <description>Instantly decode JWT tokens to inspect headers, payload and signature claims. Validate token expiration in the browser.</description>
+    </item>
+
+    <item>
+      <title>QR Code Generator — Create Custom QR Codes Online</title>
+      <link>https://anyfileconverter.online/blog/qr-code-generator</link>
+      <guid>https://anyfileconverter.online/blog/qr-code-generator</guid>
+      <description>Generate customizable QR codes for text, URLs, emails and WiFi credentials. Adjust colors and error correction levels.</description>
+    </item>
+
+    <item>
+      <title>Base64 Encoder/Decoder — Encode & Decode Text & Files</title>
+      <link>https://anyfileconverter.online/blog/base64-encoder-decoder</link>
+      <guid>https://anyfileconverter.online/blog/base64-encoder-decoder</guid>
+      <description>Encode text and files to Base64 or decode Base64 strings back to readable text. Validate Base64 format in your browser.</description>
+    </item>
+
+    <item>
+      <title>JSON ↔ CSV Converter — Convert Between JSON & CSV</title>
+      <link>https://anyfileconverter.online/blog/json-csv-converter</link>
+      <guid>https://anyfileconverter.online/blog/json-csv-converter</guid>
+      <description>Convert between JSON arrays and CSV format in both directions. Auto-detect delimiters and preview your data.</description>
+    </item>
+
+    <item>
+      <title>PDF Splitter — Extract & Reorder PDF Pages</title>
+      <link>https://anyfileconverter.online/blog/pdf-splitter</link>
+      <guid>https://anyfileconverter.online/blog/pdf-splitter</guid>
+      <description>Extract and reorder pages from PDF files. Select individual pages or ranges to create new PDF documents in your browser.</description>
+    </item>
+
   </channel>
 </rss>

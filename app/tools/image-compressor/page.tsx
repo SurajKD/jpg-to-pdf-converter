@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 const ImageCompressorClient = dynamic(
-  () => import("../../../components/ImageCompressorClient"),
+  () => import("../../../components/tools/ImageCompressorClient"),
   { ssr: false, loading: () => <div className="h-48" /> }
 );
 
@@ -149,7 +149,7 @@ export default function ImageCompressorPage() {
         </header>
 
         <section className="mt-4">
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100">
+          <div className="rounded-lg p-4 shadow-sm border border-slate-100">
             <ImageCompressorClient />
           </div>
         </section>
