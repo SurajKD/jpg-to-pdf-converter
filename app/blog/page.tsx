@@ -72,14 +72,13 @@ const posts = [
     date: "2025-03-18",
     excerpt: "Learn how to extract text from PDF documents using browser tools, desktop apps, and OCR. Perfect for editing and search.",
   },
-    {
+  {
     href: "/blog/how-to-merge-pdf",
     title: "How to Merge PDF Files — Step-by-Step Guide (Fast & Free)",
     date: "2025-03-17",
     excerpt: "Learn how to merge multiple PDF files into a single document. Compare methods: browser-based tools, desktop apps, and mobile solutions. Simple, secure & free.",
   },
-  ,
-    {
+  {
     href: "/blog/ai-pdf-summarizer",
     title: "How to Summarize PDF with AI — Quick Guide",
     date: "2026-05-22",
