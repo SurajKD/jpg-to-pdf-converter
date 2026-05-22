@@ -145,12 +145,12 @@ export default function Home() {
           <header className="grid grid-cols-1 md:grid-cols-1 gap-8 items-center">
             <div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                Free PDF, JPG & Image Converter Tools
+                Free PDF, JPG, Image & AI Converter Tools
               </h1>
 
               <p className="mt-4 text-gray-600 text-base sm:text-lg leading-7">
                 AnyFileConverter provides free online converter
-                tools for PDFs, JPG images, PNG files and
+                tools for PDFs, JPG images, PNG files, AI Summarizer and
                 document optimization directly in your browser.
                 Convert files instantly without signup while
                 keeping your data private and secure.
@@ -191,7 +191,7 @@ export default function Home() {
           {/* Tools */}
           <section className="mt-12">
             <h2 className="text-2xl font-bold">
-              Popular PDF & Image Tools
+              Popular PDF, Image & AI Tools
             </h2>
 
             <p className="mt-3 text-gray-600">
@@ -200,6 +200,12 @@ export default function Home() {
             </p>
 
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <ToolCard
+                href="/tools/ai-pdf-summarizer"
+                title="AI PDF Summarizer"
+                desc="Get concise summaries of your PDF documents using AI."
+              />
+
               <ToolCard
                 href="/tools/jpg-to-pdf"
                 title="Convert JPG to PDF"

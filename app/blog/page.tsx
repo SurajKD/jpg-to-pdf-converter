@@ -78,6 +78,13 @@ const posts = [
     date: "2025-03-17",
     excerpt: "Learn how to merge multiple PDF files into a single document. Compare methods: browser-based tools, desktop apps, and mobile solutions. Simple, secure & free.",
   },
+  ,
+    {
+    href: "/blog/ai-pdf-summarizer",
+    title: "How to Summarize PDF with AI — Quick Guide",
+    date: "2026-05-22",
+    excerpt: "Learn how to summarize PDF content using AI. Compare different tools and methods for quick, efficient summarization.",
+  },
 ];
 
 const jsonLd = {

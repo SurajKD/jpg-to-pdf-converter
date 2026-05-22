@@ -290,7 +290,7 @@ export default function Header() {
                     </Link>
                   </li>
 
-                  {/* <li>
+                  <li>
                     <Link
                       href="/tools/ai-pdf-summarizer"
                       onClick={closeAll}
@@ -298,7 +298,7 @@ export default function Header() {
                     >
                       AI PDF Summarizer
                     </Link>
-                  </li> */}
+                  </li>
                 </ul>
               </div>
             </li>

@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "background remover",
     "online file tools",
     "anyfileconverter",
+    "pdf summarizer",
   ],
   alternates: { canonical: "https://anyfileconverter.online/tools" },
   openGraph: {
@@ -186,6 +187,14 @@ const tools = [
       "Extract and reorder pages from PDF files. Select individual pages or ranges to create new PDF documents.",
     features: ["Page selection", "Range input", "Visual grid"],
   },
+  {
+    id: "pdf-summarizer",
+    title: "AI PDF Summarizer",
+    href: "/tools/ai-pdf-summarizer",
+    short:
+      "Get concise summaries of your PDF documents using AI.",
+    features: ["AI-powered summarization", "PDF upload", "Instant results"],
+  }
 ];
 
 const pageJsonLd = {
