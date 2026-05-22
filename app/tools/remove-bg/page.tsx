@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
+import ShareButton from "../../../components/ShareButton";
 
 const RemoveBgClient = dynamic(() => import("../../../components/RemoveBgClient"), {
   ssr: false,
@@ -175,6 +176,7 @@ export default function RemoveBgPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton />
 
         {/* SEO Article Section */}
         <article className="prose prose-lg mt-8">
@@ -243,6 +245,7 @@ export default function RemoveBgPage() {
         <div className="mt-8 flex justify-center">
           <AdPlaceholder />
         </div>
+
       </main>
 
       {/* JSON-LD */}

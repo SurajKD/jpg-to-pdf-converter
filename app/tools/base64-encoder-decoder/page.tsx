@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import React from 'react'
+import ShareButton from '../../../components/ShareButton'
 
 const Base64EncoderDecoderClient = dynamic(
   () =>
@@ -91,6 +92,7 @@ export default function Base64EncoderDecoderPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton/>
       </main>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }} />

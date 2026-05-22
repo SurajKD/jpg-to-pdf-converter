@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import React from 'react'
+import ShareButton from '../../../components/ShareButton'
 
 const QRCodeGeneratorClient = dynamic(
   () => import('../../../components/tools/QRCodeGeneratorClient'),
@@ -85,6 +86,8 @@ export default function QRCodeGeneratorPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton />
+
       </main>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }} />

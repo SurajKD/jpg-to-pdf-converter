@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
+import ShareButton from '../../../components/ShareButton';
 
 const EpochConverterClient = dynamic(
   () => import('../../../components/EpochConverterClient'),
@@ -106,7 +107,7 @@ export default function EpochConverterPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
-
+        <ShareButton />
         <article className="prose prose-lg mt-8">
           <h2>Decode epoch timestamps instantly</h2>
           <p>

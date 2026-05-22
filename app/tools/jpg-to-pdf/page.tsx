@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ShareButton from "../../../components/ShareButton";
 
 const AdPlaceholder = dynamic(() => import("../../../components/AdPlaceholder"), {
   ssr: false,
@@ -147,7 +148,7 @@ export default function ToolPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
-
+        <ShareButton />
         <article className="prose prose-lg mt-8">
           <h2>How to Use the JPG to PDF Converter</h2>
           <p>

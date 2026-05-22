@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
+import ShareButton from "../../../components/ShareButton";
 
 const MergePdfClient = dynamic(
   () => import("../../../components/MergePdfClient"),
@@ -151,6 +152,7 @@ export default function MergePdfPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton />
 
         {/* SEO Content */}
         <article className="prose prose-lg mt-8">

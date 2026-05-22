@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
+import ShareButton from "../../../components/ShareButton";
 
 const ImageCompressorClient = dynamic(
   () => import("../../../components/tools/ImageCompressorClient"),
@@ -157,6 +158,7 @@ export default function ImageCompressorPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton/>
 
         <article className="prose prose-lg mt-8">
           <h2>Why use our Image Compressor?</h2>

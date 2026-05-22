@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import React from "react"
+import ShareButton from "../../../components/ShareButton"
 
 const PdfToTextClient = dynamic(
   () => import("../../../components/PdfToTextClient"),
@@ -144,6 +145,7 @@ export default function PdfToTextPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton />
 
         <article className="prose prose-lg mt-8">
           <h2>How to extract text from a PDF</h2>
@@ -186,6 +188,7 @@ export default function PdfToTextPage() {
         <div className="mt-8 flex justify-center">
           <AdPlaceholder />
         </div>
+
       </main>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }} />

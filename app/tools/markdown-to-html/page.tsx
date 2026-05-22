@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
+import ShareButton from '../../../components/ShareButton';
 
 const MarkdownToHtmlClient = dynamic(
   () => import('../../../components/MarkdownToHtmlClient'),
@@ -106,6 +107,7 @@ export default function MarkdownToHtmlPage() {
         <div className="mt-6 flex justify-center">
           <AdPlaceholder />
         </div>
+        <ShareButton />
 
         <article className="prose prose-lg mt-8">
           <h2>Convert Markdown to HTML in the browser</h2>
