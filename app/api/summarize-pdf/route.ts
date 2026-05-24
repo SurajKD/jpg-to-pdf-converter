@@ -79,7 +79,7 @@ Rules:
 Document excerpts:
 ${sampled}`;
 
-        const models = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"];
+        const models = [ "gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite"];
         let summary = "";
         let lastError: any;
 
