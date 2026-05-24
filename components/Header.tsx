@@ -299,6 +299,15 @@ export default function Header() {
                       AI PDF Summarizer
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      href="/tools/youtube-thumbnail-downloader"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      YT Thumbnail Downloader
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </li>

@@ -194,6 +194,14 @@ const tools = [
     short:
       "Get concise summaries of your PDF documents using AI.",
     features: ["AI-powered summarization", "PDF upload", "Instant results"],
+  },
+  {
+    id: "youtube-thumbnail-downloader",
+    title: "YouTube Thumbnail Downloader",
+    href: "/tools/youtube-thumbnail-downloader",
+    short:
+      "Instantly extract and download high-quality YouTube video cover images and thumbnails.",
+    features: ["HD/SD/HQ support", "YouTube Shorts & Live", "Direct ZIP/batch download"],
   }
 ];
 

@@ -253,6 +253,12 @@ export default function Home() {
                 title="Generate QR Codes"
                 desc="Create custom QR codes for URLs, text and WiFi."
               />
+
+              <ToolCard
+                href="/tools/youtube-thumbnail-downloader"
+                title="YouTube Thumbnail Downloader"
+                desc="Extract and download high-quality YouTube cover images."
+              />
             </div>
           </section>
 
