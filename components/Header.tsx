@@ -308,6 +308,15 @@ export default function Header() {
                       YT Thumbnail Downloader
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      href="/tools/youtube-repurposer"
+                      onClick={closeAll}
+                      className="inline-flex items-center w-full px-3 py-2 hover:bg-slate-100 hover:text-slate-900"
+                    >
+                      YT Content Repurposer
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </li>

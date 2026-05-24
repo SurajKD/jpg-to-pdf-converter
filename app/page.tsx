@@ -205,7 +205,11 @@ export default function Home() {
                 title="AI PDF Summarizer"
                 desc="Get concise summaries of your PDF documents using AI."
               />
-
+              <ToolCard
+                href="/tools/youtube-repurposer"
+                title="YouTube Content Repurposer"
+                desc="Repurpose your YouTube content into different formats and platforms."
+              />
               <ToolCard
                 href="/tools/jpg-to-pdf"
                 title="Convert JPG to PDF"

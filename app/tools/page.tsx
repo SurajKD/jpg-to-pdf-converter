@@ -202,6 +202,14 @@ const tools = [
     short:
       "Instantly extract and download high-quality YouTube video cover images and thumbnails.",
     features: ["HD/SD/HQ support", "YouTube Shorts & Live", "Direct ZIP/batch download"],
+  },
+  {
+    id: "youtube-repurposer",
+    title: "YouTube Content Repurposer",
+    href: "/tools/youtube-repurposer",
+    short:
+      "Repurpose your YouTube content into different formats and platforms.",
+    features: ["youtube video to blog post", "youtube video to linkedin post", "youtube video to x thread", "youtube video to newsletter section", "youtube video to social captions"], 
   }
 ];
 
